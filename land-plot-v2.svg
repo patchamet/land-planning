@@ -54,6 +54,44 @@
     stroke-linejoin="round"
   />
 
+  <!-- Grid axis ticks every 5m — origin = node 1 (150,130), 5m = 35 SVG units -->
+
+  <!-- Side A: ticks above boundary y=130, labels at y=122 -->
+  <g stroke="#999" stroke-width="0.7" fill="#999" font-family="Arial" font-size="6.5" text-anchor="middle">
+    <line x1="150" y1="125" x2="150" y2="130"/><text x="150" y="123">0</text>
+    <line x1="185" y1="125" x2="185" y2="130"/><text x="185" y="123">5</text>
+    <line x1="220" y1="125" x2="220" y2="130"/><text x="220" y="123">10</text>
+    <line x1="255" y1="125" x2="255" y2="130"/><text x="255" y="123">15</text>
+    <line x1="290" y1="125" x2="290" y2="130"/><text x="290" y="123">20</text>
+    <line x1="325" y1="125" x2="325" y2="130"/><text x="325" y="123">25</text>
+    <line x1="360" y1="125" x2="360" y2="130"/><text x="360" y="123">30</text>
+    <line x1="395" y1="125" x2="395" y2="130"/><text x="395" y="123">35</text>
+    <line x1="430" y1="125" x2="430" y2="130"/><text x="430" y="123">40</text>
+  </g>
+
+  <!-- Side E: ticks left of boundary x=150, labels at x=142 -->
+  <g stroke="#999" stroke-width="0.7" fill="#999" font-family="Arial" font-size="6.5" text-anchor="end">
+    <line x1="144" y1="130" x2="150" y2="130"/><text x="142" y="133">0</text>
+    <line x1="144" y1="165" x2="150" y2="165"/><text x="142" y="168">5</text>
+    <line x1="144" y1="200" x2="150" y2="200"/><text x="142" y="203">10</text>
+    <line x1="144" y1="235" x2="150" y2="235"/><text x="142" y="238">15</text>
+    <line x1="144" y1="270" x2="150" y2="270"/><text x="142" y="273">20</text>
+    <line x1="144" y1="305" x2="150" y2="305"/><text x="142" y="308">25</text>
+    <line x1="144" y1="340" x2="150" y2="340"/><text x="142" y="343">30</text>
+    <line x1="144" y1="375" x2="150" y2="375"/><text x="142" y="378">35</text>
+    <line x1="144" y1="410" x2="150" y2="410"/><text x="142" y="413">40</text>
+    <line x1="144" y1="445" x2="150" y2="445"/><text x="142" y="448">45</text>
+    <line x1="144" y1="480" x2="150" y2="480"/><text x="142" y="483">50</text>
+    <line x1="144" y1="515" x2="150" y2="515"/><text x="142" y="518">55</text>
+    <line x1="144" y1="550" x2="150" y2="550"/><text x="142" y="553">60</text>
+    <line x1="144" y1="585" x2="150" y2="585"/><text x="142" y="588">65</text>
+    <line x1="144" y1="620" x2="150" y2="620"/><text x="142" y="623">70</text>
+    <line x1="144" y1="655" x2="150" y2="655"/><text x="142" y="658">75</text>
+    <line x1="144" y1="690" x2="150" y2="690"/><text x="142" y="693">80</text>
+    <line x1="144" y1="725" x2="150" y2="725"/><text x="142" y="728">85</text>
+    <line x1="144" y1="760" x2="150" y2="760"/><text x="142" y="763">90</text>
+  </g>
+
   <!-- Adjacent land (relative's plot) - same weight as main plot, lighter color -->
   <line x1="460" y1="595" x2="635" y2="595" stroke="#888" stroke-width="2"/>
   <line x1="370" y1="845" x2="590" y2="845" stroke="#888" stroke-width="2"/>
