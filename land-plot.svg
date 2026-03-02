@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1000" width="600" height="1000">
+  <rect width="600" height="1000" fill="#FAF5ED"/>
+
+  <!-- Road (top) -->
+  <line x1="0" y1="140" x2="600" y2="140" stroke="#222" stroke-width="1.5"/>
+  <line x1="0" y1="200" x2="600" y2="200" stroke="#222" stroke-width="1.5"/>
+
+  <!-- Outer boundary of the land plot -->
+  <path d="
+    M 150,200
+    L 460,200
+    L 460,720
+    L 400,830
+    L 150,830
+    L 150,200
+    Z
+  " fill="none" stroke="#222" stroke-width="1.5"/>
+</svg>
