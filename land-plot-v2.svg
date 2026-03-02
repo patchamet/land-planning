@@ -55,8 +55,8 @@
   />
 
   <!-- Adjacent land (relative's plot) - same weight as main plot, lighter color -->
-  <line x1="460" y1="595" x2="810" y2="595" stroke="#888" stroke-width="2"/>
-  <line x1="370" y1="845" x2="810" y2="845" stroke="#888" stroke-width="2"/>
+  <line x1="460" y1="595" x2="635" y2="595" stroke="#888" stroke-width="2"/>
+  <line x1="370" y1="845" x2="590" y2="845" stroke="#888" stroke-width="2"/>
 
   <!-- Corner nodes -->
   <circle cx="150" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
