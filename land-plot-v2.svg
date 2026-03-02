@@ -2,6 +2,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-210 -210 1020 1320" width="1020" height="1320">
   <rect x="-210" y="-210" width="1020" height="1320" fill="white"/>
 
+  <defs>
+    <!-- 1m grid: 7 SVG units ≈ 1 metre at this scale -->
+    <pattern id="grid1m" x="150" y="130" width="7" height="7" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="7" y2="0" stroke="#ccc" stroke-width="0.4"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#ccc" stroke-width="0.4"/>
+    </pattern>
+  </defs>
+
   <!-- Road boundary (top) - dashed outer edge + solid inner edge -->
   <line x1="60" y1="80"  x2="520" y2="80"  stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
   <line x1="60" y1="130" x2="520" y2="130" stroke="#222" stroke-width="2"/>
@@ -22,6 +30,13 @@
     stroke="#444"
     stroke-width="1.5"
     stroke-dasharray="8,5"
+  />
+
+  <!-- 1m grid fill inside main plot -->
+  <polygon
+    points="150,130 430,130 430,540 320,780 150,780"
+    fill="url(#grid1m)"
+    stroke="none"
   />
 
   <!-- Main plot polygon -->
