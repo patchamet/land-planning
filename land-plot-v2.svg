@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+  <rect width="600" height="900" fill="#FAF5ED"/>
+
+  <!-- Road boundary (top) - dashed outer edge + solid inner edge -->
+  <line x1="60" y1="80"  x2="520" y2="80"  stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <line x1="60" y1="130" x2="520" y2="130" stroke="#222" stroke-width="2"/>
+
+  <!-- Main plot polygon -->
+  <polygon
+    points="
+      150,130
+      430,130
+      430,540
+      320,780
+      150,780
+    "
+    fill="none"
+    stroke="#222"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+
+  <!-- Diagonal boundary line (shared with adjacent plot) -->
+  <line x1="430" y1="540" x2="370" y2="830" stroke="#222" stroke-width="2"/>
+
+  <!-- Corner nodes -->
+  <circle cx="150" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="430" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="430" cy="540" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="320" cy="780" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="150" cy="780" r="7" fill="white" stroke="#222" stroke-width="2"/>
+
+  <!-- Node numbers 1–5 -->
+  <text x="130" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">1</text>
+  <text x="450" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">2</text>
+  <text x="450" y="538" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">3</text>
+  <text x="338" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">4</text>
+  <text x="130" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">5</text>
+
+  <!-- Side labels A–E (midpoint of each edge, offset outward) -->
+  <!-- A: top edge (1→2), above the line -->
+  <text x="290" y="112" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="middle">A</text>
+  <!-- B: right edge (2→3), to the right -->
+  <text x="458" y="340" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="start">B</text>
+  <!-- C: lower-right diagonal (3→4), to the right -->
+  <text x="400" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="start">C</text>
+  <!-- D: bottom edge (4→5), below the line -->
+  <text x="235" y="808" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="middle">D</text>
+  <!-- E: left edge (5→1), to the left -->
+  <text x="122" y="460" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="end">E</text>
+</svg>
