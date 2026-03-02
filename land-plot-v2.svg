@@ -37,13 +37,18 @@
 
   <!-- Side labels A–E (midpoint of each edge, offset outward) -->
   <!-- A: top edge (1→2), above the line -->
-  <text x="290" y="112" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="middle">A</text>
+  <text x="290" y="104" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="middle">A</text>
+  <text x="290" y="120" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="middle">~40ม.</text>
   <!-- B: right edge (2→3), to the right -->
-  <text x="458" y="340" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="start">B</text>
+  <text x="458" y="332" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="start">B</text>
+  <text x="458" y="348" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="start">~59ม.</text>
   <!-- C: lower-right diagonal (3→4), to the right -->
-  <text x="400" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="start">C</text>
+  <text x="400" y="657" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="start">C</text>
+  <text x="400" y="673" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="start">~38ม.</text>
   <!-- D: bottom edge (4→5), below the line -->
   <text x="235" y="808" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="middle">D</text>
+  <text x="235" y="824" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="middle">~24ม.</text>
   <!-- E: left edge (5→1), to the left -->
-  <text x="122" y="460" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="end">E</text>
+  <text x="122" y="452" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="end">E</text>
+  <text x="122" y="468" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="end">~93ม.</text>
 </svg>
