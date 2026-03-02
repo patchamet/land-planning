@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-210 -210 1020 1320" width="1020" height="1320">
-  <rect x="-210" y="-210" width="1020" height="1320" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 10 715 905" width="715" height="905">
+  <rect x="-10" y="10" width="715" height="905" fill="white"/>
 
   <defs>
     <!-- 1m grid: 7 SVG units ≈ 1 metre at this scale -->
