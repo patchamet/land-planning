@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
-  <rect width="600" height="900" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-210 -210 1020 1320" width="1020" height="1320">
+  <rect x="-210" y="-210" width="1020" height="1320" fill="white"/>
 
   <!-- Road boundary (top) - dashed outer edge + solid inner edge -->
   <line x1="60" y1="80"  x2="520" y2="80"  stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
