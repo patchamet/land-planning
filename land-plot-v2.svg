@@ -6,6 +6,24 @@
   <line x1="60" y1="80"  x2="520" y2="80"  stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
   <line x1="60" y1="130" x2="520" y2="130" stroke="#222" stroke-width="2"/>
 
+  <!-- Waterway along B and C (width=50 units, parallel + miter at corner) -->
+  <!-- Inner edge = plot boundary (B: x=430 y130→540, C: (430,540)→(320,780))  -->
+  <!-- Outer edge = offset 50 units perpendicular outward                        -->
+  <!-- Miter corner at (480,552) — intersection of outer-B and outer-C lines    -->
+  <polygon
+    points="430,130 480,130 480,552 366,801 320,780 430,540"
+    fill="#b8dff5"
+    stroke="none"
+    opacity="0.7"
+  />
+  <polyline
+    points="480,130 480,552 366,801"
+    fill="none"
+    stroke="#444"
+    stroke-width="1.5"
+    stroke-dasharray="8,5"
+  />
+
   <!-- Main plot polygon -->
   <polygon
     points="
