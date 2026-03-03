@@ -109,6 +109,9 @@
   <!-- Bottom of horizontal road (E74, from A1 to side C) -->
   <line x1="157" y1="648" x2="380.5" y2="648" stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
 
+  <!-- House to be demolished: A21,E25–A40,E50 (19m × 25m) -->
+  <rect x="297" y="305" width="133" height="175" fill="#f5c5c5" opacity="0.6" stroke="#c00" stroke-width="1.5" stroke-dasharray="6,4"/>
+
   <!-- Adjacent land (relative's plot) - same weight as main plot, lighter color -->
   <line x1="460" y1="595" x2="635" y2="595" stroke="#888" stroke-width="2"/>
   <line x1="370" y1="845" x2="590" y2="845" stroke="#888" stroke-width="2"/>
@@ -125,23 +128,34 @@
   <circle cx="395" cy="620" r="7" fill="white" stroke="#222" stroke-width="2"/>
   <circle cx="150" cy="648" r="7" fill="white" stroke="#222" stroke-width="2"/>
   <circle cx="381" cy="648" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <!-- House nodes (A21,E25–A40,E50) -->
+  <circle cx="297" cy="305" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="430" cy="305" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="297" cy="480" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="430" cy="480" r="7" fill="white" stroke="#222" stroke-width="2"/>
 
-  <!-- Node numbers 1–10 (row by row, left→right within each row) -->
-  <!-- Row 1: y=130 → 1,2,3 -->
+  <!-- Node numbers 1–14 (row by row top→bottom, left→right within each row) -->
+  <!-- y=130 → 1,2,3 -->
   <text x="130" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">1</text>
   <text x="185" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">2</text>
   <text x="450" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">3</text>
-  <!-- Row 2: y=540 → 4 -->
-  <text x="450" y="538" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">4</text>
-  <!-- Row 3: y=620 → 5,6 -->
-  <text x="200" y="618" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">5</text>
-  <text x="410" y="618" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">6</text>
-  <!-- Row 4: y=648 → 7,8 -->
-  <text x="133" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">7</text>
-  <text x="381" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">8</text>
-  <!-- Row 5: y=780 → 9,10 -->
-  <text x="130" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">9</text>
-  <text x="338" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">10</text>
+  <!-- y=305 → 4,5 -->
+  <text x="280" y="303" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="end">4</text>
+  <text x="448" y="303" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">5</text>
+  <!-- y=480 → 6,7 -->
+  <text x="280" y="498" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="end">6</text>
+  <text x="448" y="498" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">7</text>
+  <!-- y=540 → 8 -->
+  <text x="450" y="538" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">8</text>
+  <!-- y=620 → 9,10 -->
+  <text x="200" y="618" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">9</text>
+  <text x="410" y="618" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">10</text>
+  <!-- y=648 → 11,12 -->
+  <text x="133" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">11</text>
+  <text x="381" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">12</text>
+  <!-- y=780 → 13,14 -->
+  <text x="130" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">13</text>
+  <text x="338" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">14</text>
 
   <!-- Side labels A–E (midpoint of each edge, offset outward) -->
   <!-- A: top edge (1→2), above the line -->
