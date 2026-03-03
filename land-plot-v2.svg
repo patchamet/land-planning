@@ -301,4 +301,26 @@
   <text x="167.5" y="68" font-family="Arial" font-size="10" font-weight="bold" fill="#cc3300" text-anchor="middle">ทางเข้า</text>
   <line x1="167.5" y1="72" x2="167.5" y2="110" stroke="#cc3300" stroke-width="2.5"/>
   <polygon points="167.5,124 159,109 176,109" fill="#cc3300"/>
+
+  <!-- Color legend: right of outer waterway line (x=480), between nodes 3(y=130) and 8(y=540) -->
+  <rect x="492" y="215" width="148" height="148" fill="white" stroke="#aaa" stroke-width="0.8" rx="3"/>
+  <text x="566" y="231" font-family="Arial" font-size="10" font-weight="bold" fill="#444" text-anchor="middle">สัญลักษณ์</text>
+  <!-- สร้างบ้าน -->
+  <rect x="500" y="240" width="13" height="13" fill="#4dbb4d" opacity="0.85" stroke="#2a8a2a" stroke-width="0.5"/>
+  <text x="518" y="251" font-family="Arial" font-size="10" fill="#333">สร้างบ้าน</text>
+  <!-- ถนน -->
+  <rect x="500" y="261" width="13" height="13" fill="#e8e4dc" stroke="#444" stroke-width="0.8"/>
+  <text x="518" y="272" font-family="Arial" font-size="10" fill="#333">ถนน</text>
+  <!-- ว่าง -->
+  <rect x="500" y="282" width="13" height="13" fill="#ffa040" opacity="0.85" stroke="#cc7000" stroke-width="0.5"/>
+  <text x="518" y="293" font-family="Arial" font-size="10" fill="#333">ว่าง</text>
+  <!-- บ้านเก่า -->
+  <rect x="500" y="303" width="13" height="13" fill="#f5c5c5" stroke="#c00" stroke-width="0.8"/>
+  <text x="518" y="314" font-family="Arial" font-size="10" fill="#333">บ้านเก่า</text>
+  <!-- น้ำ -->
+  <rect x="500" y="324" width="13" height="13" fill="#b8dff5" opacity="0.85" stroke="#4499cc" stroke-width="0.5"/>
+  <text x="518" y="335" font-family="Arial" font-size="10" fill="#333">น้ำ</text>
+  <!-- ไผ่ -->
+  <circle cx="507" cy="351" r="5" fill="#4e8c20" stroke="#2a5a10" stroke-width="0.5" opacity="0.85"/>
+  <text x="518" y="355" font-family="Arial" font-size="10" fill="#333">แนวไผ่</text>
 </svg>
