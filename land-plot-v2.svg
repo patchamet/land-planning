@@ -92,6 +92,23 @@
     <line x1="144" y1="760" x2="150" y2="760"/><text x="142" y="763">90</text>
   </g>
 
+  <!-- Shoulder (ไหล่ทาง): A0,E0–A1,E74 (1m wide, covers vertical E0–E70 + horizontal E70–E74) -->
+  <rect x="150" y="130" width="7" height="518" fill="#c8b8a0" opacity="0.75"/>
+  <!-- Internal road: vertical section A1,E0–A5,E70 (4m × 70m) -->
+  <rect x="157" y="130" width="28" height="490" fill="#e8e4dc" opacity="0.85"/>
+  <!-- Internal road: horizontal section A1,E70–C,E70–C,E74–A1,E74 (4m wide) -->
+  <!-- Intersections: E70∩C=(393.3,620), E74∩C=(380.5,648) -->
+  <polygon points="157,620 393.3,620 380.5,648 157,648" fill="#e8e4dc" opacity="0.85"/>
+  <!-- Road boundaries (dashed) -->
+  <!-- Right edge of vertical section (A5, x=185) -->
+  <line x1="185" y1="130" x2="185" y2="620" stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <!-- Shoulder/road separator (A1, x=157) from E0 to E74 -->
+  <line x1="157" y1="130" x2="157" y2="648" stroke="#888" stroke-width="0.8" stroke-dasharray="4,4"/>
+  <!-- Top of horizontal road (E70, from A5 to side C) -->
+  <line x1="185" y1="620" x2="393.3" y2="620" stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <!-- Bottom of horizontal road (E74, from A1 to side C) -->
+  <line x1="157" y1="648" x2="380.5" y2="648" stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+
   <!-- Adjacent land (relative's plot) - same weight as main plot, lighter color -->
   <line x1="460" y1="595" x2="635" y2="595" stroke="#888" stroke-width="2"/>
   <line x1="370" y1="845" x2="590" y2="845" stroke="#888" stroke-width="2"/>
