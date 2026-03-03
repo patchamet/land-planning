@@ -121,6 +121,35 @@
   <!-- Area label: nodes 11-12-14-13 trapezoid ~540 ตร.ม. -->
   <text x="250" y="718" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~540 ตร.ม.</text>
 
+  <!-- Segment length labels (font-size 10, thin gray) -->
+  <g font-family="Arial" font-size="10" fill="#aaa">
+    <!-- Top: 1→2=5ม., 2→3=35ม. -->
+    <text x="167" y="143" text-anchor="middle">5ม.</text>
+    <text x="307" y="143" text-anchor="middle">35ม.</text>
+    <!-- Left (E): 1→11=74ม., 11→13=~19ม. -->
+    <text x="142" y="392" text-anchor="end">74ม.</text>
+    <text x="142" y="717" text-anchor="end">~19ม.</text>
+    <!-- Bottom (D): 13→14=~24ม. -->
+    <text x="235" y="772" text-anchor="middle">~24ม.</text>
+    <!-- Side C diagonal: 8→10=~12.5ม., 10→12=~4.5ม., 12→14=~21ม. -->
+    <text x="426" y="586" text-anchor="start">~12.5ม.</text>
+    <text x="402" y="640" text-anchor="start">~4.5ม.</text>
+    <text x="364" y="720" text-anchor="start">~21ม.</text>
+    <!-- Side B (right): 3→5=25ม., 5→7=25ม., 7→8=~8.6ม. -->
+    <text x="432" y="220" text-anchor="start">25ม.</text>
+    <text x="432" y="394" text-anchor="start">25ม.</text>
+    <text x="432" y="513" text-anchor="start">~8.6ม.</text>
+    <!-- Road right edge: 2→9=70ม. -->
+    <text x="195" y="377" text-anchor="start">70ม.</text>
+    <!-- Horizontal road: 9→10=30ม. (top), 11→12=33ม. (bottom) -->
+    <text x="290" y="613" text-anchor="middle">30ม.</text>
+    <text x="266" y="659" text-anchor="middle">33ม.</text>
+    <!-- House edges: 5→4=19ม., 4→6=25ม., 6→7=19ม. -->
+    <text x="364" y="294" text-anchor="middle">19ม.</text>
+    <text x="288" y="394" text-anchor="end">25ม.</text>
+    <text x="364" y="471" text-anchor="middle">19ม.</text>
+  </g>
+
   <!-- Adjacent land (relative's plot) - same weight as main plot, lighter color -->
   <line x1="460" y1="595" x2="635" y2="595" stroke="#888" stroke-width="2"/>
   <line x1="370" y1="845" x2="590" y2="845" stroke="#888" stroke-width="2"/>
