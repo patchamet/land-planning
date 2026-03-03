@@ -288,4 +288,9 @@
   <!-- E: left edge (5→1), to the left -->
   <text x="122" y="452" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="end">E</text>
   <text x="122" y="468" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="end">~93ม.</text>
+
+  <!-- Entrance arrow: between nodes 1(150,130) and 2(185,130), pointing into plot from road -->
+  <text x="167.5" y="68" font-family="Arial" font-size="10" font-weight="bold" fill="#cc3300" text-anchor="middle">ทางเข้า</text>
+  <line x1="167.5" y1="72" x2="167.5" y2="110" stroke="#cc3300" stroke-width="2.5"/>
+  <polygon points="167.5,124 159,109 176,109" fill="#cc3300"/>
 </svg>
