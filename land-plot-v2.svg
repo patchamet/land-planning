@@ -32,6 +32,14 @@
     stroke-dasharray="8,5"
   />
 
+  <!-- Zone fills (drawn BEFORE grid so grid lines remain visible on top) -->
+  <!-- House building area: nodes 11,12,14,13 — very light green -->
+  <polygon points="150,648 381,648 320,780 150,780"
+    fill="#4dbb4d" opacity="0.22" stroke="none"/>
+  <!-- Open/free area: nodes 2,3,5,4,6,7,8,10,9 — light amber -->
+  <polygon points="185,130 430,130 430,305 297,305 297,480 430,480 430,540 395,620 185,620"
+    fill="#ffa040" opacity="0.20" stroke="none"/>
+
   <!-- 1m grid fill inside main plot -->
   <polygon
     points="150,130 430,130 430,540 320,780 150,780"
