@@ -112,6 +112,8 @@
   <!-- House to be demolished: A21,E25–A40,E50 (19m × 25m) -->
   <rect x="297" y="305" width="133" height="175" fill="#f5c5c5" opacity="0.6" stroke="#c00" stroke-width="1.5" stroke-dasharray="6,4"/>
 
+  <!-- Area label: nodes 1-11-12-10-9-2 total road+shoulder ~486 ตร.ม. (center of horizontal road) -->
+  <text x="272" y="638" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~486 ตร.ม.</text>
   <!-- Area label: nodes 4-5-7-6 house rectangle ~475 ตร.ม. -->
   <text x="364" y="397" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~475 ตร.ม.</text>
   <!-- Area label: nodes 2-3-5-4-6-7-8-10-9 polygon ~1946 ตร.ม. (center above house) -->
