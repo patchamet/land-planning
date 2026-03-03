@@ -113,19 +113,35 @@
   <line x1="460" y1="595" x2="635" y2="595" stroke="#888" stroke-width="2"/>
   <line x1="370" y1="845" x2="590" y2="845" stroke="#888" stroke-width="2"/>
 
-  <!-- Corner nodes -->
+  <!-- Corner nodes (plot boundary) -->
   <circle cx="150" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
   <circle cx="430" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
   <circle cx="430" cy="540" r="7" fill="white" stroke="#222" stroke-width="2"/>
   <circle cx="320" cy="780" r="7" fill="white" stroke="#222" stroke-width="2"/>
   <circle cx="150" cy="780" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <!-- Road nodes -->
+  <circle cx="185" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="185" cy="620" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="395" cy="620" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="150" cy="648" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="381" cy="648" r="7" fill="white" stroke="#222" stroke-width="2"/>
 
-  <!-- Node numbers 1–5 -->
+  <!-- Node numbers 1–10 (row by row, left→right within each row) -->
+  <!-- Row 1: y=130 → 1,2,3 -->
   <text x="130" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">1</text>
-  <text x="450" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">2</text>
-  <text x="450" y="538" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">3</text>
-  <text x="338" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">4</text>
-  <text x="130" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">5</text>
+  <text x="185" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">2</text>
+  <text x="450" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">3</text>
+  <!-- Row 2: y=540 → 4 -->
+  <text x="450" y="538" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">4</text>
+  <!-- Row 3: y=620 → 5,6 -->
+  <text x="200" y="618" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">5</text>
+  <text x="410" y="618" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">6</text>
+  <!-- Row 4: y=648 → 7,8 -->
+  <text x="133" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">7</text>
+  <text x="381" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">8</text>
+  <!-- Row 5: y=780 → 9,10 -->
+  <text x="130" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">9</text>
+  <text x="338" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">10</text>
 
   <!-- Side labels A–E (midpoint of each edge, offset outward) -->
   <!-- A: top edge (1→2), above the line -->
