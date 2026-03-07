@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="55 590 440 330" width="880" height="660">
+  <rect x="55" y="590" width="440" height="330" fill="white"/>
+
+  <defs>
+    <pattern id="grid1m" x="150" y="130" width="7" height="7" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="7" y2="0" stroke="#ccc" stroke-width="0.4"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#ccc" stroke-width="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- Title -->
+  <text x="265" y="608" font-family="Arial" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">ผังพื้นที่สร้างบ้าน (โซน 11-12-14-13, ~540 ตร.ม.)</text>
+
+  <!-- Context: Waterway strip along side C (12→14 portion) -->
+  <polygon points="381,648 426,669 366,801 320,780"
+    fill="#b8dff5" stroke="none" opacity="0.7"/>
+  <line x1="426" y1="669" x2="366" y2="801"
+    stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+
+  <!-- Context: Horizontal road (E70-E74) above zone, faded -->
+  <polygon points="157,620 393.3,620 380.5,648 157,648" fill="#e8e4dc" opacity="0.5"/>
+  <line x1="185" y1="620" x2="393.3" y2="620" stroke="#444" stroke-width="1" stroke-dasharray="8,5" opacity="0.4"/>
+  <line x1="157" y1="648" x2="380.5" y2="648" stroke="#444" stroke-width="1" stroke-dasharray="8,5" opacity="0.4"/>
+  <text x="272" y="638" font-family="Arial" font-size="10" fill="#ccc" text-anchor="middle">ถนนภายใน</text>
+
+  <!-- Context: Bridge -->
+  <polygon points="395,620 440,640 427,669 381,648"
+    fill="#ddd0b8" fill-opacity="0.6" stroke="#666" stroke-width="1"/>
+  <text x="411" y="649" font-family="Arial" font-size="8" fill="#888" text-anchor="middle">สะพาน</text>
+
+  <!-- Zone fill: house building area -->
+  <polygon points="150,648 381,648 320,780 150,780"
+    fill="#4dbb4d" opacity="0.22" stroke="none"/>
+
+  <!-- Grid inside zone -->
+  <polygon points="150,648 381,648 320,780 150,780"
+    fill="url(#grid1m)" stroke="none"/>
+
+  <!-- Zone boundary -->
+  <polygon points="150,648 381,648 320,780 150,780"
+    fill="none" stroke="#222" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- ===== HOUSE ZONE LAYOUT ===== -->
+
+  <!-- Parking (carport): 6x6m, flush with road -->
+  <rect x="227" y="648" width="42" height="42" fill="#d0ccc4" opacity="0.8" stroke="#888" stroke-width="1" stroke-dasharray="4,3" rx="2"/>
+  <text x="248" y="668" font-family="Arial" font-size="7" font-weight="bold" fill="#555" text-anchor="middle">P จอดรถ</text>
+  <text x="248" y="678" font-family="Arial" font-size="5.5" fill="#555" text-anchor="middle">6x6ม.</text>
+
+  <!-- House 6x6m -->
+  <rect x="227" y="690" width="42" height="42" fill="#e8c888" stroke="#996633" stroke-width="1.5" rx="1"/>
+  <line x1="227" y1="711" x2="269" y2="711" stroke="#996633" stroke-width="0.8"/>
+  <!-- Door top (parking) -->
+  <rect x="241" y="687" width="14" height="5" fill="#996633" opacity="0.7" stroke="none"/>
+  <line x1="248" y1="690" x2="248" y2="684" stroke="#996633" stroke-width="1"/>
+  <polygon points="248,683 245,688 251,688" fill="#996633" opacity="0.6"/>
+  <!-- Door right (veggie garden) -->
+  <rect x="267" y="704" width="5" height="14" fill="#996633" opacity="0.7" stroke="none"/>
+  <line x1="269" y1="711" x2="275" y2="711" stroke="#996633" stroke-width="1"/>
+  <polygon points="276,711 271,708 271,714" fill="#996633" opacity="0.6"/>
+  <text x="248" y="707" font-family="Arial" font-size="8" font-weight="bold" fill="#663300" text-anchor="middle">บ้าน</text>
+  <text x="248" y="717" font-family="Arial" font-size="6.5" fill="#663300" text-anchor="middle">6x6ม.</text>
+
+  <!-- Rain water tank -->
+  <rect x="258" y="735" width="9" height="12" fill="#8ec8e8" stroke="#4499aa" stroke-width="0.7" rx="1"/>
+  <text x="262" y="756" font-family="Arial" font-size="5.5" fill="#4499aa" text-anchor="middle">ถังน้ำ</text>
+
+  <!-- Vegetable garden -->
+  <rect x="293" y="677" width="35" height="38" fill="#77bb44" opacity="0.35" stroke="#558822" stroke-width="1" stroke-dasharray="3,2" rx="2"/>
+  <line x1="298" y1="682" x2="298" y2="710" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="305" y1="682" x2="305" y2="710" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="312" y1="682" x2="312" y2="710" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="319" y1="682" x2="319" y2="710" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <text x="310" y="672" font-family="Arial" font-size="7" fill="#558822" text-anchor="middle">แปลงผัก</text>
+
+  <!-- Large trees (block afternoon sun) -->
+  <circle cx="192" cy="682" r="11" fill="#3a9a3a" opacity="0.45" stroke="#2a6a2a" stroke-width="0.8"/>
+  <circle cx="185" cy="712" r="13" fill="#3a9a3a" opacity="0.45" stroke="#2a6a2a" stroke-width="0.8"/>
+  <circle cx="202" cy="734" r="10" fill="#3a9a3a" opacity="0.45" stroke="#2a6a2a" stroke-width="0.8"/>
+  <text x="175" y="700" font-family="Arial" font-size="5.5" fill="#2a6a2a" text-anchor="middle" transform="rotate(-90,175,700)">ต้นไม้ใหญ่ (บังแดดบ่าย)</text>
+
+  <!-- Fruit trees -->
+  <circle cx="293" cy="737" r="8" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
+  <circle cx="316" cy="739" r="9" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
+  <text x="304" y="727" font-family="Arial" font-size="6" fill="#4a7a2a" text-anchor="middle">ต้นผลไม้</text>
+
+  <!-- Sun direction annotations -->
+  <g transform="translate(410,750)">
+    <line x1="16" y1="7" x2="5" y2="2" stroke="#e8a020" stroke-width="1.2"/>
+    <polygon points="3,1 9,0 7,5" fill="#e8a020"/>
+    <text x="20" y="5" font-family="Arial" font-size="5.5" fill="#cc8800">แดดเช้า</text>
+  </g>
+  <g transform="translate(110,720)">
+    <line x1="-10" y1="-6" x2="0" y2="0" stroke="#e86020" stroke-width="1.2"/>
+    <polygon points="1,1 -5,-2 -2,-6" fill="#e86020"/>
+    <text x="-30" y="-8" font-family="Arial" font-size="5.5" fill="#cc4400">แดดบ่าย</text>
+  </g>
+
+  <!-- ===== END HOUSE ZONE LAYOUT ===== -->
+
+  <!-- Bamboo row -->
+  <g id="bamboo-line" fill="#4e8c20" stroke="#2a5a10" stroke-width="0.5" opacity="0.85">
+    <!-- Seg1: left side, x=155, y=662..774 -->
+    <circle cx="155" cy="662" r="3.5"/>
+    <circle cx="155" cy="669" r="3.5"/>
+    <circle cx="155" cy="676" r="3.5"/>
+    <circle cx="155" cy="683" r="3.5"/>
+    <circle cx="155" cy="690" r="3.5"/>
+    <circle cx="155" cy="697" r="3.5"/>
+    <circle cx="155" cy="704" r="3.5"/>
+    <circle cx="155" cy="711" r="3.5"/>
+    <circle cx="155" cy="718" r="3.5"/>
+    <circle cx="155" cy="725" r="3.5"/>
+    <circle cx="155" cy="732" r="3.5"/>
+    <circle cx="155" cy="739" r="3.5"/>
+    <circle cx="155" cy="746" r="3.5"/>
+    <circle cx="155" cy="753" r="3.5"/>
+    <circle cx="155" cy="760" r="3.5"/>
+    <circle cx="155" cy="767" r="3.5"/>
+    <circle cx="155" cy="774" r="3.5"/>
+    <!-- Seg2: bottom, y=775, x=151..319 -->
+    <circle cx="151" cy="775" r="3.5"/>
+    <circle cx="158" cy="775" r="3.5"/>
+    <circle cx="165" cy="775" r="3.5"/>
+    <circle cx="172" cy="775" r="3.5"/>
+    <circle cx="179" cy="775" r="3.5"/>
+    <circle cx="186" cy="775" r="3.5"/>
+    <circle cx="193" cy="775" r="3.5"/>
+    <circle cx="200" cy="775" r="3.5"/>
+    <circle cx="207" cy="775" r="3.5"/>
+    <circle cx="214" cy="775" r="3.5"/>
+    <circle cx="221" cy="775" r="3.5"/>
+    <circle cx="228" cy="775" r="3.5"/>
+    <circle cx="235" cy="775" r="3.5"/>
+    <circle cx="242" cy="775" r="3.5"/>
+    <circle cx="249" cy="775" r="3.5"/>
+    <circle cx="256" cy="775" r="3.5"/>
+    <circle cx="263" cy="775" r="3.5"/>
+    <circle cx="270" cy="775" r="3.5"/>
+    <circle cx="277" cy="775" r="3.5"/>
+    <circle cx="284" cy="775" r="3.5"/>
+    <circle cx="291" cy="775" r="3.5"/>
+    <circle cx="298" cy="775" r="3.5"/>
+    <circle cx="305" cy="775" r="3.5"/>
+    <circle cx="312" cy="775" r="3.5"/>
+    <circle cx="319" cy="775" r="3.5"/>
+    <!-- Seg3: diagonal -->
+    <circle cx="318.0" cy="772.4" r="3.5"/>
+    <circle cx="321.0" cy="766.1" r="3.5"/>
+    <circle cx="323.9" cy="759.7" r="3.5"/>
+    <circle cx="326.8" cy="753.4" r="3.5"/>
+    <circle cx="329.8" cy="747.0" r="3.5"/>
+    <circle cx="332.7" cy="740.7" r="3.5"/>
+    <circle cx="335.6" cy="734.3" r="3.5"/>
+    <circle cx="338.6" cy="728.0" r="3.5"/>
+    <circle cx="341.5" cy="721.6" r="3.5"/>
+    <circle cx="344.4" cy="715.3" r="3.5"/>
+    <circle cx="347.4" cy="708.9" r="3.5"/>
+    <circle cx="350.3" cy="702.6" r="3.5"/>
+    <circle cx="353.3" cy="696.2" r="3.5"/>
+    <circle cx="356.2" cy="689.8" r="3.5"/>
+    <circle cx="359.1" cy="683.5" r="3.5"/>
+    <circle cx="362.1" cy="677.1" r="3.5"/>
+    <circle cx="365.0" cy="670.8" r="3.5"/>
+    <circle cx="367.9" cy="664.5" r="3.5"/>
+    <circle cx="370.9" cy="658.1" r="3.5"/>
+  </g>
+  <text x="135" y="726" font-family="Arial" font-size="9" fill="#4e8c20" text-anchor="middle" transform="rotate(-90,135,726)">แนวไผ่</text>
+
+  <!-- Node circles -->
+  <circle cx="150" cy="648" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="381" cy="648" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="150" cy="780" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="320" cy="780" r="7" fill="white" stroke="#222" stroke-width="2"/>
+
+  <!-- Node labels -->
+  <text x="133" y="643" font-family="Arial" font-size="14" font-weight="bold" fill="#c00" text-anchor="middle">11</text>
+  <text x="381" y="643" font-family="Arial" font-size="14" font-weight="bold" fill="#c00" text-anchor="middle">12</text>
+  <text x="133" y="800" font-family="Arial" font-size="14" font-weight="bold" fill="#c00" text-anchor="middle">13</text>
+  <text x="338" y="800" font-family="Arial" font-size="14" font-weight="bold" fill="#c00" text-anchor="middle">14</text>
+
+  <!-- Segment length labels -->
+  <g font-family="Arial" font-size="10" fill="#aaa">
+    <!-- 11→13 (left, ~19m) -->
+    <text x="140" y="717" text-anchor="end">~19ม.</text>
+    <!-- 13→14 (bottom, ~24m) -->
+    <text x="235" y="796" text-anchor="middle">~24ม.</text>
+    <!-- 12→14 (diagonal, ~21m) -->
+    <text x="364" y="720" text-anchor="start">~21ม.</text>
+    <!-- 11→12 (top, 33m) -->
+    <text x="266" y="659" text-anchor="middle">33ม.</text>
+  </g>
+
+  <!-- Side labels -->
+  <text x="400" y="720" font-family="Arial" font-size="12" font-weight="bold" fill="#0055cc" text-anchor="start">C</text>
+  <text x="235" y="814" font-family="Arial" font-size="12" font-weight="bold" fill="#0055cc" text-anchor="middle">D</text>
+  <text x="120" y="717" font-family="Arial" font-size="12" font-weight="bold" fill="#0055cc" text-anchor="end">E</text>
+
+  <!-- North arrow -->
+  <g transform="translate(460,625)">
+    <g transform="rotate(25)">
+      <line x1="0" y1="12" x2="0" y2="-12" stroke="#444" stroke-width="2"/>
+      <polygon points="0,-16 -4,-9 4,-9" fill="#444"/>
+    </g>
+    <text x="10" y="-18" font-family="Arial" font-size="11" font-weight="bold" fill="#444" text-anchor="middle">N</text>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#aaa" stroke-width="0.8"/>
+  </g>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="80" y="845" width="380" height="55" fill="white" stroke="#aaa" stroke-width="0.8" rx="3"/>
+  <text x="270" y="858" font-family="Arial" font-size="9" font-weight="bold" fill="#444" text-anchor="middle">สัญลักษณ์</text>
+
+  <!-- Row 1 -->
+  <rect x="90" y="864" width="10" height="10" fill="#e8c888" stroke="#996633" stroke-width="0.7"/>
+  <text x="105" y="873" font-family="Arial" font-size="8" fill="#333">บ้าน</text>
+
+  <rect x="140" y="864" width="10" height="10" fill="#d0ccc4" stroke="#888" stroke-width="0.7" stroke-dasharray="2,2"/>
+  <text x="155" y="873" font-family="Arial" font-size="8" fill="#333">จอดรถ</text>
+
+  <rect x="200" y="864" width="10" height="10" fill="#77bb44" opacity="0.6" stroke="#558822" stroke-width="0.7"/>
+  <text x="215" y="873" font-family="Arial" font-size="8" fill="#333">แปลงผัก</text>
+
+  <circle cx="280" cy="869" r="5" fill="#3a9a3a" opacity="0.5" stroke="#2a6a2a" stroke-width="0.5"/>
+  <text x="290" y="873" font-family="Arial" font-size="8" fill="#333">ต้นไม้ใหญ่</text>
+
+  <circle cx="355" cy="869" r="5" fill="#6aaa3a" opacity="0.5" stroke="#4a7a2a" stroke-width="0.5"/>
+  <text x="365" y="873" font-family="Arial" font-size="8" fill="#333">ต้นผลไม้</text>
+
+  <rect x="415" y="864" width="10" height="10" fill="#8ec8e8" stroke="#4499aa" stroke-width="0.7" rx="1"/>
+  <text x="430" y="873" font-family="Arial" font-size="8" fill="#333">ถังน้ำ</text>
+
+  <!-- Row 2 -->
+  <rect x="90" y="882" width="10" height="10" fill="#4dbb4d" opacity="0.5" stroke="#2a8a2a" stroke-width="0.5"/>
+  <text x="105" y="891" font-family="Arial" font-size="8" fill="#333">โซนสร้างบ้าน</text>
+
+  <circle cx="185" cy="887" r="4" fill="#4e8c20" stroke="#2a5a10" stroke-width="0.5" opacity="0.85"/>
+  <text x="194" y="891" font-family="Arial" font-size="8" fill="#333">แนวไผ่</text>
+
+  <rect x="240" y="882" width="10" height="10" fill="#b8dff5" opacity="0.7" stroke="#4499cc" stroke-width="0.5"/>
+  <text x="255" y="891" font-family="Arial" font-size="8" fill="#333">น้ำ</text>
+
+  <rect x="285" y="882" width="10" height="10" fill="#e8e4dc" stroke="#444" stroke-width="0.5"/>
+  <text x="300" y="891" font-family="Arial" font-size="8" fill="#333">ถนน</text>
+
+  <rect x="340" y="882" width="10" height="10" fill="#ddd0b8" stroke="#666" stroke-width="0.5"/>
+  <text x="355" y="891" font-family="Arial" font-size="8" fill="#333">สะพาน</text>
+</svg>
