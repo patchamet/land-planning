@@ -161,9 +161,9 @@
   <text x="175" y="700" font-family="Arial" font-size="5.5" fill="#2a6a2a" text-anchor="middle" transform="rotate(-90,175,700)">ต้นไม้ใหญ่ (บังแดดบ่าย)</text>
 
   <!-- Fruit trees: lower-right area -->
-  <circle cx="293" cy="737" r="8" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
-  <circle cx="316" cy="739" r="9" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
-  <text x="304" y="727" font-family="Arial" font-size="6" fill="#4a7a2a" text-anchor="middle">ต้นผลไม้</text>
+  <circle cx="286" cy="751" r="8" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
+  <circle cx="309" cy="753" r="9" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
+  <text x="297" y="741" font-family="Arial" font-size="6" fill="#4a7a2a" text-anchor="middle">ต้นผลไม้</text>
 
   <!-- Sun direction annotations (outside plot, same arrow angles) -->
   <!-- Morning sun (east = lower-right) -->
