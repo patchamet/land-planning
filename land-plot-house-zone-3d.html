@@ -223,66 +223,87 @@
       scene.add(pillar);
     });
 
-    // House walls: 6×6m, height 3m
+    // House walls: 6×6m, height 3m, raised 0.5m (ยกพื้น 0.5ม.)
     // SVG top-left: (227, 690) → 3D: (11, 6)
     const houseX = 11;
     const houseZ = 6;
     const houseW = 6;
     const houseD = 6;
     const houseH = 3;
+    const houseBase = 0.5; // ยกพื้น 0.5ม.
 
     const wallMat = new THREE.MeshStandardMaterial({ color: 0xe8c888 });
+
+    // Stilts / pillars under house (ยกพื้น)
+    const stiltMat = new THREE.MeshStandardMaterial({ color: 0x888888 });
+    const stiltGeo = new THREE.CylinderGeometry(0.1, 0.12, houseBase, 8);
+    [[0.5, 0.5], [0.5, 5.5], [5.5, 0.5], [5.5, 5.5], [3, 0.5], [3, 5.5], [0.5, 3], [5.5, 3]].forEach(([sx, sz]) => {
+      const stilt = new THREE.Mesh(stiltGeo, stiltMat);
+      stilt.position.set(houseX + sx, houseBase / 2, houseZ + sz);
+      stilt.castShadow = true;
+      scene.add(stilt);
+    });
 
     // 4 walls (thin boxes)
     // Front wall (facing parking, z=6) with door gap
     // Left portion of front wall
     const frontLeftGeo = new THREE.BoxGeometry(2, houseH, 0.15);
     const frontLeft = new THREE.Mesh(frontLeftGeo, wallMat);
-    frontLeft.position.set(houseX + 1, houseH / 2, houseZ + 0.075);
+    frontLeft.position.set(houseX + 1, houseBase + houseH / 2, houseZ + 0.075);
     scene.add(frontLeft);
     // Right portion of front wall
     const frontRightGeo = new THREE.BoxGeometry(2.7, houseH, 0.15);
     const frontRight = new THREE.Mesh(frontRightGeo, wallMat);
-    frontRight.position.set(houseX + 4.65, houseH / 2, houseZ + 0.075);
+    frontRight.position.set(houseX + 4.65, houseBase + houseH / 2, houseZ + 0.075);
     scene.add(frontRight);
     // Door frame top (above door)
     const doorTopGeo = new THREE.BoxGeometry(1.3, 0.8, 0.15);
     const doorTop = new THREE.Mesh(doorTopGeo, wallMat);
-    doorTop.position.set(houseX + 3, 2.6, houseZ + 0.075);
+    doorTop.position.set(houseX + 3, houseBase + 2.6, houseZ + 0.075);
     scene.add(doorTop);
 
     // Back wall (z=12)
     const backGeo = new THREE.BoxGeometry(houseW, houseH, 0.15);
     const backWall = new THREE.Mesh(backGeo, wallMat);
-    backWall.position.set(houseX + 3, houseH / 2, houseZ + houseD - 0.075);
+    backWall.position.set(houseX + 3, houseBase + houseH / 2, houseZ + houseD - 0.075);
     scene.add(backWall);
 
     // Left wall (x=11)
     const leftGeo = new THREE.BoxGeometry(0.15, houseH, houseD);
     const leftWall = new THREE.Mesh(leftGeo, wallMat);
-    leftWall.position.set(houseX + 0.075, houseH / 2, houseZ + 3);
+    leftWall.position.set(houseX + 0.075, houseBase + houseH / 2, houseZ + 3);
     scene.add(leftWall);
 
     // Right wall (x=17) with door gap for veggie garden
     const rightTopGeo = new THREE.BoxGeometry(0.15, houseH, 2);
     const rightTop = new THREE.Mesh(rightTopGeo, wallMat);
-    rightTop.position.set(houseX + houseW - 0.075, houseH / 2, houseZ + 1);
+    rightTop.position.set(houseX + houseW - 0.075, houseBase + houseH / 2, houseZ + 1);
     scene.add(rightTop);
     const rightBotGeo = new THREE.BoxGeometry(0.15, houseH, 2);
     const rightBot = new THREE.Mesh(rightBotGeo, wallMat);
-    rightBot.position.set(houseX + houseW - 0.075, houseH / 2, houseZ + 5);
+    rightBot.position.set(houseX + houseW - 0.075, houseBase + houseH / 2, houseZ + 5);
     scene.add(rightBot);
     const rightDoorTopGeo = new THREE.BoxGeometry(0.15, 0.8, 2);
     const rightDoorTop = new THREE.Mesh(rightDoorTopGeo, wallMat);
-    rightDoorTop.position.set(houseX + houseW - 0.075, 2.6, houseZ + 3);
+    rightDoorTop.position.set(houseX + houseW - 0.075, houseBase + 2.6, houseZ + 3);
     scene.add(rightDoorTop);
 
-    // Floor
+    // Floor (raised 0.5m)
     const floorGeo = new THREE.BoxGeometry(houseW, 0.15, houseD);
     const floorMat = new THREE.MeshStandardMaterial({ color: 0xd4c4a0 });
     const floor = new THREE.Mesh(floorGeo, floorMat);
-    floor.position.set(houseX + 3, 0.075, houseZ + 3);
+    floor.position.set(houseX + 3, houseBase + 0.075, houseZ + 3);
     scene.add(floor);
+
+    // Stairs from parking to front door (2 steps)
+    const stairMat = new THREE.MeshStandardMaterial({ color: 0xc8b8a0 });
+    for (let s = 0; s < 2; s++) {
+      const stepGeo = new THREE.BoxGeometry(1.4, 0.12, 0.4);
+      const step = new THREE.Mesh(stepGeo, stairMat);
+      step.position.set(houseX + 3, houseBase * (s + 1) / 2 - 0.06, houseZ - 0.2 - s * 0.4);
+      step.receiveShadow = true;
+      scene.add(step);
+    }
 
     // Roof (gable / triangular prism) — no rotation, extrude along Z
     const roofShape = new THREE.Shape();
@@ -295,11 +316,11 @@
     const roofMat = new THREE.MeshStandardMaterial({ color: 0x996633 });
     const roof = new THREE.Mesh(roofGeo, roofMat);
     // Profile in X-Y, extruded along +Z. Center on house.
-    roof.position.set(houseX + houseW / 2, houseH, houseZ - 0.3);
+    roof.position.set(houseX + houseW / 2, houseBase + houseH, houseZ - 0.3);
     roof.castShadow = true;
     scene.add(roof);
 
-    // Terrace (ชานบ้าน): 3×5m, attached to right wall of house, shifted down 0.5m
+    // Terrace (ชานบ้าน): 3×5m, attached to right wall of house, raised same as house
     // SVG: (269, 697), width=21(3m), height=35(5m)
     const terraceX = (269 - 150) / 7;  // 17
     const terraceZ = (697 - 648) / 7;  // 7
@@ -308,27 +329,35 @@
     const terraceGeo = new THREE.BoxGeometry(terraceW, 0.15, terraceD);
     const terraceMat = new THREE.MeshStandardMaterial({ color: 0xd4b896 });
     const terrace = new THREE.Mesh(terraceGeo, terraceMat);
-    terrace.position.set(terraceX + terraceW / 2, 0.1, terraceZ + terraceD / 2);
+    terrace.position.set(terraceX + terraceW / 2, houseBase + 0.075, terraceZ + terraceD / 2);
     terrace.receiveShadow = true;
     terrace.castShadow = true;
     scene.add(terrace);
+
+    // Terrace stilts
+    [[0.5, 0.5], [0.5, 4.5], [2.5, 0.5], [2.5, 4.5]].forEach(([tx, tz]) => {
+      const tStilt = new THREE.Mesh(stiltGeo, stiltMat);
+      tStilt.position.set(terraceX + tx, houseBase / 2, terraceZ + tz);
+      tStilt.castShadow = true;
+      scene.add(tStilt);
+    });
 
     // Terrace railing (3 sides: right, front, back — not the house-facing side)
     const railingMat = new THREE.MeshStandardMaterial({ color: 0x996633 });
     // Right railing (x = terraceX + terraceW)
     const rRailGeo = new THREE.BoxGeometry(0.06, 0.7, terraceD);
     const rRail = new THREE.Mesh(rRailGeo, railingMat);
-    rRail.position.set(terraceX + terraceW, 0.55, terraceZ + terraceD / 2);
+    rRail.position.set(terraceX + terraceW, houseBase + 0.55, terraceZ + terraceD / 2);
     scene.add(rRail);
     // Front railing (z = terraceZ)
     const fRailGeo = new THREE.BoxGeometry(terraceW, 0.7, 0.06);
     const fRail = new THREE.Mesh(fRailGeo, railingMat);
-    fRail.position.set(terraceX + terraceW / 2, 0.55, terraceZ);
+    fRail.position.set(terraceX + terraceW / 2, houseBase + 0.55, terraceZ);
     scene.add(fRail);
     // Back railing (z = terraceZ + terraceD)
     const bRailGeo = new THREE.BoxGeometry(terraceW, 0.7, 0.06);
     const bRail = new THREE.Mesh(bRailGeo, railingMat);
-    bRail.position.set(terraceX + terraceW / 2, 0.55, terraceZ + terraceD);
+    bRail.position.set(terraceX + terraceW / 2, houseBase + 0.55, terraceZ + terraceD);
     scene.add(bRail);
 
     // ===== Step 3: Trees + Veggie garden + Water tank =====
@@ -602,13 +631,13 @@
     }
 
     // Zone labels
-    scene.add(makeLabel('บ้าน 6×6', houseX + 3, houseH + 3, houseZ + 3, '#8B4513', '14px'));
+    scene.add(makeLabel('บ้าน 6×6', houseX + 3, houseBase + houseH + 3, houseZ + 3, '#8B4513', '14px'));
     scene.add(makeLabel('ลานจอดรถ', 14, 3.2, 3, '#555', '12px'));
     scene.add(makeLabel('แปลงผัก', vegX + vegW / 2, 1.5, vegZ + vegD / 2, '#2d6b12', '12px'));
     scene.add(makeLabel('ถังน้ำ', tankX + 0.6, 2, tankZ + 0.8, '#2288aa', '11px'));
     scene.add(makeLabel('ต้นไม้บังแดดบ่าย', 6, 6, 9, '#1a6b1a', '12px'));
     scene.add(makeLabel('ต้นผลไม้', 21, 3.5, 15, '#5a8a2a', '11px'));
-    scene.add(makeLabel('ชานบ้าน', terraceX + terraceW / 2, 1.5, terraceZ + terraceD / 2, '#8B4513', '11px'));
+    scene.add(makeLabel('ชานบ้าน', terraceX + terraceW / 2, houseBase + 1.5, terraceZ + terraceD / 2, '#8B4513', '11px'));
     scene.add(makeLabel('แนวไผ่', 0.7, 5, 10, '#3a6a10', '11px'));
     scene.add(makeLabel('ถนน', 16, 0.5, -2, '#666', '12px'));
     scene.add(makeLabel('ลำน้ำ', 38, 1, 5, '#1a6699', '12px'));
