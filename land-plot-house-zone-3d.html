@@ -284,38 +284,30 @@
     const vegW = 35 / 7;           // 5
     const vegD = 38 / 7;           // 5.4
 
-    // Soil bed
-    const vegGeo = new THREE.BoxGeometry(vegW, 0.3, vegD);
-    const vegMat = new THREE.MeshStandardMaterial({ color: 0x5a3a1a });
-    const vegBed = new THREE.Mesh(vegGeo, vegMat);
-    vegBed.position.set(vegX + vegW / 2, 0.15, vegZ + vegD / 2);
-    scene.add(vegBed);
-
-    // Green crop rows on top
-    const rowMat = new THREE.MeshStandardMaterial({ color: 0x77bb44 });
-    for (let i = 0; i < 5; i++) {
-      const rowGeo = new THREE.BoxGeometry(0.4, 0.25, vegD - 0.4);
-      const row = new THREE.Mesh(rowGeo, rowMat);
-      row.position.set(vegX + 0.7 + i * 1.0, 0.42, vegZ + vegD / 2);
-      scene.add(row);
+    // Small veggie plants scattered in the garden area
+    const vegPlantMat = new THREE.MeshStandardMaterial({ color: 0x55aa33 });
+    const vegSoilMat = new THREE.MeshStandardMaterial({ color: 0x5a3a1a });
+    for (let row = 0; row < 5; row++) {
+      for (let col = 0; col < 5; col++) {
+        const px = vegX + 0.5 + row * 1.0;
+        const pz = vegZ + 0.5 + col * 1.08;
+        // Small soil mound
+        const moundGeo = new THREE.CylinderGeometry(0.2, 0.25, 0.1, 6);
+        const mound = new THREE.Mesh(moundGeo, vegSoilMat);
+        mound.position.set(px, 0.05, pz);
+        scene.add(mound);
+        // Small plant (cone + tiny sphere)
+        const stemGeo = new THREE.CylinderGeometry(0.02, 0.03, 0.3 + Math.random() * 0.2, 5);
+        const stem = new THREE.Mesh(stemGeo, new THREE.MeshStandardMaterial({ color: 0x3a7a1a }));
+        stem.position.set(px, 0.25, pz);
+        scene.add(stem);
+        const leafGeo = new THREE.SphereGeometry(0.12 + Math.random() * 0.08, 6, 5);
+        const leaf = new THREE.Mesh(leafGeo, vegPlantMat);
+        leaf.position.set(px, 0.4 + Math.random() * 0.1, pz);
+        leaf.scale.y = 0.6;
+        scene.add(leaf);
+      }
     }
-
-    // Border frame
-    const borderMat = new THREE.MeshStandardMaterial({ color: 0x8B7355 });
-    // Long sides (along Z)
-    [0, vegW].forEach(offX => {
-      const geo = new THREE.BoxGeometry(0.12, 0.35, vegD);
-      const mesh = new THREE.Mesh(geo, borderMat);
-      mesh.position.set(vegX + offX, 0.175, vegZ + vegD / 2);
-      scene.add(mesh);
-    });
-    // Short sides (along X)
-    [0, vegD].forEach(offZ => {
-      const geo = new THREE.BoxGeometry(vegW, 0.35, 0.12);
-      const mesh = new THREE.Mesh(geo, borderMat);
-      mesh.position.set(vegX + vegW / 2, 0.175, vegZ + offZ);
-      scene.add(mesh);
-    });
 
     // Rain water tank: cylinder
     // SVG: (258, 735), behind house
@@ -349,13 +341,15 @@
         stalk.position.set(dx, h / 2, dz);
         group.add(stalk);
       }
-      // Small canopy puff
-      const canopyGeo = new THREE.SphereGeometry(0.6, 8, 6);
-      const canopyMat = new THREE.MeshStandardMaterial({ color: 0x4e8c20, transparent: true, opacity: 0.8 });
-      const canopy = new THREE.Mesh(canopyGeo, canopyMat);
-      canopy.position.y = h * 0.85;
-      canopy.scale.y = 1.3;
-      group.add(canopy);
+      // Leaf tufts along the stalk tops (no sphere)
+      for (let j = 0; j < 4; j++) {
+        const leafGeo = new THREE.CylinderGeometry(0, 0.15, 0.6, 4);
+        const leafMat = new THREE.MeshStandardMaterial({ color: 0x4e8c20 });
+        const leaf = new THREE.Mesh(leafGeo, leafMat);
+        leaf.position.set((Math.random() - 0.5) * 0.4, h * 0.9 + Math.random() * 0.3, (Math.random() - 0.5) * 0.4);
+        leaf.rotation.z = (Math.random() - 0.5) * 0.8;
+        group.add(leaf);
+      }
       group.position.set(x, 0, z);
       return group;
     }
@@ -438,7 +432,7 @@
 
     const waterGeo = new THREE.ShapeGeometry(waterShape);
     const waterMat = new THREE.MeshStandardMaterial({
-      color: 0xb8dff5, transparent: true, opacity: 0.6, side: THREE.DoubleSide
+      color: 0x4a9fd8, transparent: true, opacity: 0.5, side: THREE.DoubleSide
     });
     const waterMesh = new THREE.Mesh(waterGeo, waterMat);
     waterMesh.rotation.x = -Math.PI / 2;
