@@ -67,12 +67,12 @@
   <text x="262" y="756" font-family="Arial" font-size="5.5" fill="#4499aa" text-anchor="middle">ถังน้ำ</text>
 
   <!-- Vegetable garden -->
-  <rect x="293" y="677" width="35" height="38" fill="#77bb44" opacity="0.35" stroke="#558822" stroke-width="1" stroke-dasharray="3,2" rx="2"/>
-  <line x1="298" y1="682" x2="298" y2="710" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
-  <line x1="305" y1="682" x2="305" y2="710" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
-  <line x1="312" y1="682" x2="312" y2="710" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
-  <line x1="319" y1="682" x2="319" y2="710" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
-  <text x="310" y="672" font-family="Arial" font-size="7" fill="#558822" text-anchor="middle">แปลงผัก</text>
+  <rect x="300" y="670" width="35" height="38" fill="#77bb44" opacity="0.35" stroke="#558822" stroke-width="1" stroke-dasharray="3,2" rx="2"/>
+  <line x1="305" y1="675" x2="305" y2="703" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="312" y1="675" x2="312" y2="703" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="319" y1="675" x2="319" y2="703" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="326" y1="675" x2="326" y2="703" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <text x="317" y="665" font-family="Arial" font-size="7" fill="#558822" text-anchor="middle">แปลงผัก</text>
 
   <!-- Large trees (block afternoon sun) -->
   <circle cx="192" cy="682" r="11" fill="#3a9a3a" opacity="0.45" stroke="#2a6a2a" stroke-width="0.8"/>
