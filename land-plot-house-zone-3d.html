@@ -221,6 +221,118 @@
     roof.position.set(houseX + houseW / 2, houseH, houseZ - 0.3);
     scene.add(roof);
 
+    // ===== Step 3: Trees + Veggie garden + Water tank =====
+
+    // Helper: create a tree (trunk cylinder + canopy sphere)
+    function createTree(x, z, trunkH, trunkR, canopyR, canopyColor) {
+      const group = new THREE.Group();
+      // Trunk
+      const trunkGeo = new THREE.CylinderGeometry(trunkR, trunkR * 1.3, trunkH, 8);
+      const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8B6914 });
+      const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+      trunk.position.y = trunkH / 2;
+      group.add(trunk);
+      // Canopy
+      const canopyGeo = new THREE.SphereGeometry(canopyR, 12, 10);
+      const canopyMat = new THREE.MeshStandardMaterial({ color: canopyColor, transparent: true, opacity: 0.85 });
+      const canopy = new THREE.Mesh(canopyGeo, canopyMat);
+      canopy.position.y = trunkH + canopyR * 0.6;
+      group.add(canopy);
+
+      group.position.set(x, 0, z);
+      return group;
+    }
+
+    // Large trees: west of house (block afternoon sun)
+    // SVG: (192,682), (185,712), (202,734)
+    const bigTree1 = createTree(
+      (192 - 150) / 7, (682 - 648) / 7,  // x=6.0, z=4.9
+      4, 0.2, 2.5, 0x3a9a3a
+    );
+    scene.add(bigTree1);
+
+    const bigTree2 = createTree(
+      (185 - 150) / 7, (712 - 648) / 7,  // x=5.0, z=9.1
+      5, 0.25, 3.0, 0x2e8b2e
+    );
+    scene.add(bigTree2);
+
+    const bigTree3 = createTree(
+      (202 - 150) / 7, (734 - 648) / 7,  // x=7.4, z=12.3
+      3.5, 0.18, 2.2, 0x3a9a3a
+    );
+    scene.add(bigTree3);
+
+    // Fruit trees: lower-right
+    // SVG: (293,737), (316,739)
+    const fruitTree1 = createTree(
+      (293 - 150) / 7, (737 - 648) / 7,  // x=20.4, z=12.7
+      2.5, 0.12, 1.5, 0x6aaa3a
+    );
+    scene.add(fruitTree1);
+
+    const fruitTree2 = createTree(
+      (316 - 150) / 7, (739 - 648) / 7,  // x=23.7, z=13.0
+      2.8, 0.14, 1.7, 0x6aaa3a
+    );
+    scene.add(fruitTree2);
+
+    // Vegetable garden: raised bed
+    // SVG top-left: (293, 677), size 35×38 SVG = 5×5.4m
+    const vegX = (293 - 150) / 7;  // 20.4
+    const vegZ = (677 - 648) / 7;  // 4.1
+    const vegW = 35 / 7;           // 5
+    const vegD = 38 / 7;           // 5.4
+
+    // Soil bed
+    const vegGeo = new THREE.BoxGeometry(vegW, 0.3, vegD);
+    const vegMat = new THREE.MeshStandardMaterial({ color: 0x5a3a1a });
+    const vegBed = new THREE.Mesh(vegGeo, vegMat);
+    vegBed.position.set(vegX + vegW / 2, 0.15, vegZ + vegD / 2);
+    scene.add(vegBed);
+
+    // Green crop rows on top
+    const rowMat = new THREE.MeshStandardMaterial({ color: 0x77bb44 });
+    for (let i = 0; i < 5; i++) {
+      const rowGeo = new THREE.BoxGeometry(0.4, 0.25, vegD - 0.4);
+      const row = new THREE.Mesh(rowGeo, rowMat);
+      row.position.set(vegX + 0.7 + i * 1.0, 0.42, vegZ + vegD / 2);
+      scene.add(row);
+    }
+
+    // Border frame
+    const borderMat = new THREE.MeshStandardMaterial({ color: 0x8B7355 });
+    // Long sides (along Z)
+    [0, vegW].forEach(offX => {
+      const geo = new THREE.BoxGeometry(0.12, 0.35, vegD);
+      const mesh = new THREE.Mesh(geo, borderMat);
+      mesh.position.set(vegX + offX, 0.175, vegZ + vegD / 2);
+      scene.add(mesh);
+    });
+    // Short sides (along X)
+    [0, vegD].forEach(offZ => {
+      const geo = new THREE.BoxGeometry(vegW, 0.35, 0.12);
+      const mesh = new THREE.Mesh(geo, borderMat);
+      mesh.position.set(vegX + vegW / 2, 0.175, vegZ + offZ);
+      scene.add(mesh);
+    });
+
+    // Rain water tank: cylinder
+    // SVG: (258, 735), behind house
+    const tankX = (258 - 150) / 7;  // 15.4
+    const tankZ = (735 - 648) / 7;  // 12.4
+    const tankGeo = new THREE.CylinderGeometry(0.5, 0.5, 1.2, 16);
+    const tankMat = new THREE.MeshStandardMaterial({ color: 0x8ec8e8 });
+    const tank = new THREE.Mesh(tankGeo, tankMat);
+    tank.position.set(tankX + 0.6, 0.6, tankZ + 0.8);
+    scene.add(tank);
+    // Tank lid
+    const lidGeo = new THREE.CylinderGeometry(0.52, 0.52, 0.06, 16);
+    const lidMat = new THREE.MeshStandardMaterial({ color: 0x4499aa });
+    const lid = new THREE.Mesh(lidGeo, lidMat);
+    lid.position.set(tankX + 0.6, 1.23, tankZ + 0.8);
+    scene.add(lid);
+
     // ===== Grid (ground reference) =====
     const gridHelper = new THREE.GridHelper(40, 40, 0xaaaaaa, 0xdddddd);
     gridHelper.position.set(16, -0.01, 10);
