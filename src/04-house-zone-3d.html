@@ -730,18 +730,18 @@
 
     // Waterway along side C: from near node 12 to beyond node 14
     // Inner edge: plot boundary C (12→14 extended to 8)
-    // Outer edge: ~7m further out
+    // Outer edge: ~4m further out (28 SVG units)
     // Node 8: SVG(430,540) → 3D(40, -15.4)
     // Node 12: (33, 0), Node 14: (24.3, 18.9)
-    // Outer: SVG(480,552)→(366,801) → 3D(47.1,-13.7)→(30.9,21.9)
+    // Outer: SVG(458,546)→(345,792) → 3D(44.0,-14.6)→(27.9,20.6)
     const waterShape = new THREE.Shape();
     // Inner boundary (plot side)
     waterShape.moveTo(40, 15.4);      // node 8 (negate z → positive)
     waterShape.lineTo(33, 0);         // node 12
     waterShape.lineTo(24.3, -18.9);   // node 14
     // Outer boundary
-    waterShape.lineTo(30.9, -21.9);   // outer bottom (366,801)
-    waterShape.lineTo(47.1, 13.7);    // outer top (480,552)
+    waterShape.lineTo(27.9, -20.6);   // outer bottom (345,792)
+    waterShape.lineTo(44.0, 14.6);    // outer top (458,546)
     waterShape.closePath();
 
     const waterGeo = new THREE.ShapeGeometry(waterShape);
@@ -753,12 +753,12 @@
     waterMesh.position.y = -0.05;
     scene.add(waterMesh);
 
-    // Bridge: spans waterway at diagonal
-    // SVG polygon: (395,620)→(440,640)→(427,669)→(381,648)
+    // Bridge: spans waterway at diagonal (4m wide)
+    // SVG polygon: (395,620)→(420,632)→(406,660)→(381,648)
     const bridgeShape = new THREE.Shape();
     const bp1 = svgTo3D(395, 620); // (35, -4)
-    const bp2 = svgTo3D(440, 640); // (41.4, -1.1)
-    const bp3 = svgTo3D(427, 669); // (39.6, 3)
+    const bp2 = svgTo3D(420, 632); // (38.6, -2.3)
+    const bp3 = svgTo3D(406, 660); // (36.6, 1.7)
     const bp4 = svgTo3D(381, 648); // (33, 0)
     bridgeShape.moveTo(bp1.x, -bp1.z);
     bridgeShape.lineTo(bp2.x, -bp2.z);

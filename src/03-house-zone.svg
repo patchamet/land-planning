@@ -13,9 +13,9 @@
   <text x="265" y="608" font-family="Arial" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">ผังพื้นที่สร้างบ้าน (โซน 11-12-14-13, ~540 ตร.ม.)</text>
 
   <!-- Context: Waterway strip along side C (12→14 portion) -->
-  <polygon points="381,648 426,669 366,801 320,780"
+  <polygon points="381,648 406,660 345,792 320,780"
     fill="#b8dff5" stroke="none" opacity="0.7"/>
-  <line x1="426" y1="669" x2="366" y2="801"
+  <line x1="406" y1="660" x2="345" y2="792"
     stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
 
   <!-- Context: Horizontal road (E70-E74) above zone, faded -->
@@ -25,9 +25,9 @@
   <text x="272" y="638" font-family="Arial" font-size="10" fill="#ccc" text-anchor="middle">ถนนภายใน</text>
 
   <!-- Context: Bridge -->
-  <polygon points="395,620 440,640 427,669 381,648"
+  <polygon points="395,620 420,632 406,660 381,648"
     fill="#ddd0b8" fill-opacity="0.6" stroke="#666" stroke-width="1"/>
-  <text x="411" y="649" font-family="Arial" font-size="8" fill="#888" text-anchor="middle">สะพาน</text>
+  <text x="401" y="645" font-family="Arial" font-size="8" fill="#888" text-anchor="middle">สะพาน</text>
 
   <!-- Zone fill: house building area -->
   <polygon points="150,648 381,648 320,780 150,780"

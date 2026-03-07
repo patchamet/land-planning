@@ -14,18 +14,18 @@
   <line x1="60" y1="80"  x2="520" y2="80"  stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
   <line x1="60" y1="130" x2="520" y2="130" stroke="#222" stroke-width="2"/>
 
-  <!-- Waterway along B and C (width=50 units, parallel + miter at corner) -->
+  <!-- Waterway along B and C (width=28 units ≈ 4m, parallel + miter at corner) -->
   <!-- Inner edge = plot boundary (B: x=430 y130→540, C: (430,540)→(320,780))  -->
-  <!-- Outer edge = offset 50 units perpendicular outward                        -->
-  <!-- Miter corner at (480,552) — intersection of outer-B and outer-C lines    -->
+  <!-- Outer edge = offset 28 units perpendicular outward                        -->
+  <!-- Miter corner at (458,546) — intersection of outer-B and outer-C lines    -->
   <polygon
-    points="430,130 480,130 480,552 366,801 320,780 430,540"
+    points="430,130 458,130 458,546 345,792 320,780 430,540"
     fill="#b8dff5"
     stroke="none"
     opacity="0.7"
   />
   <polyline
-    points="480,130 480,552 366,801"
+    points="458,130 458,546 345,792"
     fill="none"
     stroke="#444"
     stroke-width="1.5"
@@ -295,11 +295,11 @@
   <!-- Bamboo label -->
   <text x="135" y="726" font-family="Arial" font-size="9" fill="#4e8c20" text-anchor="middle" transform="rotate(-90,135,726)">แนวไผ่</text>
 
-  <!-- Bridge across waterway: node10(395,620)→outer(440,640), node12(381,648)→outer(427,669) -->
+  <!-- Bridge across waterway: node10(395,620)→outer(420,632), node12(381,648)→outer(406,660) -->
   <!-- Direction perpendicular to side C, outward normal (0.9091,0.4167), hits outer dashed boundary -->
-  <polygon points="395,620 440,640 427,669 381,648"
+  <polygon points="395,620 420,632 406,660 381,648"
     fill="#ddd0b8" fill-opacity="0.9" stroke="#666" stroke-width="1.5"/>
-  <text x="411" y="649" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">สะพาน</text>
+  <text x="401" y="645" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">สะพาน</text>
 
   <!-- Adjacent land (relative's plot) - same weight as main plot, lighter color -->
   <line x1="460" y1="595" x2="635" y2="595" stroke="#888" stroke-width="2"/>
