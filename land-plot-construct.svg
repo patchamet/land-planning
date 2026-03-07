@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 10 715 905" width="1610" height="2037">
+  <rect x="-10" y="10" width="715" height="905" fill="white"/>
+
+  <defs>
+    <!-- 1m grid: 7 SVG units ≈ 1 metre at this scale -->
+    <pattern id="grid1m" x="150" y="130" width="7" height="7" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="7" y2="0" stroke="#ccc" stroke-width="0.4"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#ccc" stroke-width="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- Road boundary (top) - dashed outer edge + solid inner edge -->
+  <line x1="60" y1="80"  x2="520" y2="80"  stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <line x1="60" y1="130" x2="520" y2="130" stroke="#222" stroke-width="2"/>
+
+  <!-- Waterway along B and C (width=50 units, parallel + miter at corner) -->
+  <!-- Inner edge = plot boundary (B: x=430 y130→540, C: (430,540)→(320,780))  -->
+  <!-- Outer edge = offset 50 units perpendicular outward                        -->
+  <!-- Miter corner at (480,552) — intersection of outer-B and outer-C lines    -->
+  <polygon
+    points="430,130 480,130 480,552 366,801 320,780 430,540"
+    fill="#b8dff5"
+    stroke="none"
+    opacity="0.7"
+  />
+  <polyline
+    points="480,130 480,552 366,801"
+    fill="none"
+    stroke="#444"
+    stroke-width="1.5"
+    stroke-dasharray="8,5"
+  />
+
+  <!-- Zone fills (drawn BEFORE grid so grid lines remain visible on top) -->
+  <!-- House building area: nodes 11,12,14,13 — very light green -->
+  <polygon points="150,648 381,648 320,780 150,780"
+    fill="#4dbb4d" opacity="0.22" stroke="none"/>
+  <!-- Open/free area: nodes 2,3,5,4,6,7,8,10,9 — light amber -->
+  <polygon points="185,130 430,130 430,305 297,305 297,480 430,480 430,540 395,620 185,620"
+    fill="#ffa040" opacity="0.20" stroke="none"/>
+
+  <!-- 1m grid fill inside main plot -->
+  <polygon
+    points="150,130 430,130 430,540 320,780 150,780"
+    fill="url(#grid1m)"
+    stroke="none"
+  />
+
+  <!-- Main plot polygon -->
+  <polygon
+    points="
+      150,130
+      430,130
+      430,540
+      320,780
+      150,780
+    "
+    fill="none"
+    stroke="#222"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+
+  <!-- Grid axis ticks every 5m — origin = node 1 (150,130), 5m = 35 SVG units -->
+
+  <!-- Side A: ticks above boundary y=130, labels at y=122 -->
+  <g stroke="#999" stroke-width="0.7" fill="#999" font-family="Arial" font-size="6.5" text-anchor="middle">
+    <line x1="150" y1="125" x2="150" y2="130"/><text x="150" y="123">0</text>
+    <line x1="185" y1="125" x2="185" y2="130"/><text x="185" y="123">5</text>
+    <line x1="220" y1="125" x2="220" y2="130"/><text x="220" y="123">10</text>
+    <line x1="255" y1="125" x2="255" y2="130"/><text x="255" y="123">15</text>
+    <line x1="290" y1="125" x2="290" y2="130"/><text x="290" y="123">20</text>
+    <line x1="325" y1="125" x2="325" y2="130"/><text x="325" y="123">25</text>
+    <line x1="360" y1="125" x2="360" y2="130"/><text x="360" y="123">30</text>
+    <line x1="395" y1="125" x2="395" y2="130"/><text x="395" y="123">35</text>
+    <line x1="430" y1="125" x2="430" y2="130"/><text x="430" y="123">40</text>
+  </g>
+
+  <!-- Side E: ticks left of boundary x=150, labels at x=142 -->
+  <g stroke="#999" stroke-width="0.7" fill="#999" font-family="Arial" font-size="6.5" text-anchor="end">
+    <line x1="144" y1="130" x2="150" y2="130"/><text x="142" y="133">0</text>
+    <line x1="144" y1="165" x2="150" y2="165"/><text x="142" y="168">5</text>
+    <line x1="144" y1="200" x2="150" y2="200"/><text x="142" y="203">10</text>
+    <line x1="144" y1="235" x2="150" y2="235"/><text x="142" y="238">15</text>
+    <line x1="144" y1="270" x2="150" y2="270"/><text x="142" y="273">20</text>
+    <line x1="144" y1="305" x2="150" y2="305"/><text x="142" y="308">25</text>
+    <line x1="144" y1="340" x2="150" y2="340"/><text x="142" y="343">30</text>
+    <line x1="144" y1="375" x2="150" y2="375"/><text x="142" y="378">35</text>
+    <line x1="144" y1="410" x2="150" y2="410"/><text x="142" y="413">40</text>
+    <line x1="144" y1="445" x2="150" y2="445"/><text x="142" y="448">45</text>
+    <line x1="144" y1="480" x2="150" y2="480"/><text x="142" y="483">50</text>
+    <line x1="144" y1="515" x2="150" y2="515"/><text x="142" y="518">55</text>
+    <line x1="144" y1="550" x2="150" y2="550"/><text x="142" y="553">60</text>
+    <line x1="144" y1="585" x2="150" y2="585"/><text x="142" y="588">65</text>
+    <line x1="144" y1="620" x2="150" y2="620"/><text x="142" y="623">70</text>
+    <line x1="144" y1="655" x2="150" y2="655"/><text x="142" y="658">75</text>
+    <line x1="144" y1="690" x2="150" y2="690"/><text x="142" y="693">80</text>
+    <line x1="144" y1="725" x2="150" y2="725"/><text x="142" y="728">85</text>
+    <line x1="144" y1="760" x2="150" y2="760"/><text x="142" y="763">90</text>
+  </g>
+
+  <!-- Shoulder (ไหล่ทาง): A0,E0–A1,E74 (1m wide, covers vertical E0–E70 + horizontal E70–E74) -->
+  <rect x="150" y="130" width="7" height="518" fill="#c8b8a0" opacity="0.75"/>
+  <!-- Internal road: vertical section A1,E0–A5,E70 (4m × 70m) -->
+  <rect x="157" y="130" width="28" height="490" fill="#e8e4dc" opacity="0.85"/>
+  <!-- Internal road: horizontal section A1,E70–C,E70–C,E74–A1,E74 (4m wide) -->
+  <!-- Intersections: E70∩C=(393.3,620), E74∩C=(380.5,648) -->
+  <polygon points="157,620 393.3,620 380.5,648 157,648" fill="#e8e4dc" opacity="0.85"/>
+  <!-- Road boundaries (dashed) -->
+  <!-- Right edge of vertical section (A5, x=185) -->
+  <line x1="185" y1="130" x2="185" y2="620" stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <!-- Shoulder/road separator (A1, x=157) from E0 to E74 -->
+  <line x1="157" y1="130" x2="157" y2="648" stroke="#888" stroke-width="0.8" stroke-dasharray="4,4"/>
+  <!-- Top of horizontal road (E70, from A5 to side C) -->
+  <line x1="185" y1="620" x2="393.3" y2="620" stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <!-- Bottom of horizontal road (E74, from A1 to side C) -->
+  <line x1="157" y1="648" x2="380.5" y2="648" stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+
+  <!-- House to be demolished: A21,E25–A40,E50 (19m × 25m) -->
+  <rect x="297" y="305" width="133" height="175" fill="#f5c5c5" opacity="0.6" stroke="#c00" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- Area label: nodes 1-11-12-10-9-2 total road+shoulder ~486 ตร.ม. (center of horizontal road) -->
+  <text x="272" y="638" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~486 ตร.ม.</text>
+  <!-- Area label: nodes 4-5-7-6 house rectangle ~475 ตร.ม. -->
+  <text x="364" y="397" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~475 ตร.ม.</text>
+  <!-- Area label: nodes 2-3-5-4-6-7-8-10-9 polygon ~1946 ตร.ม. (center above house) -->
+  <text x="307" y="225" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~1946 ตร.ม.</text>
+  <!-- Area label: nodes 11-12-14-13 trapezoid ~540 ตร.ม. -->
+  <text x="250" y="718" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~540 ตร.ม.</text>
+
+  <!-- Segment length labels (font-size 10, thin gray) -->
+  <g font-family="Arial" font-size="10" fill="#aaa">
+    <!-- Top: 1→2=5ม., 2→3=35ม. -->
+    <text x="167" y="143" text-anchor="middle">5ม.</text>
+    <text x="307" y="143" text-anchor="middle">35ม.</text>
+    <!-- Left (E): 1→11=74ม., 11→13=~19ม. -->
+    <text x="142" y="392" text-anchor="end">74ม.</text>
+    <text x="142" y="717" text-anchor="end">~19ม.</text>
+    <!-- Bottom (D): 13→14=~24ม. -->
+    <text x="235" y="772" text-anchor="middle">~24ม.</text>
+    <!-- Side C diagonal: 8→10=~12.5ม., 10→12=~4.5ม., 12→14=~21ม. -->
+    <text x="426" y="586" text-anchor="start">~12.5ม.</text>
+    <text x="402" y="640" text-anchor="start">~4.5ม.</text>
+    <text x="364" y="720" text-anchor="start">~21ม.</text>
+    <!-- Side B (right): 3→5=25ม., 5→7=25ม., 7→8=~8.6ม. -->
+    <text x="432" y="220" text-anchor="start">25ม.</text>
+    <text x="432" y="394" text-anchor="start">25ม.</text>
+    <text x="432" y="513" text-anchor="start">~8.6ม.</text>
+    <!-- Road right edge: 2→9=70ม. -->
+    <text x="195" y="377" text-anchor="start">70ม.</text>
+    <!-- Horizontal road: 9→10=30ม. (top), 11→12=33ม. (bottom) -->
+    <text x="290" y="613" text-anchor="middle">30ม.</text>
+    <text x="266" y="659" text-anchor="middle">33ม.</text>
+    <!-- House edges: 5→4=19ม., 4→6=25ม., 6→7=19ม. -->
+    <text x="364" y="294" text-anchor="middle">19ม.</text>
+    <text x="288" y="394" text-anchor="end">25ม.</text>
+    <text x="364" y="471" text-anchor="middle">19ม.</text>
+  </g>
+
+  <!-- Bamboo row along rear boundary: start A0,E76(150,662) → node13(150,780) → node14(320,780) → node12(381,648), 1m spacing = 7 SVG units -->
+  <!-- Total: 62 trees — seg1:17(left↓), seg2:25(bottom→), seg3:20(diagonal↗) -->
+  <g id="bamboo-line" fill="#4e8c20" stroke="#2a5a10" stroke-width="0.5" opacity="0.85">
+    <!-- Seg1: x=155 (offset 5 inward from left boundary x=150), y=662..774 (17 trees) -->
+    <circle cx="155" cy="662" r="3.5"/>
+    <circle cx="155" cy="669" r="3.5"/>
+    <circle cx="155" cy="676" r="3.5"/>
+    <circle cx="155" cy="683" r="3.5"/>
+    <circle cx="155" cy="690" r="3.5"/>
+    <circle cx="155" cy="697" r="3.5"/>
+    <circle cx="155" cy="704" r="3.5"/>
+    <circle cx="155" cy="711" r="3.5"/>
+    <circle cx="155" cy="718" r="3.5"/>
+    <circle cx="155" cy="725" r="3.5"/>
+    <circle cx="155" cy="732" r="3.5"/>
+    <circle cx="155" cy="739" r="3.5"/>
+    <circle cx="155" cy="746" r="3.5"/>
+    <circle cx="155" cy="753" r="3.5"/>
+    <circle cx="155" cy="760" r="3.5"/>
+    <circle cx="155" cy="767" r="3.5"/>
+    <circle cx="155" cy="774" r="3.5"/>
+    <!-- Seg2: y=775 (offset 5 inward from bottom boundary y=780), x=151..319 (25 trees) -->
+    <circle cx="151" cy="775" r="3.5"/>
+    <circle cx="158" cy="775" r="3.5"/>
+    <circle cx="165" cy="775" r="3.5"/>
+    <circle cx="172" cy="775" r="3.5"/>
+    <circle cx="179" cy="775" r="3.5"/>
+    <circle cx="186" cy="775" r="3.5"/>
+    <circle cx="193" cy="775" r="3.5"/>
+    <circle cx="200" cy="775" r="3.5"/>
+    <circle cx="207" cy="775" r="3.5"/>
+    <circle cx="214" cy="775" r="3.5"/>
+    <circle cx="221" cy="775" r="3.5"/>
+    <circle cx="228" cy="775" r="3.5"/>
+    <circle cx="235" cy="775" r="3.5"/>
+    <circle cx="242" cy="775" r="3.5"/>
+    <circle cx="249" cy="775" r="3.5"/>
+    <circle cx="256" cy="775" r="3.5"/>
+    <circle cx="263" cy="775" r="3.5"/>
+    <circle cx="270" cy="775" r="3.5"/>
+    <circle cx="277" cy="775" r="3.5"/>
+    <circle cx="284" cy="775" r="3.5"/>
+    <circle cx="291" cy="775" r="3.5"/>
+    <circle cx="298" cy="775" r="3.5"/>
+    <circle cx="305" cy="775" r="3.5"/>
+    <circle cx="312" cy="775" r="3.5"/>
+    <circle cx="319" cy="775" r="3.5"/>
+    <!-- Seg3: diagonal, offset 5 inward perpendicular to C (normal: -0.9076,-0.4195 × 5 = -4.5,-2.1) -->
+    <circle cx="318.0" cy="772.4" r="3.5"/>
+    <circle cx="321.0" cy="766.1" r="3.5"/>
+    <circle cx="323.9" cy="759.7" r="3.5"/>
+    <circle cx="326.8" cy="753.4" r="3.5"/>
+    <circle cx="329.8" cy="747.0" r="3.5"/>
+    <circle cx="332.7" cy="740.7" r="3.5"/>
+    <circle cx="335.6" cy="734.3" r="3.5"/>
+    <circle cx="338.6" cy="728.0" r="3.5"/>
+    <circle cx="341.5" cy="721.6" r="3.5"/>
+    <circle cx="344.4" cy="715.3" r="3.5"/>
+    <circle cx="347.4" cy="708.9" r="3.5"/>
+    <circle cx="350.3" cy="702.6" r="3.5"/>
+    <circle cx="353.3" cy="696.2" r="3.5"/>
+    <circle cx="356.2" cy="689.8" r="3.5"/>
+    <circle cx="359.1" cy="683.5" r="3.5"/>
+    <circle cx="362.1" cy="677.1" r="3.5"/>
+    <circle cx="365.0" cy="670.8" r="3.5"/>
+    <circle cx="367.9" cy="664.5" r="3.5"/>
+    <circle cx="370.9" cy="658.1" r="3.5"/>
+  </g>
+  <!-- Bamboo label -->
+  <text x="135" y="726" font-family="Arial" font-size="9" fill="#4e8c20" text-anchor="middle" transform="rotate(-90,135,726)">แนวไผ่</text>
+
+  <!-- Bridge across waterway: node10(395,620)→outer(440,640), node12(381,648)→outer(427,669) -->
+  <!-- Direction perpendicular to side C, outward normal (0.9091,0.4167), hits outer dashed boundary -->
+  <polygon points="395,620 440,640 427,669 381,648"
+    fill="#ddd0b8" fill-opacity="0.9" stroke="#666" stroke-width="1.5"/>
+  <text x="411" y="649" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">สะพาน</text>
+
+  <!-- Adjacent land (relative's plot) - same weight as main plot, lighter color -->
+  <line x1="460" y1="595" x2="635" y2="595" stroke="#888" stroke-width="2"/>
+  <line x1="370" y1="845" x2="590" y2="845" stroke="#888" stroke-width="2"/>
+
+  <!-- Corner nodes (plot boundary) -->
+  <circle cx="150" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="430" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="430" cy="540" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="320" cy="780" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="150" cy="780" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <!-- Road nodes -->
+  <circle cx="185" cy="130" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="185" cy="620" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="395" cy="620" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="150" cy="648" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="381" cy="648" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <!-- House nodes (A21,E25–A40,E50) -->
+  <circle cx="297" cy="305" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="430" cy="305" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="297" cy="480" r="7" fill="white" stroke="#222" stroke-width="2"/>
+  <circle cx="430" cy="480" r="7" fill="white" stroke="#222" stroke-width="2"/>
+
+  <!-- Node numbers 1–14 (row by row top→bottom, left→right within each row) -->
+  <!-- y=130 → 1,2,3 -->
+  <text x="130" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">1</text>
+  <text x="185" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">2</text>
+  <text x="450" y="118" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">3</text>
+  <!-- y=305 → 4,5 -->
+  <text x="280" y="303" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="end">4</text>
+  <text x="448" y="303" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">5</text>
+  <!-- y=480 → 6,7 -->
+  <text x="280" y="498" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="end">6</text>
+  <text x="448" y="498" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">7</text>
+  <!-- y=540 → 8 -->
+  <text x="450" y="538" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">8</text>
+  <!-- y=620 → 9,10 -->
+  <text x="200" y="618" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">9</text>
+  <text x="410" y="618" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="start">10</text>
+  <!-- y=648 → 11,12 -->
+  <text x="133" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">11</text>
+  <text x="381" y="665" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">12</text>
+  <!-- y=780 → 13,14 -->
+  <text x="130" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">13</text>
+  <text x="338" y="800" font-family="Arial" font-size="16" font-weight="bold" fill="#c00" text-anchor="middle">14</text>
+
+  <!-- Side labels A–E (midpoint of each edge, offset outward) -->
+  <!-- A: top edge (1→2), above the line -->
+  <text x="290" y="104" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="middle">A</text>
+  <text x="290" y="120" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="middle">~40ม.</text>
+  <!-- B: right edge (2→3), to the right -->
+  <text x="458" y="332" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="start">B</text>
+  <text x="458" y="348" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="start">~59ม.</text>
+  <!-- C: lower-right diagonal (3→4), to the right -->
+  <text x="400" y="657" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="start">C</text>
+  <text x="400" y="673" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="start">~38ม.</text>
+  <!-- D: bottom edge (4→5), below the line -->
+  <text x="235" y="808" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="middle">D</text>
+  <text x="235" y="824" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="middle">~24ม.</text>
+  <!-- E: left edge (5→1), to the left -->
+  <text x="122" y="452" font-family="Arial" font-size="16" font-weight="bold" fill="#0055cc" text-anchor="end">E</text>
+  <text x="122" y="468" font-family="Arial" font-size="12" fill="#0055cc" text-anchor="end">~93ม.</text>
+
+  <!-- Entrance arrow: between nodes 1(150,130) and 2(185,130), pointing into plot from road -->
+  <text x="167.5" y="68" font-family="Arial" font-size="10" font-weight="bold" fill="#cc3300" text-anchor="middle">ทางเข้า</text>
+  <line x1="167.5" y1="72" x2="167.5" y2="110" stroke="#cc3300" stroke-width="2.5"/>
+  <polygon points="167.5,124 159,109 176,109" fill="#cc3300"/>
+
+  <!-- North arrow: "/" tilt ≈ 45° clockwise from vertical, placed top-right -->
+  <g transform="translate(620,60)">
+    <!-- Arrow shaft + head, rotated 45° CW -->
+    <g transform="rotate(25)">
+      <line x1="0" y1="20" x2="0" y2="-20" stroke="#444" stroke-width="2.5"/>
+      <polygon points="0,-25 -6,-14 6,-14" fill="#444"/>
+    </g>
+    <!-- "N" label offset toward the arrow tip direction -->
+    <text x="15" y="-30" font-family="Arial" font-size="16" font-weight="bold" fill="#444" text-anchor="middle">N</text>
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#aaa" stroke-width="0.8"/>
+  </g>
+
+  <!-- Color legend: right of outer waterway line (x=480), between nodes 3(y=130) and 8(y=540) -->
+  <rect x="492" y="215" width="148" height="148" fill="white" stroke="#aaa" stroke-width="0.8" rx="3"/>
+  <text x="566" y="231" font-family="Arial" font-size="10" font-weight="bold" fill="#444" text-anchor="middle">สัญลักษณ์</text>
+  <!-- สร้างบ้าน -->
+  <rect x="500" y="240" width="13" height="13" fill="#4dbb4d" opacity="0.85" stroke="#2a8a2a" stroke-width="0.5"/>
+  <text x="518" y="251" font-family="Arial" font-size="10" fill="#333">สร้างบ้าน</text>
+  <!-- ถนน -->
+  <rect x="500" y="261" width="13" height="13" fill="#e8e4dc" stroke="#444" stroke-width="0.8"/>
+  <text x="518" y="272" font-family="Arial" font-size="10" fill="#333">ถนน</text>
+  <!-- ว่าง -->
+  <rect x="500" y="282" width="13" height="13" fill="#ffa040" opacity="0.85" stroke="#cc7000" stroke-width="0.5"/>
+  <text x="518" y="293" font-family="Arial" font-size="10" fill="#333">ว่าง</text>
+  <!-- บ้านเก่า -->
+  <rect x="500" y="303" width="13" height="13" fill="#f5c5c5" stroke="#c00" stroke-width="0.8"/>
+  <text x="518" y="314" font-family="Arial" font-size="10" fill="#333">บ้านเก่า</text>
+  <!-- น้ำ -->
+  <rect x="500" y="324" width="13" height="13" fill="#b8dff5" opacity="0.85" stroke="#4499cc" stroke-width="0.5"/>
+  <text x="518" y="335" font-family="Arial" font-size="10" fill="#333">น้ำ</text>
+  <!-- ไผ่ -->
+  <circle cx="507" cy="351" r="5" fill="#4e8c20" stroke="#2a5a10" stroke-width="0.5" opacity="0.85"/>
+  <text x="518" y="355" font-family="Arial" font-size="10" fill="#333">แนวไผ่</text>
+</svg>
