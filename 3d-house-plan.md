@@ -43,7 +43,7 @@
 - ลูกศรเหนือ
 - **เห็น**: มีแสงเงาสมจริง มีป้ายชื่อ หมุนดูได้ครบ
 
-### Step 6: Sun Time Slider (จำลองแดดตามเวลา)
+### Step 6: Sun Time Slider (จำลองแดดตามเวลา) ✅ Done
 - เพิ่ม `<input type="range">` ค่า 6–18 (06:00–18:00)
 - แสดงเวลาปัจจุบัน เช่น "☀ 14:00"
 - คำนวณ sun position จาก hour → azimuth + elevation (latitude ~14°N)

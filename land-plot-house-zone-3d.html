@@ -13,6 +13,14 @@
     }
     #info h3 { margin: 0 0 4px 0; font-size: 15px; }
     #info p { margin: 0; font-size: 12px; color: #ccc; }
+    #sun-control {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.6); padding: 10px 20px; border-radius: 8px;
+      display: flex; align-items: center; gap: 12px; color: #fff;
+      font-family: Arial, sans-serif; font-size: 14px;
+    }
+    #sun-control input[type=range] { width: 240px; cursor: pointer; }
+    #sun-time { min-width: 70px; text-align: center; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -20,6 +28,13 @@
     <h3>ผังพื้นที่สร้างบ้าน 3D</h3>
     <p>โซน 11-12-14-13 (~540 ตร.ม.)</p>
     <p>คลิกลาก = หมุน | scroll = ซูม | คลิกขวาลาก = เลื่อน</p>
+  </div>
+
+  <div id="sun-control">
+    <span>🌅 06:00</span>
+    <input type="range" id="sun-slider" min="6" max="18" step="0.25" value="10">
+    <span>18:00 🌇</span>
+    <span id="sun-time">☀ 10:00</span>
   </div>
 
   <script type="importmap">
@@ -70,9 +85,7 @@
     // ===== Lights + Shadows =====
     const ambient = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambient);
-    // Sun from east (morning light) — in SVG east ≈ lower-right → 3D +x, +z
     const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.0);
-    dirLight.position.set(30, 25, -5);
     dirLight.castShadow = true;
     dirLight.shadow.mapSize.width = 2048;
     dirLight.shadow.mapSize.height = 2048;
@@ -84,10 +97,58 @@
     dirLight.shadow.camera.far = 80;
     dirLight.shadow.bias = -0.002;
     scene.add(dirLight);
-    // Subtle fill light from opposite side
+    // Fill light (ambient sky bounce)
     const fillLight = new THREE.DirectionalLight(0xc4d8f0, 0.3);
     fillLight.position.set(-15, 10, 20);
     scene.add(fillLight);
+
+    // ===== Step 6: Sun position from time slider =====
+    const sunSlider = document.getElementById('sun-slider');
+    const sunTimeLabel = document.getElementById('sun-time');
+    const NORTH_OFFSET = 25 * Math.PI / 180; // north rotated 25° CW
+    const SUN_DIST = 40; // distance of light from scene center
+    const MAX_ELEV = 70 * Math.PI / 180; // max sun elevation ~70° (lat 14°N)
+
+    function updateSunPosition(hour) {
+      // t: 0=sunrise(6:00), 0.5=noon(12:00), 1=sunset(18:00)
+      const t = (hour - 6) / 12;
+
+      // Azimuth from north (CW): east=90° → south=180° → west=270°
+      const azimuth = (90 + t * 180) * Math.PI / 180 + NORTH_OFFSET;
+
+      // Elevation: sine curve peaking at noon
+      const elevation = MAX_ELEV * Math.sin(t * Math.PI);
+
+      // 3D position
+      const hDist = SUN_DIST * Math.cos(elevation);
+      const sunX = hDist * Math.sin(azimuth) + 16; // offset to scene center
+      const sunY = SUN_DIST * Math.sin(elevation);
+      const sunZ = -hDist * Math.cos(azimuth) + 10;
+      dirLight.position.set(sunX, sunY, sunZ);
+      dirLight.target.position.set(16, 0, 10);
+      dirLight.target.updateMatrixWorld();
+
+      // Light intensity: dimmer at sunrise/sunset
+      dirLight.intensity = 0.4 + 0.8 * Math.sin(t * Math.PI);
+
+      // Light color: warm at sunrise/sunset, white at noon
+      const warmth = 1 - Math.sin(t * Math.PI); // 1=warm, 0=neutral
+      const r = 1.0;
+      const g = 1.0 - warmth * 0.15;
+      const b = 1.0 - warmth * 0.35;
+      dirLight.color.setRGB(r, g, b);
+
+      // Ambient: slightly warmer/dimmer at edges
+      ambient.intensity = 0.3 + 0.3 * Math.sin(t * Math.PI);
+
+      // Update label
+      const h = Math.floor(hour);
+      const m = Math.round((hour - h) * 60);
+      sunTimeLabel.textContent = `☀ ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    }
+
+    sunSlider.addEventListener('input', () => updateSunPosition(parseFloat(sunSlider.value)));
+    updateSunPosition(10); // initial: 10:00
 
     // ===== Coordinate conversion: SVG → 3D =====
     // Origin = node 11 (SVG 150,648), scale: 7 SVG units = 1m
