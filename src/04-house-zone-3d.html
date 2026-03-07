@@ -70,8 +70,8 @@
     scene.background = new THREE.Color(0xd4e6f1);
 
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 500);
-    camera.position.set(46, 12, -14);
-    camera.lookAt(14, 0, 9);
+    camera.position.set(32, 18, -18);
+    camera.lookAt(13, 0, 7);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -108,8 +108,8 @@
     controls.update();
 
     // ===== Double Tap to Reset Camera (Mobile UX) =====
-    const DEFAULT_CAM = new THREE.Vector3(46, 12, -14);
-    const DEFAULT_TARGET = new THREE.Vector3(14, 0, 9);
+    const DEFAULT_CAM = new THREE.Vector3(32, 18, -18);
+    const DEFAULT_TARGET = new THREE.Vector3(13, 0, 7);
     let lastTap = 0;
     let resetAnim = null;
 
