@@ -479,10 +479,31 @@
 
     // Right side (x = terraceX + terraceW)
     makeBarRailing(terraceX + terraceW, terraceZ, terraceX + terraceW, terraceZ + terraceD);
-    // Front side (z = terraceZ)
-    makeBarRailing(terraceX, terraceZ, terraceX + terraceW, terraceZ);
+    // Front side (z = terraceZ) — split with gap for stairs (1.2m opening in the middle)
+    const stairW = 1.2;
+    const stairCenter = terraceX + terraceW / 2;
+    makeBarRailing(terraceX, terraceZ, stairCenter - stairW / 2, terraceZ);
+    makeBarRailing(stairCenter + stairW / 2, terraceZ, terraceX + terraceW, terraceZ);
     // Back side (z = terraceZ + terraceD)
     makeBarRailing(terraceX, terraceZ + terraceD, terraceX + terraceW, terraceZ + terraceD);
+
+    // Stairs at front of terrace toward parking (บันไดชานบ้านฝั่งลานจอดรถ)
+    const tStairMat = new THREE.MeshStandardMaterial({ color: 0xc8b8a0 });
+    const tStairSteps = 3;
+    const tStairStepH = houseBase / tStairSteps;
+    const tStairDepth = 0.3;
+    for (let s = 0; s < tStairSteps; s++) {
+      const stepGeo = new THREE.BoxGeometry(stairW, tStairStepH, tStairDepth);
+      const step = new THREE.Mesh(stepGeo, tStairMat);
+      step.position.set(
+        stairCenter,
+        houseBase - tStairStepH * s - tStairStepH / 2,
+        terraceZ - tStairDepth / 2 - s * tStairDepth
+      );
+      step.receiveShadow = true;
+      step.castShadow = true;
+      scene.add(step);
+    }
 
     // ===== Step 3: Trees + Veggie garden + Water tank =====
 
