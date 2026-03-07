@@ -120,14 +120,76 @@
   <!-- House to be demolished: A21,E25–A40,E50 (19m × 25m) -->
   <rect x="297" y="305" width="133" height="175" fill="#f5c5c5" opacity="0.6" stroke="#c00" stroke-width="1.5" stroke-dasharray="6,4"/>
 
+  <!-- ===== HOUSE ZONE LAYOUT (nodes 11,12,14,13) ===== -->
+
+  <!-- Parking area: 4×5.4m near node 11 (top-left, adjacent to road) -->
+  <rect x="162" y="656" width="28" height="38" fill="#d0ccc4" opacity="0.8" stroke="#888" stroke-width="1" stroke-dasharray="4,3" rx="2"/>
+  <text x="176" y="673" font-family="Arial" font-size="8" font-weight="bold" fill="#555" text-anchor="middle">P</text>
+  <text x="176" y="683" font-family="Arial" font-size="6" fill="#555" text-anchor="middle">จอดรถ</text>
+
+  <!-- Walkway: parking to house (dashed path) -->
+  <path d="M188,680 L205,693 L210,703" fill="none" stroke="#aa9977" stroke-width="4" stroke-dasharray="3,3" stroke-linecap="round"/>
+
+  <!-- House 6x6m: center of zone, back wall facing west -->
+  <rect x="210" y="695" width="42" height="42" fill="#e8c888" stroke="#996633" stroke-width="1.5" rx="1"/>
+  <line x1="210" y1="716" x2="252" y2="716" stroke="#996633" stroke-width="0.8"/>
+  <!-- Door indicator (east-facing) -->
+  <rect x="250" y="710" width="4" height="10" fill="#996633" opacity="0.6" stroke="none"/>
+  <text x="231" y="712" font-family="Arial" font-size="8" font-weight="bold" fill="#663300" text-anchor="middle">บ้าน</text>
+  <text x="231" y="722" font-family="Arial" font-size="6.5" fill="#663300" text-anchor="middle">6x6ม.</text>
+
+  <!-- Rain water tank: behind house (west side) -->
+  <rect x="198" y="710" width="9" height="12" fill="#8ec8e8" stroke="#4499aa" stroke-width="0.7" rx="1"/>
+  <text x="203" y="731" font-family="Arial" font-size="5.5" fill="#4499aa" text-anchor="middle">ถังน้ำ</text>
+
+  <!-- Vegetable garden: 4x5.4m, east of house (morning sun) -->
+  <rect x="264" y="695" width="28" height="38" fill="#77bb44" opacity="0.35" stroke="#558822" stroke-width="1" stroke-dasharray="3,2" rx="2"/>
+  <line x1="268" y1="700" x2="268" y2="728" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="274" y1="700" x2="274" y2="728" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="280" y1="700" x2="280" y2="728" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <line x1="286" y1="700" x2="286" y2="728" stroke="#558822" stroke-width="0.5" opacity="0.5"/>
+  <text x="278" y="690" font-family="Arial" font-size="7" fill="#558822" text-anchor="middle">แปลงผัก</text>
+
+  <!-- Large trees: west of house (block afternoon sun) -->
+  <circle cx="180" cy="712" r="11" fill="#3a9a3a" opacity="0.45" stroke="#2a6a2a" stroke-width="0.8"/>
+  <circle cx="175" cy="742" r="13" fill="#3a9a3a" opacity="0.45" stroke="#2a6a2a" stroke-width="0.8"/>
+  <circle cx="192" cy="760" r="10" fill="#3a9a3a" opacity="0.45" stroke="#2a6a2a" stroke-width="0.8"/>
+  <text x="162" y="725" font-family="Arial" font-size="5.5" fill="#2a6a2a" text-anchor="middle" transform="rotate(-90,162,725)">ต้นไม้ใหญ่ (บังแดดบ่าย)</text>
+
+  <!-- Sala: upper-right, near waterway/bridge view -->
+  <rect x="318" y="660" width="21" height="14" fill="#ddd0b8" opacity="0.8" stroke="#998866" stroke-width="1" rx="2"/>
+  <text x="328" y="670" font-family="Arial" font-size="6" fill="#665544" text-anchor="middle">ศาลา</text>
+
+  <!-- Fruit trees: lower-right area -->
+  <circle cx="278" cy="758" r="8" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
+  <circle cx="300" cy="755" r="9" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
+  <text x="289" y="745" font-family="Arial" font-size="6" fill="#4a7a2a" text-anchor="middle">ต้นผลไม้</text>
+
+  <!-- Lawn area: center-bottom -->
+  <text x="240" y="770" font-family="Arial" font-size="7" fill="#6a9a4a" text-anchor="middle" font-style="italic">สนามหญ้า</text>
+
+  <!-- Sun direction annotations -->
+  <g transform="translate(300,700)">
+    <line x1="18" y1="8" x2="6" y2="2" stroke="#e8a020" stroke-width="1.2"/>
+    <polygon points="4,1 10,0 8,6" fill="#e8a020"/>
+    <text x="22" y="6" font-family="Arial" font-size="5.5" fill="#cc8800">แดดเช้า</text>
+  </g>
+  <g transform="translate(158,698)">
+    <line x1="-10" y1="-6" x2="0" y2="0" stroke="#e86020" stroke-width="1.2"/>
+    <polygon points="1,1 -5,-2 -2,-6" fill="#e86020"/>
+    <text x="-30" y="-8" font-family="Arial" font-size="5.5" fill="#cc4400">แดดบ่าย</text>
+  </g>
+
+  <!-- ===== END HOUSE ZONE LAYOUT ===== -->
+
   <!-- Area label: nodes 1-11-12-10-9-2 total road+shoulder ~486 ตร.ม. (center of horizontal road) -->
   <text x="272" y="638" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~486 ตร.ม.</text>
   <!-- Area label: nodes 4-5-7-6 house rectangle ~475 ตร.ม. -->
   <text x="364" y="397" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~475 ตร.ม.</text>
   <!-- Area label: nodes 2-3-5-4-6-7-8-10-9 polygon ~1946 ตร.ม. (center above house) -->
   <text x="307" y="225" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~1946 ตร.ม.</text>
-  <!-- Area label: nodes 11-12-14-13 trapezoid ~540 ตร.ม. -->
-  <text x="250" y="718" font-family="Arial" font-size="16" font-weight="bold" fill="#bbb" text-anchor="middle">~540 ตร.ม.</text>
+  <!-- Area label: nodes 11-12-14-13 trapezoid ~540 ตร.ม. (moved to avoid house overlap) -->
+  <text x="330" y="718" font-family="Arial" font-size="12" font-weight="bold" fill="#bbb" text-anchor="middle">~540 ตร.ม.</text>
 
   <!-- Segment length labels (font-size 10, thin gray) -->
   <g font-family="Arial" font-size="10" fill="#aaa">
@@ -315,7 +377,7 @@
   </g>
 
   <!-- Color legend: right of outer waterway line (x=480), between nodes 3(y=130) and 8(y=540) -->
-  <rect x="492" y="215" width="148" height="148" fill="white" stroke="#aaa" stroke-width="0.8" rx="3"/>
+  <rect x="492" y="215" width="148" height="232" fill="white" stroke="#aaa" stroke-width="0.8" rx="3"/>
   <text x="566" y="231" font-family="Arial" font-size="10" font-weight="bold" fill="#444" text-anchor="middle">สัญลักษณ์</text>
   <!-- สร้างบ้าน -->
   <rect x="500" y="240" width="13" height="13" fill="#4dbb4d" opacity="0.85" stroke="#2a8a2a" stroke-width="0.5"/>
@@ -335,4 +397,16 @@
   <!-- ไผ่ -->
   <circle cx="507" cy="351" r="5" fill="#4e8c20" stroke="#2a5a10" stroke-width="0.5" opacity="0.85"/>
   <text x="518" y="355" font-family="Arial" font-size="10" fill="#333">แนวไผ่</text>
+  <!-- New layout items -->
+  <line x1="500" y1="368" x2="640" y2="368" stroke="#ddd" stroke-width="0.5"/>
+  <text x="566" y="381" font-family="Arial" font-size="9" font-weight="bold" fill="#666" text-anchor="middle">ผังบ้านใหม่</text>
+  <!-- บ้าน 6x6 -->
+  <rect x="500" y="388" width="13" height="13" fill="#e8c888" stroke="#996633" stroke-width="0.8"/>
+  <text x="518" y="399" font-family="Arial" font-size="10" fill="#333">บ้าน 6x6ม.</text>
+  <!-- จอดรถ -->
+  <rect x="500" y="409" width="13" height="13" fill="#d0ccc4" stroke="#888" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="518" y="420" font-family="Arial" font-size="10" fill="#333">จอดรถ</text>
+  <!-- แปลงผัก -->
+  <rect x="500" y="430" width="13" height="13" fill="#77bb44" opacity="0.6" stroke="#558822" stroke-width="0.8"/>
+  <text x="518" y="441" font-family="Arial" font-size="10" fill="#333">แปลงผัก</text>
 </svg>
