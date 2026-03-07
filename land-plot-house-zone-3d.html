@@ -333,6 +333,150 @@
     lid.position.set(tankX + 0.6, 1.23, tankZ + 0.8);
     scene.add(lid);
 
+    // ===== Step 4: Bamboo + Road + Waterway + Bridge =====
+
+    // Helper: create bamboo clump (thin stalks + small canopy)
+    function createBamboo(x, z) {
+      const h = 4 + Math.random() * 2; // 4-6m
+      const group = new THREE.Group();
+      // 2-3 thin stalks
+      for (let i = 0; i < 3; i++) {
+        const dx = (Math.random() - 0.5) * 0.3;
+        const dz = (Math.random() - 0.5) * 0.3;
+        const stalkGeo = new THREE.CylinderGeometry(0.04, 0.06, h, 6);
+        const stalkMat = new THREE.MeshStandardMaterial({ color: 0x6b8e23 });
+        const stalk = new THREE.Mesh(stalkGeo, stalkMat);
+        stalk.position.set(dx, h / 2, dz);
+        group.add(stalk);
+      }
+      // Small canopy puff
+      const canopyGeo = new THREE.SphereGeometry(0.6, 8, 6);
+      const canopyMat = new THREE.MeshStandardMaterial({ color: 0x4e8c20, transparent: true, opacity: 0.8 });
+      const canopy = new THREE.Mesh(canopyGeo, canopyMat);
+      canopy.position.y = h * 0.85;
+      canopy.scale.y = 1.3;
+      group.add(canopy);
+      group.position.set(x, 0, z);
+      return group;
+    }
+
+    // Bamboo along 3 sides: left (11→13), bottom (13→14), diagonal (14→12)
+    // Offset ~0.7m inward from boundary, 1m spacing, start at E76 (z≈2)
+    const bambooOffset = 0.7;
+
+    // Side E: left side, x=0+offset, z from 2 to 18.9
+    for (let z = 2; z <= 18.9; z += 1) {
+      scene.add(createBamboo(bambooOffset, z));
+    }
+    // Side D: bottom, z=18.9-offset, x from 0 to 24.3
+    for (let x = 0; x <= 24.3; x += 1) {
+      scene.add(createBamboo(x, 18.9 - bambooOffset));
+    }
+    // Side C diagonal: 14(24.3,18.9) → 12(33,0), offset inward (perpendicular)
+    const c14x = 24.3, c14z = 18.9, c12x = 33, c12z = 0;
+    const cdx = c12x - c14x, cdz = c12z - c14z;
+    const cLen = Math.sqrt(cdx * cdx + cdz * cdz);
+    // Normal pointing inward (left of direction 14→12)
+    const cnx = -cdz / cLen * bambooOffset;
+    const cnz = cdx / cLen * bambooOffset;
+    const cSteps = Math.floor(cLen);
+    for (let i = 0; i <= cSteps; i++) {
+      const t = i / cSteps;
+      const bx = c14x + cdx * t + cnx;
+      const bz = c14z + cdz * t + cnz;
+      scene.add(createBamboo(bx, bz));
+    }
+
+    // Road: trapezoid between node 9-10 line (z=-4) and node 11-12 line (z=0)
+    // Includes shoulder (x=0 to 1) + road (x=1 to ~34)
+    const roadShape = new THREE.Shape();
+    // Shoulder + road combined shape
+    // Top-left: (0, -4), Top-right: (34.8, -4), Bot-right: (33, 0), Bot-left: (0, 0)
+    roadShape.moveTo(0, 4);      // negate z for Shape 2D
+    roadShape.lineTo(34.8, 4);
+    roadShape.lineTo(33, 0);
+    roadShape.lineTo(0, 0);
+    roadShape.closePath();
+
+    const roadGeo = new THREE.ShapeGeometry(roadShape);
+    const roadMat = new THREE.MeshStandardMaterial({ color: 0xe8e4dc, side: THREE.DoubleSide });
+    const roadMesh = new THREE.Mesh(roadGeo, roadMat);
+    roadMesh.rotation.x = -Math.PI / 2;
+    roadMesh.position.y = 0.03;
+    scene.add(roadMesh);
+
+    // Shoulder strip (darker, x=0 to 1)
+    const shoulderShape = new THREE.Shape();
+    shoulderShape.moveTo(0, 4);
+    shoulderShape.lineTo(1, 4);
+    shoulderShape.lineTo(1, 0);
+    shoulderShape.lineTo(0, 0);
+    shoulderShape.closePath();
+
+    const shoulderGeo = new THREE.ShapeGeometry(shoulderShape);
+    const shoulderMat = new THREE.MeshStandardMaterial({ color: 0xc8b8a0, side: THREE.DoubleSide });
+    const shoulderMesh = new THREE.Mesh(shoulderGeo, shoulderMat);
+    shoulderMesh.rotation.x = -Math.PI / 2;
+    shoulderMesh.position.y = 0.04;
+    scene.add(shoulderMesh);
+
+    // Waterway along side C: from near node 12 to beyond node 14
+    // Inner edge: plot boundary C (12→14 extended to 8)
+    // Outer edge: ~7m further out
+    // Node 8: SVG(430,540) → 3D(40, -15.4)
+    // Node 12: (33, 0), Node 14: (24.3, 18.9)
+    // Outer: SVG(480,552)→(366,801) → 3D(47.1,-13.7)→(30.9,21.9)
+    const waterShape = new THREE.Shape();
+    // Inner boundary (plot side)
+    waterShape.moveTo(40, 15.4);      // node 8 (negate z → positive)
+    waterShape.lineTo(33, 0);         // node 12
+    waterShape.lineTo(24.3, -18.9);   // node 14
+    // Outer boundary
+    waterShape.lineTo(30.9, -21.9);   // outer bottom (366,801)
+    waterShape.lineTo(47.1, 13.7);    // outer top (480,552)
+    waterShape.closePath();
+
+    const waterGeo = new THREE.ShapeGeometry(waterShape);
+    const waterMat = new THREE.MeshStandardMaterial({
+      color: 0xb8dff5, transparent: true, opacity: 0.6, side: THREE.DoubleSide
+    });
+    const waterMesh = new THREE.Mesh(waterGeo, waterMat);
+    waterMesh.rotation.x = -Math.PI / 2;
+    waterMesh.position.y = -0.05;
+    scene.add(waterMesh);
+
+    // Bridge: spans waterway at diagonal
+    // SVG polygon: (395,620)→(440,640)→(427,669)→(381,648)
+    const bridgeShape = new THREE.Shape();
+    const bp1 = svgTo3D(395, 620); // (35, -4)
+    const bp2 = svgTo3D(440, 640); // (41.4, -1.1)
+    const bp3 = svgTo3D(427, 669); // (39.6, 3)
+    const bp4 = svgTo3D(381, 648); // (33, 0)
+    bridgeShape.moveTo(bp1.x, -bp1.z);
+    bridgeShape.lineTo(bp2.x, -bp2.z);
+    bridgeShape.lineTo(bp3.x, -bp3.z);
+    bridgeShape.lineTo(bp4.x, -bp4.z);
+    bridgeShape.closePath();
+
+    const bridgeGeo = new THREE.ExtrudeGeometry(bridgeShape, { depth: 0.3, bevelEnabled: false });
+    const bridgeMat = new THREE.MeshStandardMaterial({ color: 0xddd0b8 });
+    const bridgeMesh = new THREE.Mesh(bridgeGeo, bridgeMat);
+    bridgeMesh.rotation.x = -Math.PI / 2;
+    bridgeMesh.position.y = 0.1;
+    scene.add(bridgeMesh);
+
+    // Bridge railings (2 lines along the long edges)
+    const railMat = new THREE.MeshStandardMaterial({ color: 0x8B7355 });
+    [[bp1, bp2], [bp4, bp3]].forEach(([a, b]) => {
+      const dx = b.x - a.x, dz = b.z - a.z;
+      const len = Math.sqrt(dx * dx + dz * dz);
+      const railGeo = new THREE.BoxGeometry(len, 0.6, 0.08);
+      const rail = new THREE.Mesh(railGeo, railMat);
+      rail.position.set((a.x + b.x) / 2, 0.5, (a.z + b.z) / 2);
+      rail.rotation.y = -Math.atan2(dz, dx);
+      scene.add(rail);
+    });
+
     // ===== Grid (ground reference) =====
     const gridHelper = new THREE.GridHelper(40, 40, 0xaaaaaa, 0xdddddd);
     gridHelper.position.set(16, -0.01, 10);
