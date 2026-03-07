@@ -234,15 +234,28 @@
 
     const wallMat = new THREE.MeshStandardMaterial({ color: 0xe8c888 });
 
-    // Stilts / pillars under house (ยกพื้น)
-    const stiltMat = new THREE.MeshStandardMaterial({ color: 0x888888 });
-    const stiltGeo = new THREE.CylinderGeometry(0.1, 0.12, houseBase, 8);
-    [[0.5, 0.5], [0.5, 5.5], [5.5, 0.5], [5.5, 5.5], [3, 0.5], [3, 5.5], [0.5, 3], [5.5, 3]].forEach(([sx, sz]) => {
-      const stilt = new THREE.Mesh(stiltGeo, stiltMat);
-      stilt.position.set(houseX + sx, houseBase / 2, houseZ + sz);
-      stilt.castShadow = true;
-      scene.add(stilt);
-    });
+    // Solid base walls (ฐานยกพื้นปิดทึบ 4 ด้าน)
+    const baseMat = new THREE.MeshStandardMaterial({ color: 0xa0a0a0 });
+    // Front base (z = houseZ)
+    const baseFrontGeo = new THREE.BoxGeometry(houseW, houseBase, 0.15);
+    const baseFront = new THREE.Mesh(baseFrontGeo, baseMat);
+    baseFront.position.set(houseX + houseW / 2, houseBase / 2, houseZ + 0.075);
+    scene.add(baseFront);
+    // Back base (z = houseZ + houseD)
+    const baseBackGeo = new THREE.BoxGeometry(houseW, houseBase, 0.15);
+    const baseBack = new THREE.Mesh(baseBackGeo, baseMat);
+    baseBack.position.set(houseX + houseW / 2, houseBase / 2, houseZ + houseD - 0.075);
+    scene.add(baseBack);
+    // Left base (x = houseX)
+    const baseLeftGeo = new THREE.BoxGeometry(0.15, houseBase, houseD);
+    const baseLeft = new THREE.Mesh(baseLeftGeo, baseMat);
+    baseLeft.position.set(houseX + 0.075, houseBase / 2, houseZ + houseD / 2);
+    scene.add(baseLeft);
+    // Right base (x = houseX + houseW)
+    const baseRightGeo = new THREE.BoxGeometry(0.15, houseBase, houseD);
+    const baseRight = new THREE.Mesh(baseRightGeo, baseMat);
+    baseRight.position.set(houseX + houseW - 0.075, houseBase / 2, houseZ + houseD / 2);
+    scene.add(baseRight);
 
     // 4 walls (thin boxes)
     // Front wall (facing parking, z=6) with door gap
@@ -334,13 +347,22 @@
     terrace.castShadow = true;
     scene.add(terrace);
 
-    // Terrace stilts
-    [[0.5, 0.5], [0.5, 4.5], [2.5, 0.5], [2.5, 4.5]].forEach(([tx, tz]) => {
-      const tStilt = new THREE.Mesh(stiltGeo, stiltMat);
-      tStilt.position.set(terraceX + tx, houseBase / 2, terraceZ + tz);
-      tStilt.castShadow = true;
-      scene.add(tStilt);
-    });
+    // Terrace solid base walls (ฐานชานบ้านปิดทึบ 3 ด้าน — ไม่รวมด้านติดบ้าน)
+    // Right base
+    const tBaseRightGeo = new THREE.BoxGeometry(0.15, houseBase, terraceD);
+    const tBaseRight = new THREE.Mesh(tBaseRightGeo, baseMat);
+    tBaseRight.position.set(terraceX + terraceW - 0.075, houseBase / 2, terraceZ + terraceD / 2);
+    scene.add(tBaseRight);
+    // Front base
+    const tBaseFrontGeo = new THREE.BoxGeometry(terraceW, houseBase, 0.15);
+    const tBaseFront = new THREE.Mesh(tBaseFrontGeo, baseMat);
+    tBaseFront.position.set(terraceX + terraceW / 2, houseBase / 2, terraceZ + 0.075);
+    scene.add(tBaseFront);
+    // Back base
+    const tBaseBackGeo = new THREE.BoxGeometry(terraceW, houseBase, 0.15);
+    const tBaseBack = new THREE.Mesh(tBaseBackGeo, baseMat);
+    tBaseBack.position.set(terraceX + terraceW / 2, houseBase / 2, terraceZ + terraceD - 0.075);
+    scene.add(tBaseBack);
 
     // Terrace railing (3 sides: right, front, back — not the house-facing side)
     const railingMat = new THREE.MeshStandardMaterial({ color: 0x996633 });
