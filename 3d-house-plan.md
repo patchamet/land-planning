@@ -1,7 +1,7 @@
 # 3D House Zone Plan — Three.js
 
 ## ไฟล์เป้าหมาย
-`land-plot-house-zone-3d.html` — ไฟล์เดียว, ใช้ Three.js จาก CDN
+`04-house-zone-3d.html` — ไฟล์เดียว, ใช้ Three.js จาก CDN
 
 ## Scale
 - จาก SVG: 7 units = 1m

@@ -9,7 +9,10 @@ Scale: **7 SVG units = 1 metre**. Grid origin at node 1 (150,130).
 
 ## Current Files
 
-- [land-plot-v2.svg](land-plot-v2.svg) — Main diagram (latest version)
+- [01-plot-overview.svg](01-plot-overview.svg) — ผังที่ดินรวม (เวอร์ชันเก่า ไม่มีบ้าน)
+- [02-plot-full-plan.svg](02-plot-full-plan.svg) — ผังที่ดินรวม + ผังบ้าน
+- [03-house-zone.svg](03-house-zone.svg) — ผังโซนบ้านแบบซูม
+- [04-house-zone-3d.html](04-house-zone-3d.html) — โมเดล 3D โซนบ้าน
 
 ## Plot Shape (Pentagon)
 
