@@ -122,26 +122,26 @@
 
   <!-- ===== HOUSE ZONE LAYOUT (nodes 11,12,14,13) ===== -->
 
-  <!-- Parking (carport): 6×7.4m, attached to top of house, flush with road (y=648) -->
-  <rect x="227" y="648" width="42" height="52" fill="#d0ccc4" opacity="0.8" stroke="#888" stroke-width="1" stroke-dasharray="4,3" rx="2"/>
-  <text x="248" y="672" font-family="Arial" font-size="7" font-weight="bold" fill="#555" text-anchor="middle">P จอดรถ</text>
-  <text x="248" y="682" font-family="Arial" font-size="5.5" fill="#555" text-anchor="middle">6×7.4ม.</text>
+  <!-- Parking (carport): 6×6m, attached to top of house, flush with road (y=648) -->
+  <rect x="227" y="648" width="42" height="42" fill="#d0ccc4" opacity="0.8" stroke="#888" stroke-width="1" stroke-dasharray="4,3" rx="2"/>
+  <text x="248" y="668" font-family="Arial" font-size="7" font-weight="bold" fill="#555" text-anchor="middle">P จอดรถ</text>
+  <text x="248" y="678" font-family="Arial" font-size="5.5" fill="#555" text-anchor="middle">6×6ม.</text>
 
   <!-- House 6×6m: attached below parking, entrance through carport -->
-  <rect x="227" y="700" width="42" height="42" fill="#e8c888" stroke="#996633" stroke-width="1.5" rx="1"/>
+  <rect x="227" y="690" width="42" height="42" fill="#e8c888" stroke="#996633" stroke-width="1.5" rx="1"/>
   <!-- Roof ridge line -->
-  <line x1="227" y1="721" x2="269" y2="721" stroke="#996633" stroke-width="0.8"/>
+  <line x1="227" y1="711" x2="269" y2="711" stroke="#996633" stroke-width="0.8"/>
   <!-- Door at top of house (opens to parking/carport) -->
-  <rect x="241" y="697" width="14" height="5" fill="#996633" opacity="0.7" stroke="none"/>
+  <rect x="241" y="687" width="14" height="5" fill="#996633" opacity="0.7" stroke="none"/>
   <!-- Door arrow indicator -->
-  <line x1="248" y1="700" x2="248" y2="694" stroke="#996633" stroke-width="1" marker-end="none"/>
-  <polygon points="248,693 245,698 251,698" fill="#996633" opacity="0.6"/>
-  <text x="248" y="717" font-family="Arial" font-size="8" font-weight="bold" fill="#663300" text-anchor="middle">บ้าน</text>
-  <text x="248" y="727" font-family="Arial" font-size="6.5" fill="#663300" text-anchor="middle">6×6ม.</text>
+  <line x1="248" y1="690" x2="248" y2="684" stroke="#996633" stroke-width="1" marker-end="none"/>
+  <polygon points="248,683 245,688 251,688" fill="#996633" opacity="0.6"/>
+  <text x="248" y="707" font-family="Arial" font-size="8" font-weight="bold" fill="#663300" text-anchor="middle">บ้าน</text>
+  <text x="248" y="717" font-family="Arial" font-size="6.5" fill="#663300" text-anchor="middle">6×6ม.</text>
 
   <!-- Rain water tank: behind house (bottom side) -->
-  <rect x="258" y="745" width="9" height="12" fill="#8ec8e8" stroke="#4499aa" stroke-width="0.7" rx="1"/>
-  <text x="262" y="766" font-family="Arial" font-size="5.5" fill="#4499aa" text-anchor="middle">ถังน้ำ</text>
+  <rect x="258" y="735" width="9" height="12" fill="#8ec8e8" stroke="#4499aa" stroke-width="0.7" rx="1"/>
+  <text x="262" y="756" font-family="Arial" font-size="5.5" fill="#4499aa" text-anchor="middle">ถังน้ำ</text>
 
   <!-- Vegetable garden: 5×5.4m, right side, up 3m + right 1m -->
   <rect x="293" y="677" width="35" height="38" fill="#77bb44" opacity="0.35" stroke="#558822" stroke-width="1" stroke-dasharray="3,2" rx="2"/>
