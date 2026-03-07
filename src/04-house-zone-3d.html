@@ -136,8 +136,13 @@
       animateReset();
     }
 
-    // Mobile: double tap
+    // Mobile: double tap (single finger only — ignore multi-touch / pinch zoom)
+    let lastTouchCount = 0;
+    renderer.domElement.addEventListener('touchstart', (e) => {
+      lastTouchCount = e.touches.length;
+    }, { passive: true });
     renderer.domElement.addEventListener('touchend', (e) => {
+      if (lastTouchCount > 1) return; // ignore pinch zoom
       const now = Date.now();
       if (now - lastTap < 300) {
         e.preventDefault();
