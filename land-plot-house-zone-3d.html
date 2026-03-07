@@ -299,6 +299,38 @@
     roof.castShadow = true;
     scene.add(roof);
 
+    // Terrace (ชานบ้าน): 3×5m, attached to right wall of house, shifted down 0.5m
+    // SVG: (269, 697), width=21(3m), height=35(5m)
+    const terraceX = (269 - 150) / 7;  // 17
+    const terraceZ = (697 - 648) / 7;  // 7
+    const terraceW = 3;
+    const terraceD = 5;
+    const terraceGeo = new THREE.BoxGeometry(terraceW, 0.15, terraceD);
+    const terraceMat = new THREE.MeshStandardMaterial({ color: 0xd4b896 });
+    const terrace = new THREE.Mesh(terraceGeo, terraceMat);
+    terrace.position.set(terraceX + terraceW / 2, 0.1, terraceZ + terraceD / 2);
+    terrace.receiveShadow = true;
+    terrace.castShadow = true;
+    scene.add(terrace);
+
+    // Terrace railing (3 sides: right, front, back — not the house-facing side)
+    const railingMat = new THREE.MeshStandardMaterial({ color: 0x996633 });
+    // Right railing (x = terraceX + terraceW)
+    const rRailGeo = new THREE.BoxGeometry(0.06, 0.7, terraceD);
+    const rRail = new THREE.Mesh(rRailGeo, railingMat);
+    rRail.position.set(terraceX + terraceW, 0.55, terraceZ + terraceD / 2);
+    scene.add(rRail);
+    // Front railing (z = terraceZ)
+    const fRailGeo = new THREE.BoxGeometry(terraceW, 0.7, 0.06);
+    const fRail = new THREE.Mesh(fRailGeo, railingMat);
+    fRail.position.set(terraceX + terraceW / 2, 0.55, terraceZ);
+    scene.add(fRail);
+    // Back railing (z = terraceZ + terraceD)
+    const bRailGeo = new THREE.BoxGeometry(terraceW, 0.7, 0.06);
+    const bRail = new THREE.Mesh(bRailGeo, railingMat);
+    bRail.position.set(terraceX + terraceW / 2, 0.55, terraceZ + terraceD);
+    scene.add(bRail);
+
     // ===== Step 3: Trees + Veggie garden + Water tank =====
 
     // Helper: create a tree (trunk cylinder + canopy sphere)
@@ -344,23 +376,23 @@
     scene.add(bigTree3);
 
     // Fruit trees: lower-right
-    // SVG: (293,737), (316,739)
+    // SVG: (286,751), (309,753)
     const fruitTree1 = createTree(
-      (293 - 150) / 7, (737 - 648) / 7,  // x=20.4, z=12.7
+      (286 - 150) / 7, (751 - 648) / 7,  // x=19.4, z=14.7
       2.5, 0.12, 1.5, 0x6aaa3a
     );
     scene.add(fruitTree1);
 
     const fruitTree2 = createTree(
-      (316 - 150) / 7, (739 - 648) / 7,  // x=23.7, z=13.0
+      (309 - 150) / 7, (753 - 648) / 7,  // x=22.7, z=15.0
       2.8, 0.14, 1.7, 0x6aaa3a
     );
     scene.add(fruitTree2);
 
     // Vegetable garden: raised bed
-    // SVG top-left: (293, 677), size 35×38 SVG = 5×5.4m
-    const vegX = (293 - 150) / 7;  // 20.4
-    const vegZ = (677 - 648) / 7;  // 4.1
+    // SVG top-left: (300, 670), size 35×38 SVG = 5×5.4m
+    const vegX = (300 - 150) / 7;  // 21.4
+    const vegZ = (670 - 648) / 7;  // 3.1
     const vegW = 35 / 7;           // 5
     const vegD = 38 / 7;           // 5.4
 
@@ -575,7 +607,8 @@
     scene.add(makeLabel('แปลงผัก', vegX + vegW / 2, 1.5, vegZ + vegD / 2, '#2d6b12', '12px'));
     scene.add(makeLabel('ถังน้ำ', tankX + 0.6, 2, tankZ + 0.8, '#2288aa', '11px'));
     scene.add(makeLabel('ต้นไม้บังแดดบ่าย', 6, 6, 9, '#1a6b1a', '12px'));
-    scene.add(makeLabel('ต้นผลไม้', 22, 3.5, 13, '#5a8a2a', '11px'));
+    scene.add(makeLabel('ต้นผลไม้', 21, 3.5, 15, '#5a8a2a', '11px'));
+    scene.add(makeLabel('ชานบ้าน', terraceX + terraceW / 2, 1.5, terraceZ + terraceD / 2, '#8B4513', '11px'));
     scene.add(makeLabel('แนวไผ่', 0.7, 5, 10, '#3a6a10', '11px'));
     scene.add(makeLabel('ถนน', 16, 0.5, -2, '#666', '12px'));
     scene.add(makeLabel('ลำน้ำ', 38, 1, 5, '#1a6699', '12px'));
