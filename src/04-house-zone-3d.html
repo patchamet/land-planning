@@ -120,6 +120,24 @@
     const SUN_DIST = 40; // distance of light from scene center
     const MAX_ELEV = 70 * Math.PI / 180; // max sun elevation ~70° (lat 14°N)
 
+    // Visual sun sphere (translucent glow)
+    const sunSphereGeo = new THREE.SphereGeometry(1.5, 16, 12);
+    const sunSphereMat = new THREE.MeshBasicMaterial({
+      color: 0xffdd44, transparent: true, opacity: 0.35,
+      depthWrite: false
+    });
+    const sunSphere = new THREE.Mesh(sunSphereGeo, sunSphereMat);
+    scene.add(sunSphere);
+
+    // Sun glow ring (larger, more transparent)
+    const sunGlowGeo = new THREE.SphereGeometry(3, 16, 12);
+    const sunGlowMat = new THREE.MeshBasicMaterial({
+      color: 0xffee88, transparent: true, opacity: 0.12,
+      depthWrite: false, side: THREE.BackSide
+    });
+    const sunGlow = new THREE.Mesh(sunGlowGeo, sunGlowMat);
+    scene.add(sunGlow);
+
     function updateSunPosition(hour) {
       // t: 0=sunrise(6:00), 0.5=noon(12:00), 1=sunset(18:00)
       const t = (hour - 6) / 12;
@@ -139,18 +157,29 @@
       dirLight.target.position.set(16, 0, 10);
       dirLight.target.updateMatrixWorld();
 
+      // Update visual sun position
+      sunSphere.position.set(sunX, sunY, sunZ);
+      sunGlow.position.set(sunX, sunY, sunZ);
+
       // Light intensity: dimmer at sunrise/sunset
-      dirLight.intensity = 0.4 + 0.8 * Math.sin(t * Math.PI);
+      const sinT = Math.sin(t * Math.PI);
+      dirLight.intensity = 0.4 + 0.8 * sinT;
 
       // Light color: warm at sunrise/sunset, white at noon
-      const warmth = 1 - Math.sin(t * Math.PI); // 1=warm, 0=neutral
+      const warmth = 1 - sinT; // 1=warm, 0=neutral
       const r = 1.0;
       const g = 1.0 - warmth * 0.15;
       const b = 1.0 - warmth * 0.35;
       dirLight.color.setRGB(r, g, b);
 
+      // Sun sphere color matches light (warmer at edges of day)
+      sunSphereMat.color.setRGB(1.0, 0.85 + 0.15 * sinT, 0.3 + 0.4 * sinT);
+      sunSphereMat.opacity = 0.2 + 0.25 * sinT;
+      sunGlowMat.color.setRGB(1.0, 0.9 + 0.1 * sinT, 0.5 + 0.3 * sinT);
+      sunGlowMat.opacity = 0.06 + 0.12 * sinT;
+
       // Ambient: slightly warmer/dimmer at edges
-      ambient.intensity = 0.3 + 0.3 * Math.sin(t * Math.PI);
+      ambient.intensity = 0.3 + 0.3 * sinT;
 
       // Update label
       const h = Math.floor(hour);
