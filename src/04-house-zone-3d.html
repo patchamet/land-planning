@@ -250,6 +250,15 @@
     const boundaryLine = new THREE.Line(boundaryGeo, new THREE.LineBasicMaterial({ color: 0x222222, linewidth: 2 }));
     scene.add(boundaryLine);
 
+    // ===== Large ground plane for shadow reception =====
+    const bigGroundGeo = new THREE.PlaneGeometry(60, 40);
+    const bigGroundMat = new THREE.MeshStandardMaterial({ color: 0xc8c8c0 });
+    const bigGround = new THREE.Mesh(bigGroundGeo, bigGroundMat);
+    bigGround.rotation.x = -Math.PI / 2;
+    bigGround.position.set(16, -0.08, 5);
+    bigGround.receiveShadow = true;
+    scene.add(bigGround);
+
     // (node markers removed)
 
     // ===== Step 2: House + Parking =====
