@@ -438,23 +438,51 @@
       scene.add(post);
     });
 
-    // Terrace railing (3 sides: right, front, back — not the house-facing side)
-    const railingMat = new THREE.MeshStandardMaterial({ color: 0x996633 });
-    // Right railing (x = terraceX + terraceW)
-    const rRailGeo = new THREE.BoxGeometry(0.06, 0.7, terraceD);
-    const rRail = new THREE.Mesh(rRailGeo, railingMat);
-    rRail.position.set(terraceX + terraceW, houseBase + 0.55, terraceZ + terraceD / 2);
-    scene.add(rRail);
-    // Front railing (z = terraceZ)
-    const fRailGeo = new THREE.BoxGeometry(terraceW, 0.7, 0.06);
-    const fRail = new THREE.Mesh(fRailGeo, railingMat);
-    fRail.position.set(terraceX + terraceW / 2, houseBase + 0.55, terraceZ);
-    scene.add(fRail);
-    // Back railing (z = terraceZ + terraceD)
-    const bRailGeo = new THREE.BoxGeometry(terraceW, 0.7, 0.06);
-    const bRail = new THREE.Mesh(bRailGeo, railingMat);
-    bRail.position.set(terraceX + terraceW / 2, houseBase + 0.55, terraceZ + terraceD);
-    scene.add(bRail);
+    // Terrace railing — steel bar style (ซี่เหล็กโปร่ง) 3 sides
+    const railMetal = new THREE.MeshStandardMaterial({ color: 0x444444, metalness: 0.7, roughness: 0.3 });
+    const railH = 0.9;
+    const railY = houseBase + railH / 2;
+    const barRadius = 0.015;
+    const barSpacing = 0.12;
+
+    // Helper: top rail bar + vertical bars along a direction
+    function makeBarRailing(startX, startZ, endX, endZ) {
+      const dx = endX - startX, dz = endZ - startZ;
+      const len = Math.sqrt(dx * dx + dz * dz);
+      const angle = Math.atan2(dx, dz);
+      // Top horizontal rail
+      const topGeo = new THREE.CylinderGeometry(0.02, 0.02, len, 8);
+      topGeo.rotateX(Math.PI / 2);
+      const topRail = new THREE.Mesh(topGeo, railMetal);
+      topRail.position.set((startX + endX) / 2, houseBase + railH, (startZ + endZ) / 2);
+      topRail.rotation.y = angle;
+      scene.add(topRail);
+      // Bottom horizontal rail
+      const botGeo = new THREE.CylinderGeometry(0.02, 0.02, len, 8);
+      botGeo.rotateX(Math.PI / 2);
+      const botRail = new THREE.Mesh(botGeo, railMetal);
+      botRail.position.set((startX + endX) / 2, houseBase + 0.1, (startZ + endZ) / 2);
+      botRail.rotation.y = angle;
+      scene.add(botRail);
+      // Vertical bars
+      const count = Math.floor(len / barSpacing);
+      for (let i = 0; i <= count; i++) {
+        const t = i / count;
+        const bx = startX + dx * t;
+        const bz = startZ + dz * t;
+        const barGeo = new THREE.CylinderGeometry(barRadius, barRadius, railH, 6);
+        const bar = new THREE.Mesh(barGeo, railMetal);
+        bar.position.set(bx, railY, bz);
+        scene.add(bar);
+      }
+    }
+
+    // Right side (x = terraceX + terraceW)
+    makeBarRailing(terraceX + terraceW, terraceZ, terraceX + terraceW, terraceZ + terraceD);
+    // Front side (z = terraceZ)
+    makeBarRailing(terraceX, terraceZ, terraceX + terraceW, terraceZ);
+    // Back side (z = terraceZ + terraceD)
+    makeBarRailing(terraceX, terraceZ + terraceD, terraceX + terraceW, terraceZ + terraceD);
 
     // ===== Step 3: Trees + Veggie garden + Water tank =====
 
