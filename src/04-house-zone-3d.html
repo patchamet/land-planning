@@ -113,6 +113,11 @@
     fillLight.position.set(-15, 10, 20);
     scene.add(fillLight);
 
+    // House interior light (evening glow) — must be before updateSunPosition()
+    const houseLight = new THREE.PointLight(0xffe4b0, 0, 8);
+    houseLight.position.set(14, 1.9, 9); // center of house (will update after house coords)
+    scene.add(houseLight);
+
     // ===== Step 6: Sun position from time slider =====
     const sunSlider = document.getElementById('sun-slider');
     const sunTimeLabel = document.getElementById('sun-time');
@@ -185,6 +190,10 @@
       const h = Math.floor(hour);
       const m = Math.round((hour - h) * 60);
       sunTimeLabel.textContent = `☀ ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+
+      // House light: ramp up from 17:00 to 18:00
+      const lampT = Math.max(0, hour - 17);
+      houseLight.intensity = lampT * 1.5;
 
       // Sky color changes with time of day
       const skyWarm = new THREE.Color(0xf0c8a0);   // sunrise/sunset
@@ -576,6 +585,9 @@
       scene.add(step);
     }
 
+    // Update houseLight position now that house coords are defined
+    houseLight.position.set(houseX + 3, houseBase + 1.5, houseZ + 3);
+
     // ===== Step 3: Trees + Veggie garden + Water tank =====
 
     // Helper: create a tree (trunk cylinder + canopy sphere)
@@ -800,6 +812,21 @@
     vShoulderMesh.position.y = 0.04;
     scene.add(vShoulderMesh);
 
+    // Water ripple texture (canvas-based)
+    const waterCanvas = document.createElement('canvas');
+    waterCanvas.width = 128;
+    waterCanvas.height = 128;
+    const wCtx = waterCanvas.getContext('2d');
+    wCtx.fillStyle = 'rgba(74,159,216,0.3)';
+    wCtx.fillRect(0, 0, 128, 128);
+    for (let i = 0; i < 128; i += 8) {
+      wCtx.fillStyle = `rgba(255,255,255,${0.05 + Math.sin(i * 0.15) * 0.05})`;
+      wCtx.fillRect(0, i, 128, 3);
+    }
+    const waterTex = new THREE.CanvasTexture(waterCanvas);
+    waterTex.wrapS = waterTex.wrapT = THREE.RepeatWrapping;
+    waterTex.repeat.set(3, 6);
+
     // Waterway along side C: from near node 12 to beyond node 14
     // Inner edge: plot boundary C (12→14 extended to 8)
     // Outer edge: ~4m further out (28 SVG units)
@@ -818,7 +845,7 @@
 
     const waterGeo = new THREE.ShapeGeometry(waterShape);
     const waterMat = new THREE.MeshStandardMaterial({
-      color: 0x4a9fd8, transparent: true, opacity: 0.5, side: THREE.DoubleSide
+      color: 0x4a9fd8, map: waterTex, transparent: true, opacity: 0.5, side: THREE.DoubleSide
     });
     const waterMesh = new THREE.Mesh(waterGeo, waterMat);
     waterMesh.rotation.x = -Math.PI / 2;
@@ -932,6 +959,7 @@
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
+      waterTex.offset.y += 0.001;
       renderer.render(scene, camera);
       labelRenderer.render(scene, camera);
     }
