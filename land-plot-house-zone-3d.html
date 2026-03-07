@@ -330,20 +330,41 @@
     platBaseRight.position.set(houseX + houseW - 0.075, platH / 2, houseZ - platDepth / 2);
     scene.add(platBaseRight);
 
-    // Roof (gable / triangular prism) — no rotation, extrude along Z
-    const roofShape = new THREE.Shape();
-    roofShape.moveTo(-3.3, 0);   // left overhang
-    roofShape.lineTo(0, 2.2);    // ridge peak
-    roofShape.lineTo(3.3, 0);    // right overhang
-    roofShape.closePath();
-
-    const roofGeo = new THREE.ExtrudeGeometry(roofShape, { depth: 6.6, bevelEnabled: false });
-    const roofMat = new THREE.MeshStandardMaterial({ color: 0x996633 });
-    const roof = new THREE.Mesh(roofGeo, roofMat);
-    // Profile in X-Y, extruded along +Z. Center on house.
-    roof.position.set(houseX + houseW / 2, houseBase + houseH, houseZ - 0.3);
-    roof.castShadow = true;
-    scene.add(roof);
+    // Roof (hip roof / ทรงปั้นหยา) — 4 sloping faces, no gable
+    const roofMat = new THREE.MeshStandardMaterial({ color: 0x996633, side: THREE.DoubleSide });
+    const roofOverhang = 0.5; // ชายคายื่น 0.5m
+    const roofH = 2.2; // ความสูงหลังคา
+    const roofY = houseBase + houseH; // ฐานหลังคา
+    // Eave corners (base of roof, with overhang)
+    const e0 = new THREE.Vector3(houseX - roofOverhang, roofY, houseZ - roofOverhang);           // front-left
+    const e1 = new THREE.Vector3(houseX + houseW + roofOverhang, roofY, houseZ - roofOverhang);  // front-right
+    const e2 = new THREE.Vector3(houseX + houseW + roofOverhang, roofY, houseZ + houseD + roofOverhang); // back-right
+    const e3 = new THREE.Vector3(houseX - roofOverhang, roofY, houseZ + houseD + roofOverhang);  // back-left
+    // Ridge (สันหลังคา): short ridge line centered, running along Z (front-back)
+    const ridgeInset = 2.0; // ridge shorter than eave by 2m each side
+    const r0 = new THREE.Vector3(houseX + houseW / 2, roofY + roofH, houseZ + ridgeInset);       // ridge front
+    const r1 = new THREE.Vector3(houseX + houseW / 2, roofY + roofH, houseZ + houseD - ridgeInset); // ridge back
+    // 4 faces of hip roof
+    function makeRoofFace(a, b, c, d) {
+      const geo = d ? new THREE.BufferGeometry() : new THREE.BufferGeometry();
+      const verts = d
+        ? [a.x,a.y,a.z, b.x,b.y,b.z, c.x,c.y,c.z, a.x,a.y,a.z, c.x,c.y,c.z, d.x,d.y,d.z]
+        : [a.x,a.y,a.z, b.x,b.y,b.z, c.x,c.y,c.z];
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+      geo.computeVertexNormals();
+      const mesh = new THREE.Mesh(geo, roofMat);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      return mesh;
+    }
+    // Left slope (e0 → e3 → r1 → r0) — quad
+    scene.add(makeRoofFace(e0, e3, r1, r0));
+    // Right slope (e1 → e2 → r1 → r0) — quad (reversed winding)
+    scene.add(makeRoofFace(e2, e1, r0, r1));
+    // Front triangle (e0 → e1 → r0)
+    scene.add(makeRoofFace(e0, r0, e1));
+    // Back triangle (e3 → e2 → r1)
+    scene.add(makeRoofFace(e3, e2, r1));
 
     // Terrace (ชานบ้าน): 3×5m, attached to right wall of house, raised same as house
     // SVG: (269, 697), width=21(3m), height=35(5m)
