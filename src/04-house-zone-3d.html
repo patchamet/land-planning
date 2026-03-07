@@ -330,7 +330,7 @@
 
     // Parking roof (flat carport cover, 6×6m, height 2.8m)
     const carportRoofGeo = new THREE.BoxGeometry(6, 0.08, 6);
-    const carportRoofMat = new THREE.MeshStandardMaterial({ color: 0xb0a898, transparent: true, opacity: 0.6 });
+    const carportRoofMat = new THREE.MeshStandardMaterial({ color: 0x6a6a6a, transparent: true, opacity: 0.55 });
     const carportRoof = new THREE.Mesh(carportRoofGeo, carportRoofMat);
     carportRoof.position.set(11 + 3, 2.8, 0 + 3);
     carportRoof.castShadow = true;
@@ -338,7 +338,7 @@
 
     // Carport pillars (4 corners)
     const pillarGeo = new THREE.CylinderGeometry(0.1, 0.1, 2.8, 8);
-    const pillarMat = new THREE.MeshStandardMaterial({ color: 0x888888 });
+    const pillarMat = new THREE.MeshStandardMaterial({ color: 0xfafafa });
     [[11.3, 0.3], [16.7, 0.3], [11.3, 5.7], [16.7, 5.7]].forEach(([px, pz]) => {
       const pillar = new THREE.Mesh(pillarGeo, pillarMat);
       pillar.position.set(px, 1.4, pz);
@@ -354,10 +354,10 @@
     const houseH = 3;
     const houseBase = 0.4; // ยกพื้น 0.4ม.
 
-    const wallMat = new THREE.MeshStandardMaterial({ color: 0xf5e6c8 });
+    const wallMat = new THREE.MeshStandardMaterial({ color: 0xfafafa });
 
     // Solid base walls (ฐานยกพื้นปิดทึบ 4 ด้าน)
-    const baseMat = new THREE.MeshStandardMaterial({ color: 0x8a8a8a });
+    const baseMat = new THREE.MeshStandardMaterial({ color: 0xf0f0f0 });
     // Front base (z = houseZ)
     const baseFrontGeo = new THREE.BoxGeometry(houseW, houseBase, 0.15);
     const baseFront = new THREE.Mesh(baseFrontGeo, baseMat);
@@ -437,7 +437,7 @@
 
     // Floor (raised 0.5m)
     const floorGeo = new THREE.BoxGeometry(houseW, 0.15, houseD);
-    const floorMat = new THREE.MeshStandardMaterial({ color: 0xc8ad7e });
+    const floorMat = new THREE.MeshStandardMaterial({ color: 0xf0f0f0 });
     const floor = new THREE.Mesh(floorGeo, floorMat);
     floor.position.set(houseX + 3, houseBase + 0.075, houseZ + 3);
     floor.receiveShadow = true;
@@ -467,7 +467,7 @@
     scene.add(platBaseRight);
 
     // Roof (hip roof / ทรงปั้นหยา) — 4 sloping faces, no gable
-    const roofMat = new THREE.MeshStandardMaterial({ color: 0x996633, side: THREE.DoubleSide });
+    const roofMat = new THREE.MeshStandardMaterial({ color: 0x222222, side: THREE.DoubleSide });
     const roofOverhang = 0.5; // ชายคายื่น 0.5m
     const roofH = 2.2; // ความสูงหลังคา
     const roofY = houseBase + houseH; // ฐานหลังคา
@@ -509,7 +509,7 @@
     const terraceW = 3;
     const terraceD = 6;
     const terraceGeo = new THREE.BoxGeometry(terraceW, 0.15, terraceD);
-    const terraceMat = new THREE.MeshStandardMaterial({ color: 0xb08050 });
+    const terraceMat = new THREE.MeshStandardMaterial({ color: 0xc8b8a0 });
     const terrace = new THREE.Mesh(terraceGeo, terraceMat);
     terrace.position.set(terraceX + terraceW / 2, houseBase + 0.075, terraceZ + terraceD / 2);
     terrace.receiveShadow = true;
@@ -534,7 +534,7 @@
     scene.add(tBaseBack);
 
     // Terrace roof: shed/lean-to (หลังคาเพิงหมาแหงน) — slopes away from house wall
-    const tRoofMat = new THREE.MeshStandardMaterial({ color: 0x8B7355, side: THREE.DoubleSide });
+    const tRoofMat = new THREE.MeshStandardMaterial({ color: 0x222222, side: THREE.DoubleSide });
     const tRoofOverhang = 0.3;
     const tRoofHighY = houseBase + 2.8;  // high side (attached to house wall)
     const tRoofLowY = houseBase + 2.2;   // low side (outer edge)
@@ -564,7 +564,7 @@
     tRoofThickGeo.computeVertexNormals();
     scene.add(new THREE.Mesh(tRoofThickGeo, tRoofMat));
     // Support posts (2 posts on outer edge)
-    const tPostMat = new THREE.MeshStandardMaterial({ color: 0x8B7355 });
+    const tPostMat = new THREE.MeshStandardMaterial({ color: 0xfafafa });
     [terraceZ + 0.3, terraceZ + terraceD - 0.3].forEach(pz => {
       const postH = tRoofLowY - houseBase;
       const postGeo = new THREE.CylinderGeometry(0.06, 0.06, postH, 8);
@@ -575,7 +575,7 @@
     });
 
     // Terrace railing — steel bar style (ซี่เหล็กโปร่ง) 3 sides
-    const railMetal = new THREE.MeshStandardMaterial({ color: 0x444444, metalness: 0.7, roughness: 0.3 });
+    const railMetal = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, metalness: 0.8, roughness: 0.25 });
     const railH = 0.9;
     const railY = houseBase + railH / 2;
     const barRadius = 0.015;
