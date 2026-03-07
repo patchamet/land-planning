@@ -250,15 +250,6 @@
     const boundaryLine = new THREE.Line(boundaryGeo, new THREE.LineBasicMaterial({ color: 0x222222, linewidth: 2 }));
     scene.add(boundaryLine);
 
-    // ===== Large ground plane for shadow reception =====
-    const bigGroundGeo = new THREE.PlaneGeometry(60, 40);
-    const bigGroundMat = new THREE.MeshStandardMaterial({ color: 0xc8c8c0 });
-    const bigGround = new THREE.Mesh(bigGroundGeo, bigGroundMat);
-    bigGround.rotation.x = -Math.PI / 2;
-    bigGround.position.set(16, -0.08, 5);
-    bigGround.receiveShadow = true;
-    scene.add(bigGround);
-
     // (node markers removed)
 
     // ===== Step 2: House + Parking =====
@@ -899,10 +890,35 @@
 
     // (node labels and north arrow removed)
 
-    // ===== Grid (ground reference) =====
-    const gridHelper = new THREE.GridHelper(40, 40, 0xaaaaaa, 0xdddddd);
-    gridHelper.position.set(16, -0.01, 10);
-    scene.add(gridHelper);
+    // ===== Grid (clipped to zone boundary 11-12-14-13) =====
+    // Zone: n11(0,0), n12(33,0), n14(24.3,18.9), n13(0,18.9)
+    // Side C (12→14): diagonal, x goes from 33 at z=0 to 24.3 at z=18.9
+    function zoneMaxX(z) {
+      // Linear interpolation along side C (12→14)
+      if (z <= 0) return n12.x;
+      if (z >= n13.z) return n14.x;
+      const t = z / n13.z;
+      return n12.x + (n14.x - n12.x) * t;
+    }
+    const gridY = 0.01;
+    const gridMat = new THREE.LineBasicMaterial({ color: 0xcccccc, transparent: true, opacity: 0.25 });
+    const gridPoints = [];
+    // Horizontal lines (along x, every 1m in z)
+    for (let z = 0; z <= n13.z; z += 1) {
+      const maxX = zoneMaxX(z);
+      gridPoints.push(new THREE.Vector3(0, gridY, z), new THREE.Vector3(maxX, gridY, z));
+    }
+    // Vertical lines (along z, every 1m in x)
+    for (let x = 0; x <= n12.x; x += 1) {
+      // Find z range where this x is inside the zone
+      const maxZ = x <= n14.x ? n13.z : (n12.x - x) / (n12.x - n14.x) * n13.z;
+      if (maxZ > 0) {
+        gridPoints.push(new THREE.Vector3(x, gridY, 0), new THREE.Vector3(x, gridY, maxZ));
+      }
+    }
+    const gridGeo = new THREE.BufferGeometry().setFromPoints(gridPoints);
+    const gridLines = new THREE.LineSegments(gridGeo, gridMat);
+    scene.add(gridLines);
 
     // ===== Resize handler =====
     window.addEventListener('resize', () => {
