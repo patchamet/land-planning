@@ -34,6 +34,7 @@
   <script type="module">
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
     // ===== Scene, Camera, Renderer =====
     const scene = new THREE.Scene();
@@ -46,7 +47,18 @@
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     document.body.appendChild(renderer.domElement);
+
+    // CSS2D label renderer
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0';
+    labelRenderer.domElement.style.left = '0';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    document.body.appendChild(labelRenderer.domElement);
 
     // ===== OrbitControls =====
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -55,12 +67,27 @@
     controls.dampingFactor = 0.08;
     controls.update();
 
-    // ===== Lights (basic for now) =====
-    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+    // ===== Lights + Shadows =====
+    const ambient = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambient);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(20, 30, -10);
+    // Sun from east (morning light) — in SVG east ≈ lower-right → 3D +x, +z
+    const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.0);
+    dirLight.position.set(30, 25, -5);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.camera.left = -25;
+    dirLight.shadow.camera.right = 25;
+    dirLight.shadow.camera.top = 25;
+    dirLight.shadow.camera.bottom = -25;
+    dirLight.shadow.camera.near = 1;
+    dirLight.shadow.camera.far = 80;
+    dirLight.shadow.bias = -0.002;
     scene.add(dirLight);
+    // Subtle fill light from opposite side
+    const fillLight = new THREE.DirectionalLight(0xc4d8f0, 0.3);
+    fillLight.position.set(-15, 10, 20);
+    scene.add(fillLight);
 
     // ===== Coordinate conversion: SVG → 3D =====
     // Origin = node 11 (SVG 150,648), scale: 7 SVG units = 1m
@@ -91,6 +118,7 @@
     const groundMesh = new THREE.Mesh(groundGeo, groundMat);
     groundMesh.rotation.x = -Math.PI / 2; // lay flat on x-z plane
     groundMesh.position.y = 0;
+    groundMesh.receiveShadow = true;
     scene.add(groundMesh);
 
     // ===== Zone boundary outline =====
@@ -128,6 +156,7 @@
     const parkingMat = new THREE.MeshStandardMaterial({ color: 0xd0ccc4 });
     const parking = new THREE.Mesh(parkingGeo, parkingMat);
     parking.position.set(11 + 3, 0.05, 0 + 3);
+    parking.receiveShadow = true;
     scene.add(parking);
 
     // Parking roof (flat carport cover, 6×6m, height 2.8m)
@@ -219,6 +248,7 @@
     const roof = new THREE.Mesh(roofGeo, roofMat);
     // Profile in X-Y, extruded along +Z. Center on house.
     roof.position.set(houseX + houseW / 2, houseH, houseZ - 0.3);
+    roof.castShadow = true;
     scene.add(roof);
 
     // ===== Step 3: Trees + Veggie garden + Water tank =====
@@ -231,12 +261,14 @@
       const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8B6914 });
       const trunk = new THREE.Mesh(trunkGeo, trunkMat);
       trunk.position.y = trunkH / 2;
+      trunk.castShadow = true;
       group.add(trunk);
       // Canopy
       const canopyGeo = new THREE.SphereGeometry(canopyR, 12, 10);
       const canopyMat = new THREE.MeshStandardMaterial({ color: canopyColor, transparent: true, opacity: 0.85 });
       const canopy = new THREE.Mesh(canopyGeo, canopyMat);
       canopy.position.y = trunkH + canopyR * 0.6;
+      canopy.castShadow = true;
       group.add(canopy);
 
       group.position.set(x, 0, z);
@@ -397,6 +429,7 @@
     const roadMesh = new THREE.Mesh(roadGeo, roadMat);
     roadMesh.rotation.x = -Math.PI / 2;
     roadMesh.position.y = 0.03;
+    roadMesh.receiveShadow = true;
     scene.add(roadMesh);
 
     // Shoulder strip (darker, x=0 to 1)
@@ -471,6 +504,67 @@
       scene.add(rail);
     });
 
+    // ===== Step 5: Labels + North Arrow =====
+
+    // Helper: create a CSS2D label
+    function makeLabel(text, x, y, z, color = '#333', fontSize = '13px') {
+      const div = document.createElement('div');
+      div.textContent = text;
+      div.style.color = color;
+      div.style.fontSize = fontSize;
+      div.style.fontFamily = 'Arial, sans-serif';
+      div.style.fontWeight = 'bold';
+      div.style.textShadow = '0 0 3px rgba(255,255,255,0.8)';
+      div.style.whiteSpace = 'nowrap';
+      const label = new CSS2DObject(div);
+      label.position.set(x, y, z);
+      return label;
+    }
+
+    // Zone labels
+    scene.add(makeLabel('บ้าน 6×6', houseX + 3, houseH + 3, houseZ + 3, '#8B4513', '14px'));
+    scene.add(makeLabel('ลานจอดรถ', 14, 3.2, 3, '#555', '12px'));
+    scene.add(makeLabel('แปลงผัก', vegX + vegW / 2, 1.5, vegZ + vegD / 2, '#2d6b12', '12px'));
+    scene.add(makeLabel('ถังน้ำ', tankX + 0.6, 2, tankZ + 0.8, '#2288aa', '11px'));
+    scene.add(makeLabel('ต้นไม้บังแดดบ่าย', 6, 6, 9, '#1a6b1a', '12px'));
+    scene.add(makeLabel('ต้นผลไม้', 22, 3.5, 13, '#5a8a2a', '11px'));
+    scene.add(makeLabel('แนวไผ่', 0.7, 5, 10, '#3a6a10', '11px'));
+    scene.add(makeLabel('ถนน', 16, 0.5, -2, '#666', '12px'));
+    scene.add(makeLabel('ลำน้ำ', 38, 1, 5, '#1a6699', '12px'));
+    scene.add(makeLabel('สะพาน', 37, 1.5, 0, '#8B7355', '11px'));
+
+    // Node labels (corner markers)
+    scene.add(makeLabel('11', n11.x, 1.5, n11.z, '#c00', '13px'));
+    scene.add(makeLabel('12', n12.x, 1.5, n12.z, '#c00', '13px'));
+    scene.add(makeLabel('13', n13.x, 1.5, n13.z, '#c00', '13px'));
+    scene.add(makeLabel('14', n14.x, 1.5, n14.z, '#c00', '13px'));
+
+    // North arrow — north is rotated 25° CW from -z in SVG
+    // In 3D: north direction = rotated 25° CW from -z axis
+    const northGroup = new THREE.Group();
+    // Arrow shaft
+    const arrowShaftGeo = new THREE.CylinderGeometry(0.08, 0.08, 3, 8);
+    const arrowMat = new THREE.MeshStandardMaterial({ color: 0xcc3300 });
+    const arrowShaft = new THREE.Mesh(arrowShaftGeo, arrowMat);
+    arrowShaft.position.y = 1.5;
+    northGroup.add(arrowShaft);
+    // Arrow head (cone)
+    const arrowHeadGeo = new THREE.ConeGeometry(0.3, 0.8, 8);
+    const arrowHead = new THREE.Mesh(arrowHeadGeo, arrowMat);
+    arrowHead.position.y = 3.2;
+    northGroup.add(arrowHead);
+    // "N" label
+    scene.add(makeLabel('N', -2.5, 5, -5.5, '#cc3300', '16px'));
+    // Position arrow near top-left corner, tilt to show north direction
+    // North = 25° CW from -z, so rotate around Y by -25° (negative = CW)
+    northGroup.rotation.x = 0; // upright
+    northGroup.rotation.z = 0;
+    // Tilt the arrow to point north: rotate around local X to lay it partially flat, then Y for compass
+    northGroup.rotation.x = -Math.PI / 6; // tilt forward
+    northGroup.rotation.y = -(25 * Math.PI / 180); // 25° CW
+    northGroup.position.set(-2.5, 1, -5);
+    scene.add(northGroup);
+
     // ===== Grid (ground reference) =====
     const gridHelper = new THREE.GridHelper(40, 40, 0xaaaaaa, 0xdddddd);
     gridHelper.position.set(16, -0.01, 10);
@@ -481,6 +575,7 @@
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      labelRenderer.setSize(window.innerWidth, window.innerHeight);
     });
 
     // ===== Animate =====
@@ -488,6 +583,7 @@
       requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
+      labelRenderer.render(scene, camera);
     }
     animate();
   </script>

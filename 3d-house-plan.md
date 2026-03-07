@@ -36,7 +36,7 @@
 - สะพาน: กล่องบาง สีน้ำตาลอ่อน
 - **เห็น**: ผังครบทุกองค์ประกอบ
 
-### Step 5: Label + แสง + แดด
+### Step 5: Label + แสง + แดด ✅ Done
 - Ambient light + DirectionalLight (จำลองแดดจากทิศตะวันออก)
 - เงาจาก DirectionalLight
 - ป้ายชื่อแต่ละส่วน (CSS2DRenderer หรือ sprite)
