@@ -201,7 +201,7 @@
     // Parking (carport): 6×6m, flush with road, y=0 (flat slab)
     // SVG top-left: (227, 648) → 3D: (11, 0)
     const parkingGeo = new THREE.BoxGeometry(6, 0.1, 6);
-    const parkingMat = new THREE.MeshStandardMaterial({ color: 0xd0ccc4 });
+    const parkingMat = new THREE.MeshStandardMaterial({ color: 0xb0b0b0 });
     const parking = new THREE.Mesh(parkingGeo, parkingMat);
     parking.position.set(11 + 3, 0.05, 0 + 3);
     parking.receiveShadow = true;
@@ -233,10 +233,10 @@
     const houseH = 3;
     const houseBase = 0.4; // ยกพื้น 0.4ม.
 
-    const wallMat = new THREE.MeshStandardMaterial({ color: 0xe8c888 });
+    const wallMat = new THREE.MeshStandardMaterial({ color: 0xf5e6c8 });
 
     // Solid base walls (ฐานยกพื้นปิดทึบ 4 ด้าน)
-    const baseMat = new THREE.MeshStandardMaterial({ color: 0xa0a0a0 });
+    const baseMat = new THREE.MeshStandardMaterial({ color: 0x8a8a8a });
     // Front base (z = houseZ)
     const baseFrontGeo = new THREE.BoxGeometry(houseW, houseBase, 0.15);
     const baseFront = new THREE.Mesh(baseFrontGeo, baseMat);
@@ -316,7 +316,7 @@
 
     // Floor (raised 0.5m)
     const floorGeo = new THREE.BoxGeometry(houseW, 0.15, houseD);
-    const floorMat = new THREE.MeshStandardMaterial({ color: 0xd4c4a0 });
+    const floorMat = new THREE.MeshStandardMaterial({ color: 0xc8ad7e });
     const floor = new THREE.Mesh(floorGeo, floorMat);
     floor.position.set(houseX + 3, houseBase + 0.075, houseZ + 3);
     floor.receiveShadow = true;
@@ -388,7 +388,7 @@
     const terraceW = 3;
     const terraceD = 5;
     const terraceGeo = new THREE.BoxGeometry(terraceW, 0.15, terraceD);
-    const terraceMat = new THREE.MeshStandardMaterial({ color: 0xd4b896 });
+    const terraceMat = new THREE.MeshStandardMaterial({ color: 0xb08050 });
     const terrace = new THREE.Mesh(terraceGeo, terraceMat);
     terrace.position.set(terraceX + terraceW / 2, houseBase + 0.075, terraceZ + terraceD / 2);
     terrace.receiveShadow = true;
