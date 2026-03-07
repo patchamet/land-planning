@@ -322,7 +322,7 @@
     // Parking (carport): 6×6m, flush with road, y=0 (flat slab)
     // SVG top-left: (227, 648) → 3D: (11, 0)
     const parkingGeo = new THREE.BoxGeometry(6, 0.1, 6);
-    const parkingMat = new THREE.MeshStandardMaterial({ color: 0xb0b0b0 });
+    const parkingMat = new THREE.MeshStandardMaterial({ color: 0xd0d0d0 });
     const parking = new THREE.Mesh(parkingGeo, parkingMat);
     parking.position.set(11 + 3, 0.05, 0 + 3);
     parking.receiveShadow = true;
