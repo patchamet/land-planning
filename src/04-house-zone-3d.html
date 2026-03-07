@@ -381,12 +381,12 @@
     // Back triangle (e3 → e2 → r1)
     scene.add(makeRoofFace(e3, e2, r1));
 
-    // Terrace (ชานบ้าน): 3×5m, attached to right wall of house, raised same as house
-    // SVG: (269, 697), width=21(3m), height=35(5m)
+    // Terrace (ชานบ้าน): 3×6m, attached to right wall of house, aligned with house front/back
+    // SVG: (269, 690), width=21(3m), height=42(6m)
     const terraceX = (269 - 150) / 7;  // 17
-    const terraceZ = (697 - 648) / 7;  // 7
+    const terraceZ = (690 - 648) / 7;  // 6 (same as houseZ)
     const terraceW = 3;
-    const terraceD = 5;
+    const terraceD = 6;
     const terraceGeo = new THREE.BoxGeometry(terraceW, 0.15, terraceD);
     const terraceMat = new THREE.MeshStandardMaterial({ color: 0xb08050 });
     const terrace = new THREE.Mesh(terraceGeo, terraceMat);

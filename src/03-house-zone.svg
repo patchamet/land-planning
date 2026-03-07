@@ -62,10 +62,10 @@
   <text x="248" y="707" font-family="Arial" font-size="8" font-weight="bold" fill="#663300" text-anchor="middle">บ้าน</text>
   <text x="248" y="717" font-family="Arial" font-size="6.5" fill="#663300" text-anchor="middle">6x6ม.</text>
 
-  <!-- Terrace (ชานบ้าน): 3×5m, attached to right wall of house, shifted down 0.5m -->
-  <rect x="269" y="697" width="21" height="35" fill="#d4b896" opacity="0.7" stroke="#996633" stroke-width="1" rx="1"/>
-  <text x="279.5" y="716.5" font-family="Arial" font-size="6" font-weight="bold" fill="#663300" text-anchor="middle">ชานบ้าน</text>
-  <text x="279.5" y="724.5" font-family="Arial" font-size="5" fill="#663300" text-anchor="middle">3×5ม.</text>
+  <!-- Terrace (ชานบ้าน): 3×6m, attached to right wall of house, aligned with house front/back -->
+  <rect x="269" y="690" width="21" height="42" fill="#d4b896" opacity="0.7" stroke="#996633" stroke-width="1" rx="1"/>
+  <text x="279.5" y="713" font-family="Arial" font-size="6" font-weight="bold" fill="#663300" text-anchor="middle">ชานบ้าน</text>
+  <text x="279.5" y="721" font-family="Arial" font-size="5" fill="#663300" text-anchor="middle">3×6ม.</text>
 
   <!-- Rain water tank -->
   <rect x="258" y="735" width="9" height="12" fill="#8ec8e8" stroke="#4499aa" stroke-width="0.7" rx="1"/>
