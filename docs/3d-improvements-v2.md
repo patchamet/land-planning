@@ -55,7 +55,7 @@ composer.addPass(bloomPass);
 
 ## 2. Double Tap Reset Camera (Mobile UX)
 
-**สถานะ:** ยังไม่ทำ
+**สถานะ:** ✅ Done
 
 **ปัญหา:** บนมือถือหมุนกล้องจนหลงทิศ ไม่มีทางกลับมุมเริ่มต้นง่ายๆ
 

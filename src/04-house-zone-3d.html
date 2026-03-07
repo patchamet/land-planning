@@ -70,8 +70,8 @@
     scene.background = new THREE.Color(0xd4e6f1);
 
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 500);
-    camera.position.set(16, 25, 35);
-    camera.lookAt(12, 0, 10);
+    camera.position.set(38, 20, -10);
+    camera.lookAt(14, 0, 9);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -102,10 +102,52 @@
 
     // ===== OrbitControls =====
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(12, 0, 10);
+    controls.target.set(14, 0, 9);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.update();
+
+    // ===== Double Tap to Reset Camera (Mobile UX) =====
+    const DEFAULT_CAM = new THREE.Vector3(38, 20, -10);
+    const DEFAULT_TARGET = new THREE.Vector3(14, 0, 9);
+    let lastTap = 0;
+    let resetAnim = null;
+
+    function resetCamera() {
+      const startPos = camera.position.clone();
+      const startTarget = controls.target.clone();
+      let progress = 0;
+      if (resetAnim) cancelAnimationFrame(resetAnim);
+      function animateReset() {
+        progress += 0.05;
+        if (progress >= 1) {
+          camera.position.copy(DEFAULT_CAM);
+          controls.target.copy(DEFAULT_TARGET);
+          controls.update();
+          resetAnim = null;
+          return;
+        }
+        const t = progress * progress * (3 - 2 * progress); // smoothstep
+        camera.position.lerpVectors(startPos, DEFAULT_CAM, t);
+        controls.target.lerpVectors(startTarget, DEFAULT_TARGET, t);
+        controls.update();
+        resetAnim = requestAnimationFrame(animateReset);
+      }
+      animateReset();
+    }
+
+    // Mobile: double tap
+    renderer.domElement.addEventListener('touchend', (e) => {
+      const now = Date.now();
+      if (now - lastTap < 300) {
+        e.preventDefault();
+        resetCamera();
+      }
+      lastTap = now;
+    });
+
+    // Desktop: double click
+    renderer.domElement.addEventListener('dblclick', () => resetCamera());
 
     // ===== Lights + Shadows =====
     const ambient = new THREE.AmbientLight(0xffffff, 0.5);
