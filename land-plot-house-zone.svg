@@ -62,6 +62,11 @@
   <text x="248" y="707" font-family="Arial" font-size="8" font-weight="bold" fill="#663300" text-anchor="middle">บ้าน</text>
   <text x="248" y="717" font-family="Arial" font-size="6.5" fill="#663300" text-anchor="middle">6x6ม.</text>
 
+  <!-- Terrace (ชานบ้าน): 3×5m, attached to right wall of house, shifted down 0.5m -->
+  <rect x="269" y="697" width="21" height="35" fill="#d4b896" opacity="0.7" stroke="#996633" stroke-width="1" rx="1"/>
+  <text x="279.5" y="716.5" font-family="Arial" font-size="6" font-weight="bold" fill="#663300" text-anchor="middle">ชานบ้าน</text>
+  <text x="279.5" y="724.5" font-family="Arial" font-size="5" fill="#663300" text-anchor="middle">3×5ม.</text>
+
   <!-- Rain water tank -->
   <rect x="258" y="735" width="9" height="12" fill="#8ec8e8" stroke="#4499aa" stroke-width="0.7" rx="1"/>
   <text x="262" y="756" font-family="Arial" font-size="5.5" fill="#4499aa" text-anchor="middle">ถังน้ำ</text>
@@ -81,9 +86,9 @@
   <text x="175" y="700" font-family="Arial" font-size="5.5" fill="#2a6a2a" text-anchor="middle" transform="rotate(-90,175,700)">ต้นไม้ใหญ่ (บังแดดบ่าย)</text>
 
   <!-- Fruit trees -->
-  <circle cx="293" cy="737" r="8" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
-  <circle cx="316" cy="739" r="9" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
-  <text x="304" y="727" font-family="Arial" font-size="6" fill="#4a7a2a" text-anchor="middle">ต้นผลไม้</text>
+  <circle cx="286" cy="751" r="8" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
+  <circle cx="309" cy="753" r="9" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
+  <text x="297" y="741" font-family="Arial" font-size="6" fill="#4a7a2a" text-anchor="middle">ต้นผลไม้</text>
 
   <!-- Sun direction annotations -->
   <g transform="translate(410,750)">
