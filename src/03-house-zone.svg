@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="55 590 440 330" width="880" height="660">
-  <rect x="55" y="590" width="440" height="330" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="55 562 440 358" width="880" height="716">
+  <rect x="55" y="562" width="440" height="358" fill="white"/>
 
   <defs>
     <pattern id="grid1m" x="150" y="130" width="7" height="7" patternUnits="userSpaceOnUse">
@@ -10,13 +10,23 @@
   </defs>
 
   <!-- Title -->
-  <text x="265" y="608" font-family="Arial" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">ผังพื้นที่สร้างบ้าน (โซน 11-12-14-13, ~540 ตร.ม.)</text>
+  <text x="265" y="578" font-family="Arial" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">ผังพื้นที่สร้างบ้าน (โซน 11-12-14-13, ~540 ตร.ม.)</text>
 
   <!-- Context: Waterway strip along side C (12→14 portion) -->
   <polygon points="381,648 406,660 345,792 320,780"
     fill="#b8dff5" stroke="none" opacity="0.7"/>
   <line x1="406" y1="660" x2="345" y2="792"
     stroke="#444" stroke-width="1.5" stroke-dasharray="8,5"/>
+
+  <!-- Context: Vertical road coming from north (~5m section) -->
+  <rect x="150" y="590" width="7" height="58" fill="#c8b8a0" opacity="0.4"/>
+  <rect x="157" y="590" width="28" height="30" fill="#e8e4dc" opacity="0.5"/>
+  <line x1="185" y1="590" x2="185" y2="620" stroke="#444" stroke-width="1" stroke-dasharray="8,5" opacity="0.4"/>
+  <line x1="157" y1="590" x2="157" y2="648" stroke="#444" stroke-width="1" stroke-dasharray="8,5" opacity="0.3"/>
+  <!-- Entrance arrow on vertical road -->
+  <line x1="171" y1="594" x2="171" y2="614" stroke="#cc3300" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="171,616 167,608 175,608" fill="#cc3300" opacity="0.6"/>
+  <text x="171" y="592" font-family="Arial" font-size="7" fill="#cc3300" text-anchor="middle" opacity="0.7">ทางเข้า</text>
 
   <!-- Context: Horizontal road (E70-E74) above zone, faded -->
   <polygon points="157,620 393.3,620 380.5,648 157,648" fill="#e8e4dc" opacity="0.5"/>
