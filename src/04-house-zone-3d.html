@@ -354,7 +354,7 @@
     const houseH = 3;
     const houseBase = 0.4; // ยกพื้น 0.4ม.
 
-    const wallMat = new THREE.MeshStandardMaterial({ color: 0xfafafa });
+    const wallMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
     // Solid base walls (ฐานยกพื้นปิดทึบ 4 ด้าน)
     const baseMat = new THREE.MeshStandardMaterial({ color: 0xf0f0f0 });
@@ -403,6 +403,20 @@
     doorTop.position.set(houseX + 4, houseBase + 2.6, houseZ + 0.075);
     doorTop.castShadow = true;
     scene.add(doorTop);
+    // Front door panel (ประตูหน้า)
+    const doorMat = new THREE.MeshStandardMaterial({ color: 0x8b7355 });
+    const frontDoorH = 2.2;
+    const frontDoorGeo = new THREE.BoxGeometry(1.3, frontDoorH, 0.08);
+    const frontDoor = new THREE.Mesh(frontDoorGeo, doorMat);
+    frontDoor.position.set(houseX + 3.65, houseBase + frontDoorH / 2, houseZ + 0.075);
+    frontDoor.castShadow = true;
+    scene.add(frontDoor);
+    // Door handle (front)
+    const handleMat = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.8, roughness: 0.3 });
+    const fHandleGeo = new THREE.BoxGeometry(0.08, 0.2, 0.06);
+    const fHandle = new THREE.Mesh(fHandleGeo, handleMat);
+    fHandle.position.set(houseX + 3.25, houseBase + 1.1, houseZ + 0.12);
+    scene.add(fHandle);
 
     // Back wall (z=12)
     const backGeo = new THREE.BoxGeometry(houseW, houseH, 0.15);
@@ -434,6 +448,18 @@
     rightDoorTop.position.set(houseX + houseW - 0.075, houseBase + 2.6, houseZ + 3);
     rightDoorTop.castShadow = true;
     scene.add(rightDoorTop);
+    // Right door panel (ประตูข้างฝั่งสวนผัก)
+    const rightDoorH = 2.2;
+    const rightDoorGeo = new THREE.BoxGeometry(0.08, rightDoorH, 2);
+    const rightDoorPanel = new THREE.Mesh(rightDoorGeo, doorMat);
+    rightDoorPanel.position.set(houseX + houseW - 0.075, houseBase + rightDoorH / 2, houseZ + 3);
+    rightDoorPanel.castShadow = true;
+    scene.add(rightDoorPanel);
+    // Door handle (right)
+    const rHandleGeo = new THREE.BoxGeometry(0.06, 0.2, 0.08);
+    const rHandle = new THREE.Mesh(rHandleGeo, handleMat);
+    rHandle.position.set(houseX + houseW - 0.12, houseBase + 1.1, houseZ + 2.3);
+    scene.add(rHandle);
 
     // Floor (raised 0.5m)
     const floorGeo = new THREE.BoxGeometry(houseW, 0.15, houseD);
