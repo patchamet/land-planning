@@ -713,7 +713,21 @@
     roadMesh.receiveShadow = true;
     scene.add(roadMesh);
 
-    // Shoulder strip (darker, x=0 to 1)
+    // Vertical incoming road from north (~5m section): x=1 to 5, z=-8.3 to -4
+    const vRoadShape = new THREE.Shape();
+    vRoadShape.moveTo(1, 8.3);   // negate z for Shape 2D
+    vRoadShape.lineTo(5, 8.3);
+    vRoadShape.lineTo(5, 4);
+    vRoadShape.lineTo(1, 4);
+    vRoadShape.closePath();
+    const vRoadGeo = new THREE.ShapeGeometry(vRoadShape);
+    const vRoadMesh = new THREE.Mesh(vRoadGeo, roadMat);
+    vRoadMesh.rotation.x = -Math.PI / 2;
+    vRoadMesh.position.y = 0.03;
+    vRoadMesh.receiveShadow = true;
+    scene.add(vRoadMesh);
+
+    // Shoulder strip (darker, x=0 to 1) — horizontal road portion
     const shoulderShape = new THREE.Shape();
     shoulderShape.moveTo(0, 4);
     shoulderShape.lineTo(1, 4);
@@ -727,6 +741,19 @@
     shoulderMesh.rotation.x = -Math.PI / 2;
     shoulderMesh.position.y = 0.04;
     scene.add(shoulderMesh);
+
+    // Shoulder strip along vertical road (x=0 to 1, z=-8.3 to 0)
+    const vShoulderShape = new THREE.Shape();
+    vShoulderShape.moveTo(0, 8.3);
+    vShoulderShape.lineTo(1, 8.3);
+    vShoulderShape.lineTo(1, 4);
+    vShoulderShape.lineTo(0, 4);
+    vShoulderShape.closePath();
+    const vShoulderGeo = new THREE.ShapeGeometry(vShoulderShape);
+    const vShoulderMesh = new THREE.Mesh(vShoulderGeo, shoulderMat);
+    vShoulderMesh.rotation.x = -Math.PI / 2;
+    vShoulderMesh.position.y = 0.04;
+    scene.add(vShoulderMesh);
 
     // Waterway along side C: from near node 12 to beyond node 14
     // Inner edge: plot boundary C (12→14 extended to 8)
@@ -812,6 +839,7 @@
     scene.add(makeLabel('ชานบ้าน', terraceX + terraceW / 2, houseBase + 1.5, terraceZ + terraceD / 2, '#8B4513', '11px'));
     scene.add(makeLabel('แนวไผ่', 0.7, 5, 10, '#3a6a10', '11px'));
     scene.add(makeLabel('ถนน', 16, 0.5, -2, '#666', '12px'));
+    scene.add(makeLabel('ทางเข้า ↓', 3, 0.5, -6, '#cc3300', '11px'));
     scene.add(makeLabel('ลำน้ำ', 38, 1, 5, '#1a6699', '12px'));
     scene.add(makeLabel('สะพาน', 37, 1.5, 0, '#8B7355', '11px'));
 
