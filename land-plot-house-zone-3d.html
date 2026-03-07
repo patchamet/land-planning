@@ -133,20 +133,7 @@
     const boundaryLine = new THREE.Line(boundaryGeo, new THREE.LineBasicMaterial({ color: 0x222222, linewidth: 2 }));
     scene.add(boundaryLine);
 
-    // ===== Node markers (corner posts) =====
-    const nodePositions = [
-      { pos: n11, label: '11' },
-      { pos: n12, label: '12' },
-      { pos: n13, label: '13' },
-      { pos: n14, label: '14' }
-    ];
-    nodePositions.forEach(({ pos }) => {
-      const postGeo = new THREE.CylinderGeometry(0.15, 0.15, 1, 8);
-      const postMat = new THREE.MeshStandardMaterial({ color: 0xcc0000 });
-      const post = new THREE.Mesh(postGeo, postMat);
-      post.position.set(pos.x, 0.5, pos.z);
-      scene.add(post);
-    });
+    // (node markers removed)
 
     // ===== Step 2: House + Parking =====
 
@@ -533,37 +520,7 @@
     scene.add(makeLabel('ลำน้ำ', 38, 1, 5, '#1a6699', '12px'));
     scene.add(makeLabel('สะพาน', 37, 1.5, 0, '#8B7355', '11px'));
 
-    // Node labels (corner markers)
-    scene.add(makeLabel('11', n11.x, 1.5, n11.z, '#c00', '13px'));
-    scene.add(makeLabel('12', n12.x, 1.5, n12.z, '#c00', '13px'));
-    scene.add(makeLabel('13', n13.x, 1.5, n13.z, '#c00', '13px'));
-    scene.add(makeLabel('14', n14.x, 1.5, n14.z, '#c00', '13px'));
-
-    // North arrow — north is rotated 25° CW from -z in SVG
-    // In 3D: north direction = rotated 25° CW from -z axis
-    const northGroup = new THREE.Group();
-    // Arrow shaft
-    const arrowShaftGeo = new THREE.CylinderGeometry(0.08, 0.08, 3, 8);
-    const arrowMat = new THREE.MeshStandardMaterial({ color: 0xcc3300 });
-    const arrowShaft = new THREE.Mesh(arrowShaftGeo, arrowMat);
-    arrowShaft.position.y = 1.5;
-    northGroup.add(arrowShaft);
-    // Arrow head (cone)
-    const arrowHeadGeo = new THREE.ConeGeometry(0.3, 0.8, 8);
-    const arrowHead = new THREE.Mesh(arrowHeadGeo, arrowMat);
-    arrowHead.position.y = 3.2;
-    northGroup.add(arrowHead);
-    // "N" label
-    scene.add(makeLabel('N', -2.5, 5, -5.5, '#cc3300', '16px'));
-    // Position arrow near top-left corner, tilt to show north direction
-    // North = 25° CW from -z, so rotate around Y by -25° (negative = CW)
-    northGroup.rotation.x = 0; // upright
-    northGroup.rotation.z = 0;
-    // Tilt the arrow to point north: rotate around local X to lay it partially flat, then Y for compass
-    northGroup.rotation.x = -Math.PI / 6; // tilt forward
-    northGroup.rotation.y = -(25 * Math.PI / 180); // 25° CW
-    northGroup.position.set(-2.5, 1, -5);
-    scene.add(northGroup);
+    // (node labels and north arrow removed)
 
     // ===== Grid (ground reference) =====
     const gridHelper = new THREE.GridHelper(40, 40, 0xaaaaaa, 0xdddddd);
