@@ -397,6 +397,47 @@
     tBaseBack.position.set(terraceX + terraceW / 2, houseBase / 2, terraceZ + terraceD - 0.075);
     scene.add(tBaseBack);
 
+    // Terrace roof: shed/lean-to (หลังคาเพิงหมาแหงน) — slopes away from house wall
+    const tRoofMat = new THREE.MeshStandardMaterial({ color: 0x8B7355, side: THREE.DoubleSide });
+    const tRoofOverhang = 0.3;
+    const tRoofHighY = houseBase + 2.8;  // high side (attached to house wall)
+    const tRoofLowY = houseBase + 2.2;   // low side (outer edge)
+    const tRoofGeo = new THREE.BufferGeometry();
+    // 4 corners of the sloped roof plane
+    const tr0 = [terraceX - tRoofOverhang, tRoofHighY, terraceZ - tRoofOverhang];           // high front-left
+    const tr1 = [terraceX - tRoofOverhang, tRoofHighY, terraceZ + terraceD + tRoofOverhang]; // high back-left
+    const tr2 = [terraceX + terraceW + tRoofOverhang, tRoofLowY, terraceZ + terraceD + tRoofOverhang]; // low back-right
+    const tr3 = [terraceX + terraceW + tRoofOverhang, tRoofLowY, terraceZ - tRoofOverhang];  // low front-right
+    tRoofGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+      ...tr0, ...tr1, ...tr2,  ...tr0, ...tr2, ...tr3
+    ], 3));
+    tRoofGeo.computeVertexNormals();
+    const tRoofMesh = new THREE.Mesh(tRoofGeo, tRoofMat);
+    tRoofMesh.castShadow = true;
+    scene.add(tRoofMesh);
+    // Roof thickness (thin slab underneath)
+    const tRoofThickGeo = new THREE.BufferGeometry();
+    const th = 0.06;
+    const tr0b = [tr0[0], tr0[1] - th, tr0[2]];
+    const tr1b = [tr1[0], tr1[1] - th, tr1[2]];
+    const tr2b = [tr2[0], tr2[1] - th, tr2[2]];
+    const tr3b = [tr3[0], tr3[1] - th, tr3[2]];
+    tRoofThickGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+      ...tr0b, ...tr2b, ...tr1b,  ...tr0b, ...tr3b, ...tr2b
+    ], 3));
+    tRoofThickGeo.computeVertexNormals();
+    scene.add(new THREE.Mesh(tRoofThickGeo, tRoofMat));
+    // Support posts (2 posts on outer edge)
+    const tPostMat = new THREE.MeshStandardMaterial({ color: 0x8B7355 });
+    [terraceZ + 0.3, terraceZ + terraceD - 0.3].forEach(pz => {
+      const postH = tRoofLowY - houseBase;
+      const postGeo = new THREE.CylinderGeometry(0.06, 0.06, postH, 8);
+      const post = new THREE.Mesh(postGeo, tPostMat);
+      post.position.set(terraceX + terraceW - 0.15, houseBase + postH / 2, pz);
+      post.castShadow = true;
+      scene.add(post);
+    });
+
     // Terrace railing (3 sides: right, front, back — not the house-facing side)
     const railingMat = new THREE.MeshStandardMaterial({ color: 0x996633 });
     // Right railing (x = terraceX + terraceW)
