@@ -333,7 +333,7 @@
     const carportRoofMat = new THREE.MeshStandardMaterial({ color: 0x6a6a6a, transparent: true, opacity: 0.55 });
     const carportRoof = new THREE.Mesh(carportRoofGeo, carportRoofMat);
     carportRoof.position.set(11 + 3, 2.8, 0 + 3);
-    carportRoof.castShadow = true;
+    carportRoof.castShadow = false;
     scene.add(carportRoof);
 
     // Carport pillars (4 corners)
