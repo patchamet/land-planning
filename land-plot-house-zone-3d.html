@@ -230,7 +230,7 @@
     const houseW = 6;
     const houseD = 6;
     const houseH = 3;
-    const houseBase = 0.5; // ยกพื้น 0.5ม.
+    const houseBase = 0.4; // ยกพื้น 0.4ม.
 
     const wallMat = new THREE.MeshStandardMaterial({ color: 0xe8c888 });
 
@@ -307,6 +307,28 @@
     const floor = new THREE.Mesh(floorGeo, floorMat);
     floor.position.set(houseX + 3, houseBase + 0.075, houseZ + 3);
     scene.add(floor);
+
+    // Raised platform in front of house door (พื้นยกระดับหน้าประตู): 6×1.5m, height 0.2m
+    const platH = 0.2;
+    const platDepth = 1.5;
+    const platGeo = new THREE.BoxGeometry(houseW, 0.15, platDepth);
+    const platMesh = new THREE.Mesh(platGeo, floorMat);
+    platMesh.position.set(houseX + houseW / 2, platH + 0.075, houseZ - platDepth / 2);
+    platMesh.receiveShadow = true;
+    scene.add(platMesh);
+    // Platform base walls (3 sides — back connects to house)
+    const platBaseFrontGeo = new THREE.BoxGeometry(houseW, platH, 0.15);
+    const platBaseFront = new THREE.Mesh(platBaseFrontGeo, baseMat);
+    platBaseFront.position.set(houseX + houseW / 2, platH / 2, houseZ - platDepth + 0.075);
+    scene.add(platBaseFront);
+    const platBaseLeftGeo = new THREE.BoxGeometry(0.15, platH, platDepth);
+    const platBaseLeft = new THREE.Mesh(platBaseLeftGeo, baseMat);
+    platBaseLeft.position.set(houseX + 0.075, platH / 2, houseZ - platDepth / 2);
+    scene.add(platBaseLeft);
+    const platBaseRightGeo = new THREE.BoxGeometry(0.15, platH, platDepth);
+    const platBaseRight = new THREE.Mesh(platBaseRightGeo, baseMat);
+    platBaseRight.position.set(houseX + houseW - 0.075, platH / 2, houseZ - platDepth / 2);
+    scene.add(platBaseRight);
 
     // Roof (gable / triangular prism) — no rotation, extrude along Z
     const roofShape = new THREE.Shape();
