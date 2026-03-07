@@ -308,16 +308,6 @@
     floor.position.set(houseX + 3, houseBase + 0.075, houseZ + 3);
     scene.add(floor);
 
-    // Stairs from parking to front door (2 steps)
-    const stairMat = new THREE.MeshStandardMaterial({ color: 0xc8b8a0 });
-    for (let s = 0; s < 2; s++) {
-      const stepGeo = new THREE.BoxGeometry(1.4, 0.12, 0.4);
-      const step = new THREE.Mesh(stepGeo, stairMat);
-      step.position.set(houseX + 4, houseBase * (s + 1) / 2 - 0.06, houseZ - 0.2 - s * 0.4);
-      step.receiveShadow = true;
-      scene.add(step);
-    }
-
     // Roof (gable / triangular prism) — no rotation, extrude along Z
     const roofShape = new THREE.Shape();
     roofShape.moveTo(-3.3, 0);   // left overhang
