@@ -165,15 +165,15 @@
   <circle cx="316" cy="739" r="9" fill="#6aaa3a" opacity="0.45" stroke="#4a7a2a" stroke-width="0.8"/>
   <text x="304" y="727" font-family="Arial" font-size="6" fill="#4a7a2a" text-anchor="middle">ต้นผลไม้</text>
 
-  <!-- Sun direction annotations -->
-  <!-- Morning sun (east = lower-right), good for veggie garden -->
-  <g transform="translate(321,710)">
+  <!-- Sun direction annotations (outside plot, same arrow angles) -->
+  <!-- Morning sun (east = lower-right) -->
+  <g transform="translate(410,750)">
     <line x1="16" y1="7" x2="5" y2="2" stroke="#e8a020" stroke-width="1.2"/>
     <polygon points="3,1 9,0 7,5" fill="#e8a020"/>
     <text x="20" y="5" font-family="Arial" font-size="5.5" fill="#cc8800">แดดเช้า</text>
   </g>
-  <!-- Afternoon sun (west = upper-left), blocked by trees -->
-  <g transform="translate(168,680)">
+  <!-- Afternoon sun (west = upper-left) -->
+  <g transform="translate(110,720)">
     <line x1="-10" y1="-6" x2="0" y2="0" stroke="#e86020" stroke-width="1.2"/>
     <polygon points="1,1 -5,-2 -2,-6" fill="#e86020"/>
     <text x="-30" y="-8" font-family="Arial" font-size="5.5" fill="#cc4400">แดดบ่าย</text>
