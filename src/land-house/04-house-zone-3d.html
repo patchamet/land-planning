@@ -32,6 +32,14 @@
       #sun-control { font-size: 12px; padding: 8px 12px; gap: 6px; bottom: 12px; }
       #sun-time { font-size: 12px; min-width: 50px; }
     }
+    #loader {
+      position: absolute; inset: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      background: #1a1a2e; color: #cdd;
+      font-family: Arial, sans-serif; font-size: 15px;
+      text-align: center; padding: 20px;
+    }
+    #loader.error { color: #ff9a9a; }
   </style>
 </head>
 <body>
@@ -47,6 +55,27 @@
     <span>18:00 🌇</span>
     <span id="sun-time">☀ 10:00</span>
   </div>
+
+  <div id="loader">กำลังโหลดโมเดล 3D…</div>
+
+  <script>
+    // Watchdog: if the 3D scene fails to initialise (CDN down / no WebGL),
+    // show a friendly error instead of a blank dark screen.
+    function showLoadError(msg) {
+      var l = document.getElementById('loader');
+      if (l) { l.textContent = msg; l.classList.add('error'); }
+    }
+    window.addEventListener('error', function (e) {
+      if (e && e.message && /import|module|three|webgl/i.test(e.message)) {
+        showLoadError('โหลดโมเดลไม่สำเร็จ — ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองรีเฟรชอีกครั้ง');
+      }
+    });
+    setTimeout(function () {
+      if (!window.__sceneReady) {
+        showLoadError('โหลดโมเดลไม่สำเร็จ — ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองรีเฟรชอีกครั้ง');
+      }
+    }, 15000);
+  </script>
 
   <script type="importmap">
   {
@@ -75,7 +104,7 @@
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // clamp for high-DPI mobile perf
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     document.body.appendChild(renderer.domElement);
@@ -513,7 +542,7 @@
     const r1 = new THREE.Vector3(houseX + houseW / 2, roofY + roofH, houseZ + houseD - ridgeInset); // ridge back
     // 4 faces of hip roof
     function makeRoofFace(a, b, c, d) {
-      const geo = d ? new THREE.BufferGeometry() : new THREE.BufferGeometry();
+      const geo = new THREE.BufferGeometry();
       const verts = d
         ? [a.x,a.y,a.z, b.x,b.y,b.z, c.x,c.y,c.z, a.x,a.y,a.z, c.x,c.y,c.z, d.x,d.y,d.z]
         : [a.x,a.y,a.z, b.x,b.y,b.z, c.x,c.y,c.z];
@@ -743,6 +772,7 @@
     // Small veggie plants scattered in the garden area
     const vegPlantMat = new THREE.MeshStandardMaterial({ color: 0x55aa33 });
     const vegSoilMat = new THREE.MeshStandardMaterial({ color: 0x5a3a1a });
+    const vegStemMat = new THREE.MeshStandardMaterial({ color: 0x3a7a1a });
     for (let row = 0; row < 5; row++) {
       for (let col = 0; col < 5; col++) {
         const px = vegX + 0.5 + row * 1.0;
@@ -754,7 +784,7 @@
         scene.add(mound);
         // Small plant (cone + tiny sphere)
         const stemGeo = new THREE.CylinderGeometry(0.02, 0.03, 0.3 + Math.random() * 0.2, 5);
-        const stem = new THREE.Mesh(stemGeo, new THREE.MeshStandardMaterial({ color: 0x3a7a1a }));
+        const stem = new THREE.Mesh(stemGeo, vegStemMat);
         stem.position.set(px, 0.25, pz);
         scene.add(stem);
         const leafGeo = new THREE.SphereGeometry(0.12 + Math.random() * 0.08, 6, 5);
@@ -784,6 +814,10 @@
 
     // ===== Step 4: Bamboo + Road + Waterway + Bridge =====
 
+    // Shared bamboo materials (hoisted out of loops — ~64 clumps × 7 meshes)
+    const bambooStalkMat = new THREE.MeshStandardMaterial({ color: 0x6b8e23 });
+    const bambooLeafMat = new THREE.MeshStandardMaterial({ color: 0x4e8c20 });
+
     // Helper: create bamboo clump (thin stalks + small canopy)
     function createBamboo(x, z) {
       const h = 4 + Math.random() * 2; // 4-6m
@@ -793,16 +827,14 @@
         const dx = (Math.random() - 0.5) * 0.3;
         const dz = (Math.random() - 0.5) * 0.3;
         const stalkGeo = new THREE.CylinderGeometry(0.04, 0.06, h, 6);
-        const stalkMat = new THREE.MeshStandardMaterial({ color: 0x6b8e23 });
-        const stalk = new THREE.Mesh(stalkGeo, stalkMat);
+        const stalk = new THREE.Mesh(stalkGeo, bambooStalkMat);
         stalk.position.set(dx, h / 2, dz);
         group.add(stalk);
       }
       // Leaf tufts along the stalk tops (no sphere)
       for (let j = 0; j < 4; j++) {
         const leafGeo = new THREE.CylinderGeometry(0, 0.15, 0.6, 4);
-        const leafMat = new THREE.MeshStandardMaterial({ color: 0x4e8c20 });
-        const leaf = new THREE.Mesh(leafGeo, leafMat);
+        const leaf = new THREE.Mesh(leafGeo, bambooLeafMat);
         leaf.position.set((Math.random() - 0.5) * 0.4, h * 0.9 + Math.random() * 0.3, (Math.random() - 0.5) * 0.4);
         leaf.rotation.z = (Math.random() - 0.5) * 0.8;
         group.add(leaf);
@@ -1043,15 +1075,26 @@
       labelRenderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // ===== Animate =====
+    // ===== Animate (pauses when tab is hidden to save battery) =====
+    let frameId = null;
     function animate() {
-      requestAnimationFrame(animate);
+      frameId = null;
+      if (document.hidden) return;
+      frameId = requestAnimationFrame(animate);
       controls.update();
       waterTex.offset.y += 0.001;
       composer.render();
       labelRenderer.render(scene, camera);
     }
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && frameId === null) animate();
+    });
     animate();
+
+    // Scene ready — hide loading overlay
+    window.__sceneReady = true;
+    const loaderEl = document.getElementById('loader');
+    if (loaderEl) loaderEl.style.display = 'none';
   </script>
 </body>
 </html>

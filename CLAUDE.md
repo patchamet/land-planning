@@ -7,12 +7,29 @@ Scale: **7 SVG units = 1 metre**. Grid origin at node 1 (150,130).
 - A-axis: horizontal (metres from left, A0=x=150)
 - E-axis: vertical (metres from top, E0=y=130)
 
-## Current Files
+## Folder Structure
 
-- [01-plot-overview.svg](01-plot-overview.svg) — ผังที่ดินรวม (เวอร์ชันเก่า ไม่มีบ้าน)
-- [02-plot-full-plan.svg](02-plot-full-plan.svg) — ผังที่ดินรวม + ผังบ้าน
-- [03-house-zone.svg](03-house-zone.svg) — ผังโซนบ้านแบบซูม
-- [04-house-zone-3d.html](04-house-zone-3d.html) — โมเดล 3D โซนบ้าน
+```
+index.html            — หน้ารวมลิงก์ (ลิงก์ไปทุกหัวข้อ)
+src/land-house/       — เรื่องที่ดินและบ้าน
+src/smartfarm/        — เรื่องสมาร์ทฟาร์ม (ยังว่าง)
+docs/land-house/      — บันทึกการออกแบบโมเดล 3D บ้าน
+docs/smartfarm/       — เอกสารออกแบบระบบ smart farm (เริ่มที่ README.md)
+  00-concept.md         — แนวคิดโรงเรือน (ฟาร์ม ไม่ใช่ tech)
+  01-context.md         — C4 Level 1
+  02-container.md       — C4 Level 2
+  adr/                  — บันทึกการตัดสินใจเชิงสถาปัตยกรรม
+```
+
+แต่ละหัวข้อใหม่ให้สร้างโฟลเดอร์ของตัวเองใต้ `src/` และเพิ่มการ์ดลิงก์ใน `index.html`
+
+## Current Files — src/land-house/
+
+- [01-plot-overview.svg](src/land-house/01-plot-overview.svg) — ผังที่ดินรวม (เวอร์ชันเก่า ไม่มีบ้าน)
+- [02-plot-full-plan.svg](src/land-house/02-plot-full-plan.svg) — ผังที่ดินรวม + ผังบ้าน
+- [03-house-zone.svg](src/land-house/03-house-zone.svg) — ผังโซนบ้านแบบซูม
+- [04-house-zone-3d.html](src/land-house/04-house-zone-3d.html) — โมเดล 3D โซนบ้าน
+- [05-boq.html](src/land-house/05-boq.html) — BOQ ประมาณการปริมาณงาน
 
 ## Plot Shape (Pentagon)
 

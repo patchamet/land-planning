@@ -153,6 +153,18 @@
     }
     .badge-svg { background: #e0eee8; color: #4a8a6a; border: 1px solid #c0dcd0; }
     .badge-3d { background: #deeaf4; color: #4a7a9c; border: 1px solid #bcd2e4; }
+    .badge-boq { background: #f4ecd8; color: #8a6d3b; border: 1px solid #e4d4b0; }
+    .card-thumb.is-boq {
+      background: linear-gradient(135deg, #f0ead8, #e2d6bc);
+      color: #6a5a3a;
+      font-size: 3rem;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card-thumb.is-boq span {
+      font-size: 0.8rem;
+      color: #8a7a5a;
+    }
     footer {
       text-align: center;
       padding: 18px;
@@ -171,25 +183,25 @@
 
   <main>
     <div class="grid">
-      <a class="card" href="src/02-plot-full-plan.svg" target="_blank">
+      <a class="card" href="src/land-house/02-plot-full-plan.svg" target="_blank">
         <div class="card-thumb">
-          <img src="src/02-plot-full-plan.svg" alt="ผังที่ดิน + ผังบ้าน">
+          <img src="src/land-house/02-plot-full-plan.svg" alt="ผังที่ดิน + ผังบ้าน">
         </div>
         <div class="card-body">
           <h3>ผังที่ดิน + ผังบ้าน <span class="badge badge-svg">SVG</span></h3>
           <p>ผังรวมพร้อมตำแหน่งบ้าน ชานบ้าน ลานจอดรถ</p>
         </div>
       </a>
-      <a class="card" href="src/03-house-zone.svg" target="_blank">
+      <a class="card" href="src/land-house/03-house-zone.svg" target="_blank">
         <div class="card-thumb">
-          <img src="src/03-house-zone.svg" alt="ผังโซนบ้าน">
+          <img src="src/land-house/03-house-zone.svg" alt="ผังโซนบ้าน">
         </div>
         <div class="card-body">
           <h3>ผังโซนบ้าน (ซูม) <span class="badge badge-svg">SVG</span></h3>
           <p>โซน 11-12-14-13 (~540 ตร.ม.) แสดงรายละเอียด</p>
         </div>
       </a>
-      <a class="card" href="src/04-house-zone-3d.html" target="_blank">
+      <a class="card" href="src/land-house/04-house-zone-3d.html" target="_blank">
         <div class="card-thumb is-3d">
           🏠
           <span>คลิกเพื่อเปิดโมเดล 3D</span>
@@ -197,6 +209,16 @@
         <div class="card-body">
           <h3>โมเดล 3D <span class="badge badge-3d">3D</span></h3>
           <p>หมุน ซูม ปรับแสงแดดตามเวลาได้</p>
+        </div>
+      </a>
+      <a class="card" href="src/land-house/05-boq.html" target="_blank">
+        <div class="card-thumb is-boq">
+          📋
+          <span>ประมาณการปริมาณงาน</span>
+        </div>
+        <div class="card-body">
+          <h3>BOQ <span class="badge badge-boq">BOQ</span></h3>
+          <p>ปริมาณงานจากโมเดล กรอกราคาแล้วคิดยอดรวมอัตโนมัติ</p>
         </div>
       </a>
     </div>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOQ — ประมาณการปริมาณงาน</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #eef2f3;
+      color: #3a4a5c;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+    header {
+      background: #fff;
+      border-bottom: 2px solid #c8dae8;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    header h1 { font-size: 1.4rem; color: #3a5a7c; font-weight: 700; }
+    header p { font-size: 0.78rem; color: #8aa4b8; text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
+    main { max-width: 900px; margin: 0 auto; padding: 20px 14px; }
+    .note {
+      background: #fff7e6; border: 1px solid #f0d9a8; color: #8a6d3b;
+      border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .btn {
+      background: #fff; border: 1px solid #c8dae8; color: #3a5a7c;
+      border-radius: 5px; padding: 7px 14px; font-size: 0.82rem; cursor: pointer;
+      font-family: inherit; transition: background 0.12s, border-color 0.12s;
+    }
+    .btn:hover { background: #f4f8fb; border-color: #8ab4d0; }
+    .btn-link { margin-left: auto; text-decoration: none; display: inline-flex; align-items: center; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 4px rgba(60,90,120,0.08); }
+    thead th {
+      background: #3a5a7c; color: #fff; font-size: 0.78rem; font-weight: 600;
+      padding: 9px 8px; text-align: left; white-space: nowrap;
+    }
+    thead th.num { text-align: right; }
+    tbody td { padding: 7px 8px; border-bottom: 1px solid #eef2f5; font-size: 0.82rem; vertical-align: middle; }
+    tbody td.num { text-align: right; white-space: nowrap; }
+    .group-row td {
+      background: #dce8f2; color: #2a4a6c; font-weight: 700; font-size: 0.82rem;
+      padding: 8px; border-bottom: 1px solid #c8dae8;
+    }
+    .subtotal-row td { background: #f4f8fb; font-weight: 600; color: #3a5a7c; border-bottom: 2px solid #c8dae8; }
+    .grand-row td { background: #3a5a7c; color: #fff; font-weight: 700; font-size: 0.95rem; padding: 12px 8px; }
+    input.cell {
+      width: 100%; max-width: 110px; border: 1px solid #d6e2ec; border-radius: 4px;
+      padding: 4px 6px; font-family: inherit; font-size: 0.82rem; text-align: right; color: #3a4a5c;
+      background: #fbfdfe;
+    }
+    input.cell:focus { outline: none; border-color: #7badc8; background: #fff; }
+    .unit { color: #8a9aaa; font-size: 0.78rem; }
+    .item-name { color: #3a4a5c; }
+    .item-derive { display: block; color: #aab6c2; font-size: 0.68rem; margin-top: 1px; }
+    footer { text-align: center; padding: 18px; font-size: 0.72rem; color: #b0bcc8; }
+    @media (max-width: 560px) {
+      .item-derive { display: none; }
+      thead th, tbody td { padding: 6px 5px; font-size: 0.76rem; }
+      input.cell { max-width: 80px; }
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .toolbar, .note, footer { display: none; }
+      input.cell { border: none; background: none; }
+      table { box-shadow: none; }
+      thead th { background: #3a5a7c !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .group-row td, .grand-row td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BOQ — ประมาณการปริมาณงาน</h1>
+    <p>Land Planning · Bill of Quantities</p>
+  </header>
+
+  <main>
+    <div class="note">
+      <strong>ปริมาณเป็นค่าประมาณการเบื้องต้น</strong> คำนวณจากขนาดในโมเดล 3D
+      (มาตราส่วน 7 หน่วย SVG = 1 ม.) เพื่อใช้ตั้งต้นเท่านั้น —
+      ยังไม่ใช่ปริมาณจากแบบก่อสร้างจริง <br>
+      ช่อง <em>ปริมาณ</em> และ <em>ราคา/หน่วย</em> แก้ไขได้ ระบบจะคิดยอดรวมให้อัตโนมัติ
+      และจำค่าที่กรอกไว้ในเครื่องนี้ (localStorage)
+    </div>
+
+    <div class="toolbar">
+      <button class="btn" onclick="window.print()">🖨️ พิมพ์ / บันทึก PDF</button>
+      <button class="btn" id="reset-btn">↺ ล้างราคาที่กรอก</button>
+      <a class="btn btn-link" href="../../index.html">← กลับหน้าหลัก</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th class="num">ปริมาณ</th>
+          <th>หน่วย</th>
+          <th class="num">ราคา/หน่วย (บาท)</th>
+          <th class="num">รวม (บาท)</th>
+        </tr>
+      </thead>
+      <tbody id="boq-body"></tbody>
+    </table>
+  </main>
+
+  <footer>Land Planning Project — BOQ</footer>
+
+  <script>
+    // ===== BOQ data =====
+    // qty = ปริมาณประมาณการจากโมเดล 3D (04-house-zone-3d.html), price = ผู้ใช้กรอกเอง
+    // derive = ที่มาของปริมาณ (แสดงใต้ชื่อรายการ)
+    const GROUPS = [
+      {
+        name: 'บ้านพักอาศัย (6×6 ม. ยกพื้น 0.4 ม.)',
+        items: [
+          { id: 'house-floor',   name: 'พื้น ค.ส.ล. ยกระดับ',                qty: 36,   unit: 'ตร.ม.', derive: '6 × 6 ม.' },
+          { id: 'house-base',    name: 'ฐานยกพื้น ก่อปิดทึบโดยรอบ',          qty: 9.6,  unit: 'ตร.ม.', derive: 'รอบ 24 ม. × สูง 0.4 ม.' },
+          { id: 'house-wall',    name: 'ผนังก่อ-ฉาบ-ทาสี (หักช่องเปิด)',     qty: 65,   unit: 'ตร.ม.', derive: 'รอบ 24 ม. × สูง 3 ม. − ประตู' },
+          { id: 'house-roof',    name: 'หลังคาปั้นหยา (โครง+มุง+เชิงชาย)',   qty: 58,   unit: 'ตร.ม.', derive: 'ผัง 7×7 ม. × ความชัน ~1.18' },
+          { id: 'house-ceiling', name: 'ฝ้าเพดาน',                           qty: 36,   unit: 'ตร.ม.', derive: '6 × 6 ม.' },
+          { id: 'house-door',    name: 'ประตู (หน้า + ข้างฝั่งสวนผัก)',       qty: 2,    unit: 'บาน',   derive: 'จากโมเดล' },
+        ],
+      },
+      {
+        name: 'ชานบ้าน (3×6 ม.)',
+        items: [
+          { id: 'terrace-floor', name: 'พื้น ค.ส.ล.',                        qty: 18,   unit: 'ตร.ม.', derive: '3 × 6 ม.' },
+          { id: 'terrace-base',  name: 'ฐานยกพื้น ก่อปิด 3 ด้าน',            qty: 4.8,  unit: 'ตร.ม.', derive: '12 ม. × 0.4 ม.' },
+          { id: 'terrace-roof',  name: 'หลังคาเพิงหมาแหงน',                  qty: 24,   unit: 'ตร.ม.', derive: '~3.6 × 6.6 ม.' },
+          { id: 'terrace-rail',  name: 'ราวกันตกเหล็ก',                      qty: 10.8, unit: 'ม.',    derive: 'ขวา 6 + หน้า 1.8 + หลัง 3' },
+          { id: 'terrace-post',  name: 'เสารับหลังคาชาน',                    qty: 2,    unit: 'ต้น',   derive: 'จากโมเดล' },
+          { id: 'terrace-stair', name: 'บันไดทางขึ้น (3 ขั้น)',              qty: 1,    unit: 'ชุด',   derive: 'จากโมเดล' },
+        ],
+      },
+      {
+        name: 'คาร์พอร์ต / ลานจอดรถ (6×6 ม.)',
+        items: [
+          { id: 'carport-floor', name: 'พื้น ค.ส.ล. ลานจอด',                 qty: 36,   unit: 'ตร.ม.', derive: '6 × 6 ม.' },
+          { id: 'carport-roof',  name: 'หลังคาคลุม (เมทัลชีท/โปร่งแสง)',     qty: 36,   unit: 'ตร.ม.', derive: '6 × 6 ม.' },
+          { id: 'carport-post',  name: 'เสารับหลังคา',                       qty: 4,    unit: 'ต้น',   derive: '4 มุม' },
+        ],
+      },
+      {
+        name: 'งานภายนอก / สวน',
+        items: [
+          { id: 'veg-bed',    name: 'แปลงผักยกแปลง',                          qty: 27,   unit: 'ตร.ม.', derive: '5 × 5.4 ม.' },
+          { id: 'water-tank', name: 'ถังเก็บน้ำฝน (~1,000 ล.)',              qty: 1,    unit: 'ใบ',    derive: 'จากโมเดล' },
+          { id: 'big-tree',   name: 'ไม้ยืนต้น/บังแดด',                       qty: 3,    unit: 'ต้น',   derive: 'จากโมเดล' },
+          { id: 'fruit-tree', name: 'ไม้ผล',                                  qty: 2,    unit: 'ต้น',   derive: 'จากโมเดล' },
+        ],
+      },
+      {
+        name: 'รั้ว / แนวไผ่กันลม-พรางตา',
+        items: [
+          { id: 'bamboo', name: 'ปลูกไผ่ตามแนวเขต 3 ด้าน', qty: 63, unit: 'กอ', derive: 'ซ้าย 17 + ล่าง 25 + เฉียง 21' },
+        ],
+      },
+      {
+        name: 'งานพื้น/ถนน (อาจอยู่นอกสัญญา — ปรับได้)',
+        items: [
+          { id: 'site-clear', name: 'เคลียร์/ปรับพื้นที่โซนก่อสร้าง', qty: 541, unit: 'ตร.ม.', derive: 'พื้นที่โซน 11-12-14-13' },
+          { id: 'road',       name: 'ถนน-ทางเข้า (รวมไหล่ทาง)',       qty: 136, unit: 'ตร.ม.', derive: 'คางหมูกว้าง ~34 ม. × 4 ม.' },
+          { id: 'bridge',     name: 'สะพานข้ามลำน้ำ',                  qty: 1,   unit: 'ชุด',   derive: '~4 ตร.ม.' },
+        ],
+      },
+    ];
+
+    // ===== Persistence =====
+    const STORE_KEY = 'boq-v1';
+    function loadStore() {
+      try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
+      catch (e) { return {}; }
+    }
+    function saveStore(store) {
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {}
+    }
+    let store = loadStore();
+
+    const fmt = (n) => (isFinite(n) ? n : 0).toLocaleString('th-TH', { maximumFractionDigits: 2 });
+
+    // ===== Render =====
+    const body = document.getElementById('boq-body');
+
+    function render() {
+      body.innerHTML = '';
+      let grand = 0;
+
+      GROUPS.forEach((group) => {
+        const gRow = document.createElement('tr');
+        gRow.className = 'group-row';
+        gRow.innerHTML = `<td colspan="5">${group.name}</td>`;
+        body.appendChild(gRow);
+
+        let subtotal = 0;
+
+        group.items.forEach((item) => {
+          const saved = store[item.id] || {};
+          const qty = saved.qty != null ? saved.qty : item.qty;
+          const price = saved.price != null ? saved.price : 0;
+          const total = qty * price;
+          subtotal += total;
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="item-name">${item.name}<span class="item-derive">${item.derive}</span></td>
+            <td class="num"><input class="cell" type="number" min="0" step="any" data-id="${item.id}" data-field="qty" value="${qty}"></td>
+            <td class="unit">${item.unit}</td>
+            <td class="num"><input class="cell" type="number" min="0" step="any" data-id="${item.id}" data-field="price" value="${price || ''}" placeholder="0"></td>
+            <td class="num" id="total-${item.id}">${fmt(total)}</td>
+          `;
+          body.appendChild(tr);
+        });
+
+        const sRow = document.createElement('tr');
+        sRow.className = 'subtotal-row';
+        sRow.innerHTML = `<td colspan="4">รวมหมวด — ${group.name}</td><td class="num" id="sub-${GROUPS.indexOf(group)}">${fmt(subtotal)}</td>`;
+        body.appendChild(sRow);
+
+        grand += subtotal;
+      });
+
+      const grandRow = document.createElement('tr');
+      grandRow.className = 'grand-row';
+      grandRow.innerHTML = `<td colspan="4">รวมทั้งโครงการ (ยังไม่รวมภาษี/ค่าดำเนินการ)</td><td class="num" id="grand-total">${fmt(grand)}</td>`;
+      body.appendChild(grandRow);
+    }
+
+    // ===== Recalculate on input =====
+    body.addEventListener('input', (e) => {
+      const input = e.target;
+      if (!input.classList.contains('cell')) return;
+      const id = input.dataset.id;
+      const field = input.dataset.field;
+      const val = parseFloat(input.value);
+
+      store[id] = store[id] || {};
+      store[id][field] = isFinite(val) ? val : 0;
+      saveStore(store);
+
+      recalc();
+    });
+
+    function recalc() {
+      let grand = 0;
+      GROUPS.forEach((group, gi) => {
+        let subtotal = 0;
+        group.items.forEach((item) => {
+          const saved = store[item.id] || {};
+          const qty = saved.qty != null ? saved.qty : item.qty;
+          const price = saved.price != null ? saved.price : 0;
+          const total = qty * price;
+          subtotal += total;
+          const cell = document.getElementById('total-' + item.id);
+          if (cell) cell.textContent = fmt(total);
+        });
+        const sub = document.getElementById('sub-' + gi);
+        if (sub) sub.textContent = fmt(subtotal);
+        grand += subtotal;
+      });
+      const g = document.getElementById('grand-total');
+      if (g) g.textContent = fmt(grand);
+    }
+
+    // ===== Reset =====
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      if (!confirm('ล้างปริมาณและราคาที่กรอกทั้งหมด กลับเป็นค่าประมาณการตั้งต้น?')) return;
+      store = {};
+      saveStore(store);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
