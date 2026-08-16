@@ -10,7 +10,7 @@
 | # | ของ | สเปคที่ต้องเช็ค | ราคา | ร้าน | ลิงก์ | สถานะ |
 |---|---|---|---|---|---|---|
 | 1 | ESP32 DevKit-C 38 pin | เลือกหัว **Type C** / เสาอากาศในตัว (ห้าม 32U) | ฿199 | IT-Garden | [Shopee](https://shopee.co.th/ESP32-ESP-32-DEVKIT-C-Layout-Development-Board-38-Pin-i.128765755.6416424361) | 🛒 ใส่ตะกร้า |
-| 2 | Relay module 2 ช่อง | 5V trigger + optocoupler + ขั้วสกรู COM/NO/NC | ~฿48 | — | — | ⬜ ยังไม่เจอ |
+| 2 | Relay module 2 ช่อง | เลือก Voltage = **5V** (ห้ามหยิบ 12V) / มี optocoupler + COM/NO/NC ครบ / active-low | ฿48 | IT-Garden | [Shopee](https://shopee.co.th/%E0%B9%82%E0%B8%A1%E0%B8%94%E0%B8%B9%E0%B8%A5%E0%B8%A3%E0%B8%B5%E0%B9%80%E0%B8%A5%E0%B8%A2%E0%B9%8C-Module-Relay-2-Channel-DC-5V-12V-Active-Low-Level-Trigger-i.128765755.7716504218) | 🛒 ใส่ตะกร้า |
 | 3 | Breadboard 830 จุด | MB-102 | ~฿37 | — | — | ⬜ ยังไม่เจอ |
 | 4 | สายจัมป์ ผู้-เมีย + ผู้-ผู้ | อย่างละ 1 ชุด (20–40 เส้น) | ~฿40 | — | — | ⬜ ยังไม่เจอ |
 | 5 | LED 5mm + R 220Ω | ชุด 10 หลอดพอ | ~฿10 | — | — | ⬜ ยังไม่เจอ |
