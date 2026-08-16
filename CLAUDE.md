@@ -2,28 +2,29 @@
 
 ## Project Overview
 
-SVG land plot planning diagram for a single parcel in Thailand.
+**เว็บไซต์สาธารณะ** แสดงผังที่ดินและสิ่งปลูกสร้างของแปลงเดียวในไทย
 Scale: **7 SVG units = 1 metre**. Grid origin at node 1 (150,130).
 - A-axis: horizontal (metres from left, A0=x=150)
 - E-axis: vertical (metres from top, E0=y=130)
+
+## ขอบเขตของ repo นี้ (สำคัญ)
+
+> repo นี้เป็น **public** และเก็บ**เฉพาะเรื่องที่ดินและสิ่งปลูกสร้าง**เท่านั้น
+> - เป็นเว็บไซต์สำหรับ**แสดงผล**อย่างเดียว — งานที่ลงมือทำจริงอยู่ใน repo อื่น
+> - งานที่เสร็จจาก repo อื่นแล้วอยากโชว์ ค่อยนำผลลัพธ์มาใส่ที่นี่
+> - **ห้ามใส่ข้อมูลอ่อนไหว** (เอกสารสิทธิ์ พิกัดละเอียด ราคาซื้อขาย ข้อมูลส่วนบุคคล)
+> - เรื่อง IoT / สมาร์ทฟาร์ม ย้ายไป repo [`iot-homestead`](https://github.com/patchamet/iot-homestead) แล้ว
 
 ## Folder Structure
 
 ```
 index.html            — หน้ารวมลิงก์ (ลิงก์ไปทุกหัวข้อ)
 src/land-house/       — เรื่องที่ดินและบ้าน
-src/smartfarm/        — เรื่องสมาร์ทฟาร์ม (ยังว่าง)
 docs/land-house/      — บันทึกการออกแบบโมเดล 3D บ้าน
-docs/smartfarm/       — เอกสารออกแบบระบบ smart farm (เริ่มที่ README.md)
-  00-concept.md         — แนวคิดโรงเรือน (ฟาร์ม ไม่ใช่ tech)
-  01-context.md         — C4 Level 1
-  02-container.md       — C4 Level 2
-  adr/                  — บันทึกการตัดสินใจเชิงสถาปัตยกรรม
-tasks/                — งานย่อยที่แตกมาทำก่อน (แต่ละ task มีโฟลเดอร์+เอกสารของตัวเอง)
-  switch-control/       — สวิตช์ไฟสั่งงานระยะไกล เปิด/ปิด + ตั้งเวลา (แตกจาก smartfarm IoT เฟส D5)
 ```
 
 แต่ละหัวข้อใหม่ให้สร้างโฟลเดอร์ของตัวเองใต้ `src/` และเพิ่มการ์ดลิงก์ใน `index.html`
+(โดยหัวข้อนั้นต้องอยู่ในขอบเขต "ที่ดินและสิ่งปลูกสร้าง")
 
 ## Current Files — src/land-house/
 
